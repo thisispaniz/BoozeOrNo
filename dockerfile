@@ -2,7 +2,7 @@ FROM python:3.10.14
 
 COPY ./requirements.txt OneButtonWebpage/app/requirements.txt
 
-WORKDIR OnebuttonWebpag4/app
+WORKDIR OnebuttonWebpage/app
 
 RUN pip3 install -r requirements.txt
 
