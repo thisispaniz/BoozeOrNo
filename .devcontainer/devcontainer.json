@@ -1,18 +1,1 @@
-{
-    "name": "FastAPI Development",
-    "build": {
-        "dockerfile": "../dockerfile",
-        "context": ".."
-    },
-    "forwardPorts": [8000],
-    "settings": {
-        "terminal.integrated.shell.linux": "/bin/bash"
-    },
-    "features": {
-        "ghcr.io/warrenbuckley/codespace-features/sqlite:latest": {}
-    },
-    "extensions": [
-        "ms-python.python",
-        "qwerty.sqlite-viewer"
-    ],
-    "postStartCommand": "cd OneButtonWebpage && cd app && uvicorn main:app --reload"
+
