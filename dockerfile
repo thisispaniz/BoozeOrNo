@@ -4,7 +4,7 @@ COPY ./requirements.txt OneButtonWebpage/app/requirements.txt
 
 WORKDIR OnebuttonWebpage/app
 
-RUN pip3 install -r requirements.txt
+RUN pip install -r ./requirements.txt
 
 EXPOSE 8000
 
