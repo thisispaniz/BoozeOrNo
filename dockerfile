@@ -1,8 +1,8 @@
 FROM python:3.10.14
 
-COPY ./requirements.txt /app/requirements.txt
+COPY ./requirements.txt OneButtonWebpage/app/requirements.txt
 
-WORKDIR /app
+WORKDIR OnebuttonWebpag4/app
 
 RUN pip3 install -r requirements.txt
 
