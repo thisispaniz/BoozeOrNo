@@ -1,12 +1,10 @@
 FROM python:3.10.14
 
+RUN pip install -r requirements.txt
+
 COPY OneButtonWebpage OneButtonWebpage
 
-COPY ./requirements.txt OneButtonWebpage/app/requirements.txt
-
 WORKDIR OnebuttonWebpage/app
-
-RUN pip install -r requirements.txt
 
 EXPOSE 8000
 
