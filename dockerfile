@@ -6,7 +6,7 @@ WORKDIR OnebuttonWebpage/app
 
 RUN pip3 install -r requirements.txt
 
-COPY app /app/
+# COPY app /app/
 
 EXPOSE 8000
 
