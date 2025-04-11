@@ -15,4 +15,4 @@
         "ms-python.python",
         "qwerty.sqlite-viewer"
     ],
-    "postStartCommand": "cd app && python3 -m uvicorn main:app --reload"
+    "postStartCommand": "cd OneButtonWebpage && cd app && uvicorn main:app --reload"
