@@ -3,6 +3,7 @@ from fastapi.responses import FileResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 import sqlite3
 from datetime import datetime
+from zoneinfo import ZoneInfo
 
 app = FastAPI()
 
@@ -28,7 +29,7 @@ def get_html():
 @app.post("/submit/")
 async def submit_timestamp(request: Request):
     # Get current timestamp
-    current_timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    current_timestamp = datetime.now(ZoneInfo("Europe/Berlin")).strftime("%Y-%m-%d %H:%M:%S")
 
     # Insert timestamp into database
     with sqlite3.connect('data.db', check_same_thread=False) as conn:
