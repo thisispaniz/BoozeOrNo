@@ -10,7 +10,13 @@
     },
     
     "extensions": [
-        "ms-python.python",
+        "ms-python.python", "qwtel.sqlite-viewer"
     ],
     "postStartCommand": "cd OneButtonWebpage/app && python3 -m uvicorn main:app --reload"
+}
+
+{
+  "extensions": [
+    "qwtel.sqlite-viewer"
+  ]
 }
