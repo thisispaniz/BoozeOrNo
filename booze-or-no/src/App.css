@@ -1,42 +1,53 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+body {
+  padding-left: 100px;
+  padding-right: 100px;
+  background-color: #0A0A0A;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 20px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.logo img {
+  height: 40px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.nav {
+  display: flex;
+  gap: 1.5rem;
 }
 
-.card {
-  padding: 2em;
+.nav-link {
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+.nav-link:hover {
+  color: #FFC300;
 }
 
-.read-the-docs {
-  color: #888;
+.nav-link-yellow {
+  text-decoration: none;
+  background-color: #FFC300;
+  color: #0A0A0A;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  width: 75px;
+  height: 44px;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
+.nav-link-yellow:hover {
+  background-color: #ffffff;
+  color: #0A0A0A;
+}
+
