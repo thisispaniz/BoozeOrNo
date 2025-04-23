@@ -1,15 +1,15 @@
 body {
-  padding-left: 100px;
-  padding-right: 100px;
+  padding-left: 150px;
+  padding-right: 150px;
   background-color: #0A0A0A;
+  font-family: "Bebas Neue", sans-serif;
 }
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
-  font-family: "Bebas Neue", sans-serif;
+  padding-top: 2rem;
   font-size: 20px;
 }
 
@@ -27,9 +27,9 @@ body {
   color: #ffffff;
   font-weight: 500;
   transition: color 0.3s ease;
-}
-.nav-link:hover {
-  color: #FFC300;
+  &:hover {
+    color: #FFC300;
+  }
 }
 
 .nav-link-yellow {
@@ -44,10 +44,73 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  &:hover {
+    background-color: #cc9d01;
+  }
 }
 
-.nav-link-yellow:hover {
+.hero-section {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+  height: 450px;
+  text-align: left;
+  color: #ffffff;
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+h1 {
+  font-size: 60px;
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
+h1 {
+  font-size: 40px;
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
+p {
+  font-family: "Raleway", sans-serif;
+  font-size: 20px;
+  margin-top: 20px;
+  color: #ffffff;
+  margin-bottom: 30px;
+}
+
+input {
+  width: 447px;
+  height: 44px;
+  font-family: "Raleway", sans-serif;
+  font-size: 15px;
+  background-color: #0A0A0A;
+  color: #B5B5B5;
+  border-radius: 2px;
+  border-width: 1px;
+  margin-right: 12px;
+  padding: 10px;
+  &:focus {
+    outline: none;
+    border-color: #FFC300;
+  }
+  &::placeholder {
+    font-style: italic;
+  }
+}
+
+.search-button {
+  width: 118px;
+  height: 44px;
+  background-color: #FFC300;
   color: #0A0A0A;
-  background-color: #e4af00;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 20px;
+  border-radius: 2px;
+  border-width: 0px;
+  &:hover {
+    background-color: #cc9d01;
+  }
 }
-
