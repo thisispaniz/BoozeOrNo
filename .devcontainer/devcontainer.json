@@ -2,7 +2,7 @@
     "name": "Booze Or No",
     "dockerComposeFile": "docker-compose.yml",
     "service": "backend",
-    "workspaceFolder": "/workspace",
+    "workspaceFolder": "./",
     "forwardPorts": [8000],
     "customizations": {
         "vscode": {
