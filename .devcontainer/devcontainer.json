@@ -1,16 +1,16 @@
 {
-    "name": "FastAPI Development",
-    "build": {
-        "dockerfile": "../dockerfile",
-        "context": ".."
-    },
+    "name": "Booze Or No",
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "backend",
+    "workspaceFolder": "/workspace",
     "forwardPorts": [8000],
-    "settings": {
-        "terminal.integrated.shell.linux": "/bin/bash"
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "terminal.integrated.defaultProfile.linux": "bash"
+            }
+        }
     },
     
-    "extensions": [
-        "ms-python.python", "qwtel.sqlite-viewer"
-    ],
-    "postStartCommand": "cd OneButtonWebpage/app && python3 -m uvicorn main:app --reload"
+    "postCreateCommand": "pip install -r requirements.txt "
 }
