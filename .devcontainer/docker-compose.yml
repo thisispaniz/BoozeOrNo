@@ -1,27 +1,31 @@
-
+version: "3.8"
 services:
   backend:
-    build: workspaces/BoozeOrNo/backend
+    build:
+      context: ./backend  # Build from the backend folder in the root directory
+      dockerfile: .devcontainer/backend/Dockerfile  # Ensure the correct Dockerfile is used
     container_name: backend
     ports:
       - "8000:8000"
     volumes:
-      - workspaces/BoozeOrNo/backend
+      - ./backend:/backend  # Mount the backend folder into the container
     depends_on:
       - db
 
   frontend:
-    build: workspaces/BoozeOrNo/frontend
+    build:
+      context: ./frontend  # Build from the frontend folder in the root directory
+      dockerfile: .devcontainer/frontend/Dockerfile  # Ensure the correct Dockerfile is used
     container_name: frontend
     ports:
       - "3000:3000"
     volumes:
-      - workspaces/BoozeOrNo/frontend
+      - ./frontend:/frontend  # Mount the frontend folder into the container
     stdin_open: true
     tty: true
 
   db:
-    image: nouchka/sqlite3:latest  # lightweight SQLite container
+    image: nouchka/sqlite3:latest  # SQLite container
     container_name: sqlite-db
     volumes:
-      - workspaces/BoozeOrNo/db
+      - ./db:/db  # Mount the db folder into the container
