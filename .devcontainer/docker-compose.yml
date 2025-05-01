@@ -1,22 +1,22 @@
 
 services:
   backend:
-    build: ./backend
+    build: workspaces/BoozeOrNo/backend
     container_name: backend
     ports:
       - "8000:8000"
     volumes:
-      - ./backend:/
+      - workspaces/BoozeOrNo/backend
     depends_on:
       - db
 
   frontend:
-    build: ./frontend
+    build: workspaces/BoozeOrNo/frontend
     container_name: frontend
     ports:
       - "3000:3000"
     volumes:
-      - ./frontend:/
+      - workspaces/BoozeOrNo/frontend
     stdin_open: true
     tty: true
 
@@ -24,4 +24,4 @@ services:
     image: nouchka/sqlite3:latest  # lightweight SQLite container
     container_name: sqlite-db
     volumes:
-      - ./
+      - workspaces/BoozeOrNo/db
