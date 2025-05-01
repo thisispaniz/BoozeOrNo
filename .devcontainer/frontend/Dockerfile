@@ -4,6 +4,6 @@ WORKDIR /workspaces/BoozeOrNo/frontend
 COPY . /workspaces/BoozeOrNo/frontend
 
 RUN npm install
-RUN npm run build  # optional if you want to serve production build
+RUN npm run dev
 
 CMD ["npm", "start"]
