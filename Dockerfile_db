@@ -8,7 +8,7 @@ WORKDIR /workspaces/BoozeOrNo/db
 # Expose the port if needed
 # EXPOSE 1433
 # Command to run when the container starts
-CMD ["sqlite3", "/workspaces/BoozeOrNo/db/alcohol_interaction_data.db"]
+# CMD ["sqlite3", "/workspaces/BoozeOrNo/db/alcohol_interaction_data.db"]
 
 
 
