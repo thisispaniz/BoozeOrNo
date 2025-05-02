@@ -1,16 +1,13 @@
 {
-    "name": "Booze Or No",
+    "name": "BoozeOrNo",
     "dockerComposeFile": "docker-compose.yml",
     "service": "backend",
-    "workspaceFolder": "/workspaces/BoozeOrNo",
-    "forwardPorts": [8000],
-    "customizations": {
-        "vscode": {
-            "settings": {
-                "terminal.integrated.defaultProfile.linux": "bash"
-            }
-        }
-    },
+    "workspaceFolder": "../BoozeOrNo",
+    "forwardPorts": [8000, 3000],
+    "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash"
+            },
+
     
-    "postCreateCommand": "pip install -r requirements.txt "
+    "postStartCommand": "pip install -r requirements.txt "
 }
