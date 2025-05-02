@@ -1,4 +1,4 @@
-FROM nouchka/sqlite3:latest
+FROM sqlite3:latest
 
 COPY db /workspaces/BoozeOrNo/db
 WORKDIR /workspaces/BoozeOrNo/db
