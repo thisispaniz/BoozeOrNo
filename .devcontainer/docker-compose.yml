@@ -9,8 +9,6 @@ services:
       - "8000:8000"
     volumes:
       - ./backend:/backend  # Mount the backend folder into the container
-    depends_on:
-      - db
 
   frontend:
     build:
@@ -29,5 +27,7 @@ services:
       context: ./../  # Build from the db folder in the root directory
       dockerfile: Dockerfile_db  # Ensure the correct Dockerfile is used
     container_name: sqlite-db
+    ports:
+      - "5000:5000"
     volumes:
       - ./db:/db  # Mount the db folder into the container
