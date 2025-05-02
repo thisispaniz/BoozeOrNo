@@ -2,7 +2,7 @@
 services:
   backend:
     build:
-      context: ./../backend  # Build from the backend folder in the root directory
+      context: ./../  # Build from the backend folder in the root directory
       dockerfile: Dockerfile_backend  # Ensure the correct Dockerfile is used
     container_name: backend
     ports:
