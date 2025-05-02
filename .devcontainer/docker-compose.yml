@@ -2,8 +2,8 @@ version: "3.8"
 services:
   backend:
     build:
-      context: ./backend  # Build from the backend folder in the root directory
-      dockerfile: Dockerfile  # Ensure the correct Dockerfile is used
+      context: ./../  # Build from the backend folder in the root directory
+      dockerfile: Dockerfile_backend  # Ensure the correct Dockerfile is used
     container_name: backend
     ports:
       - "8000:8000"
@@ -14,8 +14,8 @@ services:
 
   frontend:
     build:
-      context: ./frontend  # Build from the frontend folder in the root directory
-      dockerfile: Dockerfile  # Ensure the correct Dockerfile is used
+      context: ./../  # Build from the frontend folder in the root directory
+      dockerfile: Dockerfile_frontend  # Ensure the correct Dockerfile is used
     container_name: frontend
     ports:
       - "3000:3000"
