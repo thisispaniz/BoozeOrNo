@@ -2,7 +2,7 @@ FROM node:18
 
 # COPY BoozeOrNo/frontend/package.json ./package.json
 # COPY BoozeOrNo/frontend/package-lock.json ./package-lock.json
-COPY frontend frontend
+COPY frontend /workspaces/BoozeOrNo/frontend
 WORKDIR /workspaces/BoozeOrNo/frontend
 
 RUN npm install
