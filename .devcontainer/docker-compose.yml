@@ -3,7 +3,7 @@ services:
   backend:
     build:
       context: ./backend  # Build from the backend folder in the root directory
-      dockerfile: .devcontainer/backend/Dockerfile  # Ensure the correct Dockerfile is used
+      dockerfile: Dockerfile  # Ensure the correct Dockerfile is used
     container_name: backend
     ports:
       - "8000:8000"
@@ -15,7 +15,7 @@ services:
   frontend:
     build:
       context: ./frontend  # Build from the frontend folder in the root directory
-      dockerfile: .devcontainer/frontend/Dockerfile  # Ensure the correct Dockerfile is used
+      dockerfile: Dockerfile  # Ensure the correct Dockerfile is used
     container_name: frontend
     ports:
       - "3000:3000"
