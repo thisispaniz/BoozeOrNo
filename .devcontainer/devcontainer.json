@@ -2,12 +2,10 @@
     "name": "BoozeOrNo",
     "dockerComposeFile": "docker-compose.yml",
     "service": "backend",
-    "workspaceFolder": "workspaces/BoozeOrNo",
+    "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
     "forwardPorts": [8000, 3000],
     "settings": {
         "terminal.integrated.defaultProfile.linux": "bash"
-            },
-
-    
-    "postStartCommand": "pip install -r requirements.txt "
+    },
+    "postStartCommand": "pip install -r requirements.txt"
 }
