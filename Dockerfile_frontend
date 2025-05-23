@@ -7,4 +7,4 @@ WORKDIR /workspaces/BoozeOrNo/frontend
 
 RUN npm install
 
-CMD ["npm", "start"]
+CMD ["npm", "run", "dev"]
