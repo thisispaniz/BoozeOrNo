@@ -2,13 +2,15 @@ from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
 import sqlite3
 import os
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 
 app = FastAPI()
 
 # CORS configuration (allows frontend to access backend in Codespaces)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Change this to your frontend URL in production
+    allow_origins=["*"],  # this will be our actual URL later in progress
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -43,3 +45,10 @@ def search_medication(q: str = Query(..., description="Medication name or active
         }
         for row in results
     ]
+
+app.mount("/", StaticFiles(directory="frontend", html=True), name="frontend")
+
+    # Make sure uvicorn binds to 0.0.0.0, not localhost
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
