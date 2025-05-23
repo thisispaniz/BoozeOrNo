@@ -8,7 +8,8 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./backend:/backend  # Mount the backend folder into the container
+      - ./backend:/backend
+        ./db:/db  # Mount the backend folder into the container
     command: sleep infinity  # Keep the container running
 
   frontend:

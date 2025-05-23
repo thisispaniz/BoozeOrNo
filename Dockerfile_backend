@@ -9,6 +9,7 @@ RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - \
 
 # Copy backend code
 COPY backend /workspaces/BoozeOrNo/backend
+COPY db /workspaces/BoozeOrNo/db
 
 WORKDIR /workspaces/BoozeOrNo/backend
 
