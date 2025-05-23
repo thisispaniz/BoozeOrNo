@@ -10,7 +10,7 @@ services:
     volumes:
       - ./backend:/backend
         ./db:/db  # Mount the backend folder into the container
-    command: sleep infinity  # Keep the container running
+    # command: sleep infinity  # Keep the container running
 
   frontend:
     build:
@@ -21,9 +21,9 @@ services:
       - "3000:3000"
     volumes:
       - ./frontend:/frontend  # Mount the frontend folder into the container
-    stdin_open: true
-    tty: true
-    command: sleep infinity  # Keep the container running
+    # stdin_open: true
+    # tty: true
+   # command: sleep infinity  # Keep the container running
 
 #  db:
  #   build:

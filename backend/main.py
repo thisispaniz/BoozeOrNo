@@ -46,7 +46,7 @@ def search_medication(q: str = Query(..., description="Medication name or active
         for row in results
     ]
 
-app.mount("/", StaticFiles(directory="frontend", html=True), name="frontend")
+# app.mount("/", StaticFiles(directory="frontend", html=True), name="frontend")
 
     # Make sure uvicorn binds to 0.0.0.0, not localhost
 if __name__ == "__main__":
