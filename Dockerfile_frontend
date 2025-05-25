@@ -3,8 +3,8 @@ FROM node:18
 # COPY BoozeOrNo/frontend/package.json ./package.json
 # COPY BoozeOrNo/frontend/package-lock.json ./package-lock.json
 COPY frontend /workspaces/BoozeOrNo/frontend
-WORKDIR /workspaces/BoozeOrNo/frontend
+WORKDIR /workspaces/BoozeOrNo/frontend/booze-or-no
 
 RUN npm install
 
-CMD ["npm", "start"]
+CMD ["npm", "run", "dev"]

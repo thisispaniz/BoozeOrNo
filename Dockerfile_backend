@@ -9,11 +9,12 @@ RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - \
 
 # Copy backend code
 COPY backend /workspaces/BoozeOrNo/backend
-
-WORKDIR /workspaces/BoozeOrNo/backend
+COPY db /workspaces/BoozeOrNo/db
+COPY requirements.txt .
 
 # (Optional) Install Python dependencies if you have requirements.txt in backend
-# COPY backend/requirements.txt .
-# RUN pip install -r requirements.txt
+RUN pip install -r requirements.txt
+
+WORKDIR /workspaces/BoozeOrNo/backend
 
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

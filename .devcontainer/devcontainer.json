@@ -3,9 +3,8 @@
     "dockerComposeFile": "docker-compose.yml",
     "service": "backend",
     "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
-    "forwardPorts": [8000, 3000],
+    "forwardPorts": [3000, 8000],
     "settings": {
         "terminal.integrated.defaultProfile.linux": "bash"
-    },
-    "postStartCommand": "pip install -r requirements.txt"
+    }
 }
