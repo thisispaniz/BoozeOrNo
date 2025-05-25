@@ -38,9 +38,9 @@ def search_medication(q: str = Query(..., description="Medication name or active
 
     return [
         {
-            "symptoms_disorders": row[0],
-            "medication_brand": row[1],
-            "active_ingredient": row[2],
+            #"symptoms_disorders": row[0],
+            #"medication_brand": row[1],
+            #"active_ingredient": row[2],
             "alcohol_interaction": row[3]
         }
         for row in results
