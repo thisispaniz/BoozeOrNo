@@ -1,54 +1,50 @@
 import React, { useState } from "react";
-import "../App.css";
 
 function HeroSection() {
-    const [query, setQuery] = useState("");
-    const [result, setResult] = useState(null);
-    const [error, setError] = useState(null);
+  const [query, setQuery] = useState("");
+  const [result, setResult] = useState(null);
+  const [error, setError] = useState(null);
 
-    const handleSearch = async () => {
-        if (!query.trim()) return;
+  async function handleSearch() {
+    if (!query.trim()) {
+      setError("Please enter a medication name or ingredient.");
+      return;
+    }
+    setError(null);
+    setResult(null);
 
-        try {
-            const response = await fetch(`http://backend:8000/search?q=${encodeURIComponent(query)}`);
-            if (!response.ok) {
-                throw new Error("Network response was not ok");
-            }
+    try {
+      const response = await fetch(`/search?q=${encodeURIComponent(query)}`);
+      if (!response.ok) throw new Error("Network response was not ok");
 
-            const data = await response.json();
-            if (data.length > 0) {
-                setResult(data[0].alcohol_interaction); // Show only first match
-            } else {
-                setResult("No interaction data found for that medication.");
-            }
-        } catch (err) {
-            setError("Failed to fetch data. Make sure the backend is running.");
-        }
-    };
+      const data = await response.json();
+      setResult(data.length > 0 ? data[0].alcohol_interaction : "No results found.");
+    } catch (e) {
+      setError("Failed to fetch data. Make sure the backend is running.");
+      console.error(e);
+    }
+  }
 
-    return (
-        <section className="hero-section">
-            <h1>WANNA PARTY BUT:</h1>
-            <h1>-YOU'RE ON MEDS?</h1>
-            <h1>-HAVE A MEDICAL CONDITION?</h1>
-            <p>See how safe it is to drink tonight.</p>
-            <h2>TRY IT NOW</h2>
-            <div className="search-bar">
-                <input
-                    type="text"
-                    placeholder="Enter a medication you are taking"
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)}
-                />
-                <button type="submit" className="search-button" onClick={handleSearch}>
-                    BOOZE OR NO
-                </button>
-            </div>
-
-            {result && <div className="result"><p>{result}</p></div>}
-            {error && <div className="error"><p>{error}</p></div>}
-        </section>
-    );
+  return (
+    <section className="hero-section">
+      <h1>WANNA PARTY BUT:</h1>
+      <h1>-YOU'RE ON MEDS?</h1>
+      <h1>-HAVE A MEDICAL CONDITION?</h1>
+      <p>See how safe it is to drink tonight.</p>
+      <h2>TRY IT NOW</h2>
+      <div className="search-bar">
+        <input
+          type="text"
+          placeholder="Enter a medication you are taking"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+        />
+        <button className="search-button" onClick={handleSearch}>BOOZE OR NO</button>
+      </div>
+      {error && <p style={{ color: "red" }}>{error}</p>}
+      {result && <p>Alcohol interaction info: {result}</p>}
+    </section>
+  );
 }
 
 export default HeroSection;
