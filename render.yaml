@@ -4,8 +4,8 @@ services:
     env: docker
     region: frankfurt
     plan: free
-    dockerfilePath: ./Dockerfile_backend
-    buildContext: .
+    dockerfilePath: backend/Dockerfile_backend
+    buildContext: ./
     envVars:
       - key: PORT
         value: 8000
@@ -15,8 +15,10 @@ services:
     env: docker
     region: frankfurt
     plan: free
-    dockerfilePath: ./Dockerfile_frontend
-    buildContext: .
+    dockerfilePath: frontend/Dockerfile_frontend
+    buildContext: ./
     envVars:
       - key: PORT
         value: 3000
+      - key: VITE_BACKEND_URL
+        value: https://boozeorno-backend.onrender.com
