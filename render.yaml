@@ -4,8 +4,7 @@ services:
     env: docker
     region: frankfurt
     plan: free
-    dockerfilePath: backend/Dockerfile_backend
-    buildContext: ./
+    dockerfilePath: Dockerfile_backend
     envVars:
       - key: PORT
         value: 8000
@@ -15,8 +14,7 @@ services:
     env: docker
     region: frankfurt
     plan: free
-    dockerfilePath: frontend/Dockerfile_frontend
-    buildContext: ./
+    dockerfilePath: Dockerfile_frontend
     envVars:
       - key: PORT
         value: 3000
