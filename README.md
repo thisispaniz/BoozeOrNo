@@ -1,9 +1,9 @@
-# BoozOrNo
-------
+# BoozeOrNo
+-----
 
-First, we created a one button app. it runs automatically if you open a codespace from the main branch - you just need to open the "ports" section in codespaces and open the link. 
+this is the release branch which we use for public deployment on a website.
+DO NOT merge this into main!
 
 ---------
-Our Miro board to check ongoing/planned/done tasks: [click
-](https://miro.com/app/board/uXjVIDqTiSk=/?share_link_id=52710550780)
------------
+
+only update this branch from main!
