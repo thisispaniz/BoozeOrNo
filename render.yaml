@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: boozeorno-backend
+    env: docker
+    region: frankfurt
+    plan: free
+    dockerfilePath: ./Dockerfile_backend
+    buildContext: .
+    envVars:
+      - key: PORT
+        value: 8000
+
+  - type: web
+    name: boozeorno-frontend
+    env: docker
+    region: frankfurt
+    plan: free
+    dockerfilePath: ./Dockerfile_frontend
+    buildContext: .
+    envVars:
+      - key: PORT
+        value: 3000
