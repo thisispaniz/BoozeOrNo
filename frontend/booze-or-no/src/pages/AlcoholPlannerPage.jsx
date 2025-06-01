@@ -91,24 +91,25 @@ function AlcoholPlannerPage() {
             </ul>
 
             <h3>BAC Over Time</h3>
-          <div className="graph-container">
-            <svg width="100%" height="200">
-              {results.timePoints.map((point, index) => {
-                const x = (index / (results.timePoints.length - 1)) * 100;
-                const y = 200 - parseFloat(point.bac) * 200; // scale BAC to svg height
-                return (
-                  <circle key={index} cx={`${x}%`} cy={y} r="2" fill="blue">
-                    <title>{point.time}: {point.bac}</title>
-                  </circle>
-                );
-              })}
-            </svg>
-            <div className="x-labels">
-              {results.timePoints.map((point, i) => (
-                <span key={i}>{i % 2 === 0 ? point.time : ''}</span>
-              ))}
+            <div className="graph-container">
+                <svg width="100%" height="200">
+                    <path
+                        d = {results.timePoints.map((point, index) => {
+                            const x = (index / (results.timePoints.length - 1)) * 600;
+                            const y = 200 - parseFloat(point.bac) * 200;
+                            return `${index === 0 ? 'M' : 'L'} ${x},${y}`;
+                        }).join(' ')}
+                        fill = "none"
+                        stroke='#FFC300'
+                        strokeWidth="2"
+                    />
+                </svg>
+                <div className="x-labels">
+                    {results.timePoints.map((point, i) => (
+                        <span key={i}>{i % 2 === 0 ? point.time : ''}</span>
+                    ))}
+                </div>
             </div>
-</div>
 
         </div>
     )}
