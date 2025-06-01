@@ -15,7 +15,7 @@ Click on the link for port 3000 and the website shows in a new tab/window, accor
 
 ------------
 
-To see the web application in live action, on a publicy available website, visit: https://boozeorno-frontend.onrender.com/
+To see the web application in live action, on a publicy available website (PRODUCTION ENVIRONMENT), visit: https://boozeorno-frontend.onrender.com/
 It may take a while spinning up because we're on the free plan and therefore only use 0.1 CPU. Also, after a certain time of inactivity, it spins down.
 
 -----
