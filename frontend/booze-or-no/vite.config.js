@@ -16,9 +16,9 @@ export default defineConfig({
     ],
     proxy: {
       '/search': {
-        target: 'http://backend:8000',
-        changeOrigin: true,
-        secure: false,
+      target: 'https://boozeorno-backend.onrender.com',
+      changeOrigin: true,
+      secure: true,
       }
     }
   }
