@@ -4,6 +4,7 @@ import HeroSection from './components/HeroSection';
 import FeaturesSection from './components/FeaturesSection';
 import DisclaimerSection from './components/DisclaimerSection';
 import SignupPage from './pages/SignupPage';
+import AlcoholPlannerPage from './pages/AlcoholPlannerPage';
 
 function LandingPage() {
   return (
@@ -22,6 +23,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/signup" element={<SignupPage />} />
+        <Route path="/planner" element={<AlcoholPlannerPage />} />
       </Routes>
     </Router>
   )
