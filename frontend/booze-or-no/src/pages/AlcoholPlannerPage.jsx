@@ -1,6 +1,7 @@
 // src/pages/AlcoholPlannerPage.jsx
 import React, { useState } from 'react';
-import './AlcoholPlannerPage.css';
+import NavBar from '../components/NavBar';
+import '../App.css';
 
 const rFactors = {
     male: 0.73,
@@ -54,8 +55,10 @@ function AlcoholPlannerPage() {
     }
 
     return (
+        <>
+        <NavBar />
         <div className="planner-container">
-            <h2>Alcohol Metabolism Planner</h2>
+            <h1>Alcohol Metabolism Planner</h1>
             <form onSubmit={handleSubmit} className="planner-form">
                 <label>
                     Sex:
@@ -67,12 +70,12 @@ function AlcoholPlannerPage() {
 
                 <label>
                     Weight (kg):
-                    <input type="number" value={weight} onChange={(e) => setWeight(e.target.value)} />
+                    <input className='calcinput' type="number" value={weight} onChange={(e) => setWeight(e.target.value)} />
                 </label>
 
                 <label>
                     The alcohol needs to be out of your system by:
-                    <input type="datetime-local" value={targetTime} onChange={(e) => setTargetTime(e.target.value)} />
+                    <input className='calcinput' type="datetime-local" value={targetTime} onChange={(e) => setTargetTime(e.target.value)} />
                 </label>
 
                 <button type="submit">Calculate</button>
@@ -90,25 +93,28 @@ function AlcoholPlannerPage() {
             <h3>BAC Over Time</h3>
             <div className="graph-container">
                 <svg width="100%" height="200">
-                    {results.timePoints.map((point, index) => {
-                    const x = (index / (results.timePoints.length - 1)) * 100;
-                    const y = 200 - parseFloat(point.bac) * 200; // scale BAC to svg height
-                    return (
-                        <circle key={index} cx={`${x}%`} cy={y} r="2" fill="blue">
-                            <title>{point.time}: {point.bac}</title>
-                        </circle>
-                    );
-                    })}
+                    <path
+                        d = {results.timePoints.map((point, index) => {
+                            const x = (index / (results.timePoints.length - 1)) * 600;
+                            const y = 200 - parseFloat(point.bac) * 200;
+                            return `${index === 0 ? 'M' : 'L'} ${x},${y}`;
+                        }).join(' ')}
+                        fill = "none"
+                        stroke='#FFC300'
+                        strokeWidth="2"
+                    />
                 </svg>
                 <div className="x-labels">
                     {results.timePoints.map((point, i) => (
-                    <span key={i}>{i % 2 === 0 ? point.time : ''}</span>
+                        <span key={i}>{i % 2 === 0 ? point.time : ''}</span>
                     ))}
                 </div>
             </div>
+
         </div>
     )}
     </div>
+    </>
 );
 }
 
