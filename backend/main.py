@@ -7,9 +7,13 @@ import logging
 app = FastAPI()
 
 # CORS configuration for production
+origins = [
+    "https://boozeorno-frontend.onrender.com", 
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://boozeorno-frontend.onrender.com/"],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
