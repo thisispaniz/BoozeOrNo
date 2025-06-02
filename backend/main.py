@@ -1,9 +1,9 @@
-from fastapi import FastAPI, Query
+from fastapi import FastAPI, Query, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import os
 import psycopg2
-from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
+# from fastapi.staticfiles import StaticFiles
+# from fastapi.responses import FileResponse
 
 app = FastAPI()
 
@@ -20,45 +20,49 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Supabase client setup
+SUPABASE_URL = os.getenv("SUPABASE_URL")
+SUPABASE_KEY = os.getenv("SUPABASE_KEY")
+
+supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
+
 # CORS configuration for dev!
 
 #app.add_middleware(
 #    CORSMiddleware,
-#    allow_origins=["*"],  # Later, restrict this to frontend domain
+#    allow_origins=["*"], # <-- for prod, must be restricted to the dedicated port
 #    allow_credentials=True,
 #    allow_methods=["*"],
 #    allow_headers=["*"],
 #)
 
-DATABASE_URL = os.getenv("SUPABASE_DB_URL")
-
 @app.get("/search")
 def search_medication(q: str = Query(..., description="Medication name or active ingredient")):
-    # Connect to PostgreSQL from Supabase
-    conn = psycopg2.connect(DATABASE_URL)
-    cursor = conn.cursor()
+    try:
+        response = (
+            supabase
+            .from_("alcmedi")
+            .select("symptoms_disorders,medication_brand,active_ingredient,alcohol_interaction")
+            .or_(f"medication_brand.ilike.%{q}%,active_ingredient.ilike.%{q}%")
+            .limit(10)
+            .execute()
+        )
+        if response.status_code != 200:
+            raise HTTPException(status_code=500, detail="Failed to query Supabase")
 
-    query = """
-    SELECT symptoms_disorders, medication_brand, active_ingredient, alcohol_interaction
-    FROM alcmedi
-    WHERE medication_brand ILIKE %s OR active_ingredient ILIKE %s
-    LIMIT 10;
-    """
-    wildcard_query = f"%{q}%"
-    cursor.execute(query, (wildcard_query, wildcard_query))
-    results = cursor.fetchall()
+        data = response.data
+        return [
+            {
+                "symptoms_disorders": row["symptoms_disorders"],
+                "medication_brand": row["medication_brand"],
+                "active_ingredient": row["active_ingredient"],
+                "alcohol_interaction": row["alcohol_interaction"],
+            }
+            for row in data
+        ]
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
-    conn.close()
-
-    return [
-        {
-            "symptoms_disorders": row[0],
-            "medication_brand": row[1],
-            "active_ingredient": row[2],
-            "alcohol_interaction": row[3]
-        }
-        for row in results
-    ]
 
 # app.mount("/", StaticFiles(directory="frontend", html=True), name="frontend")
 
