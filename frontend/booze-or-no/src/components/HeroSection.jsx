@@ -55,9 +55,7 @@ function HeroSection() {
         <div className="results">
           <p>
             This medication has the active ingredient <strong>{results.active_ingredient}</strong>.{" "}
-            <br>
             There are generic brands available: <strong>{results.medication_brand}</strong>.{" "}
-              <br>
             It is usually used for/against <strong>{results.symptoms_disorders}</strong>.
           </p>
           {results.alcohol_interaction.toLowerCase() === "none" ? (
