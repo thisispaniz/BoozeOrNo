@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
 import os
-import psycopg2  # Make sure this is in your requirements.txt
+import psycopg2
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 
