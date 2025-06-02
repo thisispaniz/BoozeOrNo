@@ -7,21 +7,29 @@ from fastapi.responses import FileResponse
 
 app = FastAPI()
 
-# CORS configuration (allows frontend to access backend in Codespaces or Render)
+origins = [
+    "https://boozeorno-frontend.onrender.com",  # Render frontend URL
+]
+# CORS configuration for prod!
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Later, restrict this to frontend domain
+    allow_origins=origins,  # don't use ["*"] in production with credentials
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# -------------------------------
-# Supabase database connection
-# -------------------------------
-# Step 1: Go to Supabase > Project > Settings > Database > Connection string (URI)
-# Step 2: Set it as an environment variable in Render under 'Environment Variables'
-#         e.g., key: SUPABASE_DB_URL, value: postgresql://USER:PASSWORD@HOST:PORT/DATABASE
+# CORS configuration for dev!
+
+#app.add_middleware(
+#    CORSMiddleware,
+#    allow_origins=["*"],  # Later, restrict this to frontend domain
+#    allow_credentials=True,
+#    allow_methods=["*"],
+#    allow_headers=["*"],
+#)
+
 DATABASE_URL = os.getenv("SUPABASE_DB_URL")
 
 @app.get("/search")
