@@ -14,7 +14,7 @@ function HeroSection() {
     setResult(null);
 
     try {
-      const response = await fetch(`https://boozeorno-backend.onrender.com/search?q=${encodeURIComponent(query)}`);
+      const response = await fetch(`https://boozeorno-backend.onrender.com/search?q=${query}`);
       if (!response.ok) throw new Error("Network response was not ok");
 
       const data = await response.json();
