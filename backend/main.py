@@ -2,13 +2,14 @@ from fastapi import FastAPI, Query, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import os
 from supabase import create_client, Client
+import logging
 
 app = FastAPI()
 
 # CORS configuration for production
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://boozeorno-frontend.onrender.com"],
+    allow_origins=["https://boozeorno-frontend.onrender.com/"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
