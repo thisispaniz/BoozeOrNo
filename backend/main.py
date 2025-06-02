@@ -2,6 +2,7 @@ from fastapi import FastAPI, Query, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import os
 import psycopg2
+from supabase import create_client, Client
 # from fastapi.staticfiles import StaticFiles
 # from fastapi.responses import FileResponse
 
