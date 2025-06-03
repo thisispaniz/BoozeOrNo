@@ -6,6 +6,7 @@ import DisclaimerSection from './components/DisclaimerSection';
 import TagLine from './components/TagLine';
 import SignupPage from './pages/SignupPage';
 import AlcoholPlannerPage from './pages/AlcoholPlannerPage';
+import LoginPage from './pages/LoginPage'
 
 function LandingPage() {
   return (
@@ -24,6 +25,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<LandingPage />} />
+        <Route path="login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/planner" element={<AlcoholPlannerPage />} />
       </Routes>
