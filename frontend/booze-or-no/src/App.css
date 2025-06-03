@@ -1,4 +1,5 @@
 body {
+  margin: 0;
   padding-left: 150px;
   padding-right: 150px;
   background-color: #0A0A0A;
@@ -11,6 +12,7 @@ body {
   align-items: center;
   padding-top: 2rem;
   font-size: 20px;
+  margin-bottom: 100px;
 }
 
 .logo img {
@@ -57,8 +59,8 @@ body {
   height: 450px;
   text-align: left;
   color: #ffffff;
-  margin-top: 100px;
-  margin-bottom: 0px;
+  margin-bottom: 80px;
+  margin-top: -20px;
 }
 
 h1 {
@@ -188,7 +190,7 @@ input {
   font-weight: 700;
 }
 
-.disclaimer {  
+.disclaimer {
   text-align: left;
   width: 45%;
   padding-bottom: 100px;
@@ -254,3 +256,116 @@ button {
   width: 568px;
   border-radius: 2px;
 }
+
+.password-rules {
+  margin-top: 10px;
+  font-family: "Raleway", sans-serif;
+  font-size: 14px;
+  color: #ffffff;
+  background-color: #111;
+  border: 1px solid #444;
+  padding: 15px;
+  font-size: 14px;
+  border-radius: 2px;
+}
+
+.password-rules ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.password-rules li {
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.password-rules li.valid::before {
+  content: "✓";
+  color: #97ff41;
+  margin-right: 8px;
+}
+
+.password-rules li.invalid::before {
+  content: "✗";
+  color: #999;
+  margin-right: 8px;
+}
+
+.password-rules li.valid {
+  color: #97ff41;
+}
+
+.password-rules li.invalid {
+  color: #999
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.form {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+}
+
+.name-fields {
+  display: flex;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  gap: 15px;
+  input {
+    margin: 0;
+  }
+}
+
+.signup-input {
+  padding: 12px;
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+  width: 100%;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.register-btn {
+  background-color: #ffc107;
+  color: black;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.login-link {
+  text-align: center;
+  font-size: 14px;
+}
+
+.login-link span {
+  font-weight: bold;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.password-container {
+  position: relative;
+}
+
+password

@@ -3,6 +3,7 @@ import NavBar from './components/NavBar';
 import HeroSection from './components/HeroSection';
 import FeaturesSection from './components/FeaturesSection';
 import DisclaimerSection from './components/DisclaimerSection';
+import TagLine from './components/TagLine';
 import SignupPage from './pages/SignupPage';
 import AlcoholPlannerPage from './pages/AlcoholPlannerPage';
 
@@ -12,6 +13,7 @@ function LandingPage() {
     <NavBar />
     <HeroSection />
     <FeaturesSection />
+    <TagLine />
     <DisclaimerSection />
    </>
   );
