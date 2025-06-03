@@ -18,9 +18,6 @@ const SignupForm = () => {
             placeholder="password"
           />
           <button className="register-btn">LOGIN</button>
-          <p className="login-link">
-            Have an account already? <span>LOGIN</span>
-          </p>
         </div>
       </div>
       <TagLine />
