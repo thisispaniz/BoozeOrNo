@@ -4,10 +4,6 @@ import "../App.css";
 function DisclaimerSection() {
     return (
         <div className="disclaimer-section">
-            <div className="row">
-                <div className="column column-photo"><img src="/Booze or No.svg" alt="BoozeOrNo" /></div>
-                <div className="column column-text"><p>DON'T KILL YOURSELF DRINKING</p></div>
-            </div>
             <div className="disclaimer">
                 <h3>DISCLAIMER</h3>
                 <p>

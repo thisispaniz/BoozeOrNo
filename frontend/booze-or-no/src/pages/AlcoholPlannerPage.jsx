@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import NavBar from '../components/NavBar';
 import '../App.css';
+import TagLine from '../components/TagLine';
 
 const rFactors = {
     male: 0.73,
@@ -110,10 +111,10 @@ function AlcoholPlannerPage() {
                     ))}
                 </div>
             </div>
-
         </div>
     )}
     </div>
+    <TagLine />
     </>
 );
 }
