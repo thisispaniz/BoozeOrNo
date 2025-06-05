@@ -1,52 +1,64 @@
-from fastapi import FastAPI, Query
+from fastapi import FastAPI, Query, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-import sqlite3
+from supabase import create_client, Client
 import os
-from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
 
 app = FastAPI()
 
-# CORS configuration (allows frontend to access backend in Codespaces)
+# CORS (adjust for production)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # this will be our actual URL later in progress
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Path to your SQLite database inside the container
-DB_PATH = "/workspaces/BoozeOrNo/db/alcohol_interaction_data.db"
+# Supabase client setup
+SUPABASE_URL = os.environ.get("SUPABASE_URL")
+SUPABASE_KEY = os.environ.get("SUPABASE_KEY")
 
+if not SUPABASE_URL or not SUPABASE_KEY:
+    raise ValueError("SUPABASE_URL and SUPABASE_KEY must be set as environment variables")
+
+supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
+
+# /register endpoint
+@app.post("/register")
+def register_user(email: str, password: str):
+    try:
+        result = supabase.auth.sign_up({"email": email, "password": password})
+        if result.user is None:
+            raise HTTPException(status_code=400, detail="Registration failed")
+        return {"message": "User registered", "id": result.user.id}
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+# /login endpoint
+@app.post("/login")
+def login_user(email: str, password: str):
+    try:
+        result = supabase.auth.sign_in_with_password({"email": email, "password": password})
+        if result.session is None:
+            raise HTTPException(status_code=401, detail="Login failed")
+        return {"access_token": result.session.access_token}
+    except Exception as e:
+        raise HTTPException(status_code=401, detail=str(e))
+
+# /search endpoint
 @app.get("/search")
 def search_medication(q: str = Query(..., description="Medication name or active ingredient")):
-    conn = sqlite3.connect(DB_PATH)
-    cursor = conn.cursor()
+    try:
+        response = supabase.table("alcmedi")\
+            .select("alcohol_interaction")\
+            .or_(f"medication_brand.ilike.%{q}%,active_ingredient.ilike.%{q}%")\
+            .limit(10)\
+            .execute()
 
-    query = """
-    SELECT symptoms_disorders, medication_brand, active_ingredient, alcohol_interaction
-    FROM alcmedi
-    WHERE medication_brand LIKE ? OR active_ingredient LIKE ?
-    LIMIT 10;
-    """
-    wildcard_query = f"%{q}%"
-    cursor.execute(query, (wildcard_query, wildcard_query))
-    results = cursor.fetchall()
+        return response.data
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
-    conn.close()
-
-    return [
-        {
-            #"symptoms_disorders": row[0],
-            #"medication_brand": row[1],
-            #"active_ingredient": row[2],
-            "alcohol_interaction": row[3]
-        }
-        for row in results
-    ]
-
-# app.mount("/", StaticFiles(directory="frontend", html=True), name="frontend")
 
     # Make sure uvicorn binds to 0.0.0.0, not localhost
 if __name__ == "__main__":
