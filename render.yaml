@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: boozeorno-backend
+    env: docker
+    region: frankfurt
+    plan: free
+    dockerfilePath: Dockerfile_backend
+    envVars:
+      - key: PORT
+        value: 8000
+
+  - type: web
+    name: boozeorno-frontend
+    env: docker
+    region: frankfurt
+    plan: free
+    dockerfilePath: Dockerfile_frontend
+    envVars:
+      - key: PORT
+        value: 3000
+      - key: VITE_BACKEND_URL
+        value: https://boozeorno-backend.onrender.com

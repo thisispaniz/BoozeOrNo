@@ -1,54 +1,58 @@
-from fastapi import FastAPI, Query
+from fastapi import FastAPI, Query, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-import sqlite3
 import os
-from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
+from supabase import create_client, Client
+import logging
 
 app = FastAPI()
 
-# CORS configuration (allows frontend to access backend in Codespaces)
+# CORS configuration for production
+origins = [
+    "https://boozeorno-frontend.onrender.com", 
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # this will be our actual URL later in progress
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Path to your SQLite database inside the container
-DB_PATH = "/workspaces/BoozeOrNo/db/alcohol_interaction_data.db"
+# Supabase client setup
+SUPABASE_URL = os.getenv("SUPABASE_URL")
+SUPABASE_KEY = os.getenv("SUPABASE_KEY")
+
+if not SUPABASE_URL or not SUPABASE_KEY:
+    raise RuntimeError("SUPABASE_URL or SUPABASE_KEY is not set in environment variables.")
+
+supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 @app.get("/search")
 def search_medication(q: str = Query(..., description="Medication name or active ingredient")):
-    conn = sqlite3.connect(DB_PATH)
-    cursor = conn.cursor()
+    try:
+        response = (
+            supabase
+            .table("alcmedi")
+            .select("*")  # fetch all columns
+            .or_(f"medication_brand.ilike.%{q}%,active_ingredient.ilike.%{q}%")
+            .limit(10)
+            .execute()
+        )
 
-    query = """
-    SELECT symptoms_disorders, medication_brand, active_ingredient, alcohol_interaction
-    FROM alcmedi
-    WHERE medication_brand LIKE ? OR active_ingredient LIKE ?
-    LIMIT 10;
-    """
-    wildcard_query = f"%{q}%"
-    cursor.execute(query, (wildcard_query, wildcard_query))
-    results = cursor.fetchall()
 
-    conn.close()
+        logging.info(f"Supabase response: {response.model_dump_json(indent=2)}")
 
-    return [
-        {
-            #"symptoms_disorders": row[0],
-            #"medication_brand": row[1],
-            #"active_ingredient": row[2],
-            "alcohol_interaction": row[3]
-        }
-        for row in results
-    ]
+        if not response.data:
+            raise HTTPException(status_code=404, detail="No matching entries found")
 
-# app.mount("/", StaticFiles(directory="frontend", html=True), name="frontend")
+        return response.data
 
-    # Make sure uvicorn binds to 0.0.0.0, not localhost
+    except Exception as e:
+        logging.exception("Supabase query failed")
+        raise HTTPException(status_code=500, detail=str(e))
+
+# For local dev only:
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)

@@ -2,23 +2,30 @@ import React, { useState } from "react";
 
 function HeroSection() {
   const [query, setQuery] = useState("");
-  const [result, setResult] = useState(null);
+  const [results, setResults] = useState(null);
   const [error, setError] = useState(null);
 
   async function handleSearch() {
     if (!query.trim()) {
       setError("Please enter a medication name or ingredient.");
+      setResults(null);
       return;
     }
     setError(null);
-    setResult(null);
+    setResults(null);
 
     try {
-      const response = await fetch(`/search?q=${encodeURIComponent(query)}`);
+      const response = await fetch(`https://boozeorno-backend.onrender.com/search?q=${query}`);
       if (!response.ok) throw new Error("Network response was not ok");
 
       const data = await response.json();
-      setResult(data.length > 0 ? data[0].alcohol_interaction : "No results found.");
+
+      if (data.length === 0) {
+        setError("No results found.");
+        setResults(null);
+      } else {
+        setResults(data[0]);
+      }
     } catch (e) {
       setError("Failed to fetch data. Make sure the backend is running.");
       console.error(e);
@@ -41,8 +48,27 @@ function HeroSection() {
         />
         <button className="search-button" onClick={handleSearch}>BOOZE OR NO</button>
       </div>
+
       {error && <p style={{ color: "red" }}>{error}</p>}
-      {result && <p>Alcohol interaction info: {result}</p>}
+
+      {results && (
+        <div className="results">
+          <p>
+            This medication has the active ingredient <strong>{results.active_ingredient}</strong>.{" "}
+            There are generic brands available: <strong>{results.medication_brand}</strong>.{" "}
+            It is usually used for/against <strong>{results.symptoms_disorders}</strong>.
+          </p>
+          {results.alcohol_interaction.toLowerCase() === "none" ? (
+            <p>
+              There is no known significant interaction of this medication with alcohol, but nevertheless, proceed with caution.
+            </p>
+          ) : (
+            <p>
+              Be aware: the following interactions are known to happen with alcohol: <strong>{results.alcohol_interaction}</strong>.
+            </p>
+          )}
+        </div>
+      )}
     </section>
   );
 }
