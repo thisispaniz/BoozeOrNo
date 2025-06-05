@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import '../App.css';
 import NavBar from "../components/NavBar";
 import TagLine from "../components/TagLine";
+import { getBackendUrl } from "../utils/api";
 
 const SignupForm = () => {
   const [showPasswordRules, setShowPasswordRules] = useState(false);
   const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
 
   const passwordRequirements = [
     { label: "At least 8 characters", test: (pw) => pw.length >= 8 },
@@ -15,21 +18,44 @@ const SignupForm = () => {
     { label: "One special character", test: (pw) => /[!@#$%^&*]/.test(pw) },
   ];
 
+  const handleSignup = async () => {
+    try {
+      const res = await fetch(`${getBackendUrl()}/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setMessage(`❌ ${data.detail || "Signup failed"}`);
+      } else {
+        setMessage("✅ Signup successful! Please check your email to confirm your account.");
+      }
+    } catch (err) {
+      setMessage("❌ Server error during signup.");
+    }
+  };
+
   return (
     <>
       <NavBar />
       <div className="container">
         <h1 className="title">CREATE AN ACCOUNT</h1>
         <div className="form">
-          <div className="name-fields">
-            <input className="signup-input" type="text" placeholder="First name" />
-            <input className="signup-input" type="text" placeholder="Last name" />
-          </div>
-          <input className="signup-input" type="email" placeholder="email" />
+          <input
+            className="signup-input"
+            type="email"
+            placeholder="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
           <input
             className="signup-input"
             type="password"
             placeholder="password"
+            value={password}
             onFocus={() => setShowPasswordRules(true)}
             onBlur={() => setShowPasswordRules(false)}
             onChange={(e) => setPassword(e.target.value)}
@@ -48,7 +74,10 @@ const SignupForm = () => {
               </ul>
             </div>
           )}
-          <button className="register-btn">REGISTER</button>
+          <button className="register-btn" onClick={handleSignup}>
+            REGISTER
+          </button>
+          {message && <p className="feedback-message">{message}</p>}
           <p className="login-link">
             Have an account already? <span>LOGIN</span>
           </p>
