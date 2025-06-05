@@ -1,0 +1,139 @@
+id,symptoms_disorders,medication_brand,active_ingredient,alcohol_interaction
+1,Allergies / Colds / Flu , Alavert , Loratadine , Drowsiness
+2,Allergies / Colds / Flu , Atarax , Hydroxyzine , Dizziness; increased risk for overdose
+3,Allergies / Colds / Flu , Benadryl , Diphenhydramine , Increased risk for overdose
+4,Allergies / Colds / Flu , Clarinex , Desloratadine , none
+5,Allergies / Colds / Flu , Claritin , Loratadine , none
+6,Allergies / Colds / Flu , Claritin-D , Loratadine + Pseudoephedrine , none
+7,Allergies / Colds / Flu , Dimetapp , Brompheniramine , none
+8,Allergies / Colds / Flu , Sudafed , Chlorpheniramine , none
+9,Allergies / Colds / Flu , Triaminic Cold & Allergy , Chlorpheniramine , none
+10,Allergies / Colds / Flu , Tylenol Allergy Sinus , Chlorpheniramine , none
+11,Allergies / Colds / Flu , Tylenol Cold & Flu , Chlorpheniramine , none
+12,Allergies / Colds / Flu , Zyrtec , Cetirizine , none
+13,Angina / Coronary Heart Disease , Isordil , Isosorbide , Rapid heartbeat; sudden changes in blood pressure; dizziness; fainting
+14,Angina / Coronary Heart Disease , none , Nitroglycerin , Rapid heartbeat; sudden changes in blood pressure; dizziness; fainting
+15,Anxiety and Epilepsy , Ativan , Lorazepam , Drowsiness / dizziness; increased risk for overdose; slowed or difficulty breathing; impaired motor control; unusual behavior; memory problems
+16,Anxiety and Epilepsy , BuSpar , Buspirone , Drowsiness / dizziness; increased risk for overdose; slowed or difficulty breathing; impaired motor control; unusual behavior; memory problems
+17,Anxiety and Epilepsy , Klonopin , Clonazepam , Drowsiness / dizziness; increased risk for overdose; slowed or difficulty breathing; impaired motor control; unusual behavior; memory problems
+18,Anxiety and Epilepsy , Librium , Chlordiazepoxide , Drowsiness / dizziness; increased risk for overdose; slowed or difficulty breathing; impaired motor control; unusual behavior; memory problems
+19,Anxiety and Epilepsy, Paxil , Paroxetine , Drowsiness / dizziness; increased risk for overdose; slowed or difficulty breathing; impaired motor control; unusual behavior; memory problems
+20,Anxiety and Epilepsy , Valium , Diazepam , Drowsiness / dizziness; increased risk for overdose; slowed or difficulty breathing; impaired motor control; unusual behavior; memory problems
+21,Anxiety and Epilepsy , Xanax , Alprazolam , Drowsiness / dizziness; increased risk for overdose; slowed or difficulty breathing; impaired motor control; unusual behavior; memory problems
+22,Arthritis , Celebrex , Celecoxib , Ulcers / stomach bleeding / liver damage
+23,Arthritis , Naprosyn , Naproxen , Ulcers / stomach bleeding / liver damage
+24,Arthritis , Voltaren , Diclofenac , Ulcers / stomach bleeding / liver damage
+25,Attention and Concentration (ADHD) , Adderall , Amphetamine/Dextroamphetamine , Dizziness / drowsiness / impaired concentration / possible increased risk for heart problems
+26,Attention and Concentration (ADHD) , Concerta , Methylphenidate , Dizziness / drowsiness / impaired concentration / possible increased risk for heart problems
+27,Attention and Concentration (ADHD) , Ritalin , Methylphenidate , SDizziness / drowsiness / impaired concentration / possible increased risk for heart problems
+28,Attention and Concentration (ADHD) , Dexedrine , Dextroamphetamine , Dizziness / drowsiness / impaired concentration / possible increased risk for heart problems
+29,Attention and Concentration (ADHD) , Focalin , Dexmethylphenidate , Dizziness / drowsiness / impaired concentration / possible increased risk for heart problems
+30,Attention and Concentration (ADHD) , Strattera , Atomoxetine , Liver damage
+31,Attention and Concentration (ADHD) , Vyvanse , Lisdexamfetamine , Liver damage
+32,Blood Clots , Coumadin , Warfarin , Occasional drinking may lead to internal bleeding; heavier drinking may cause more bleeding or the opposite (risk of clots / strokes / heart attacks)
+33,Cough , Delsym , Dextromethorphan , Drowsiness / dizziness / increased risk for overdose
+34,Cough , Robitussin Cough , Dextromethorphan , Drowsiness / dizziness / increased risk for overdose
+35,Cough , Robitussin A-C , Guaifenesin + Codeine , Drowsiness / dizziness / increased risk for overdose
+36,Depression , Abilify , Aripiprazole , Drowsiness / dizziness; increased risk for overdose; increased feelings of depression / hopelessness
+37,Depression , Anafranil , Clomipramine , Drowsiness / dizziness; increased risk for overdose; increased feelings of depression / hopelessness
+38,Depression , Celexa , Citalopram , Drowsiness / dizziness; increased risk for overdose; increased feelings of depression / hopelessness
+39,Depression , Clozaril , Clozapine , Drowsiness / dizziness; increased risk for overdose; increased feelings of depression / hopelessness
+40,Depression , Cymbalta , Duloxetine , Drowsiness / dizziness; increased risk for overdose; increased feelings of depression / hopelessness; liver damage
+41,Depression , Desyrel , Trazodone , Drowsiness / dizziness; increased risk for overdose; increased feelings of depression / hopelessness
+42,Depression , Effexor , Venlafaxine , Drowsiness / dizziness; increased risk for overdose; increased feelings of depression / hopelessness
+43,Depression , Elavil , Amitriptyline , Drowsiness / dizziness; increased risk for overdose; increased feelings of depression / hopelessness
+44,Depression , Geodon , Ziprasidone , Drowsiness / dizziness; increased risk for overdose; increased feelings of depression / hopelessness
+45,Depression , Invega , Paliperidone , Drowsiness / dizziness; increased risk for overdose; increased feelings of depression / hopelessness
+46,Depression , Lexapro , Escitalopram , Drowsiness / dizziness; increased risk for overdose; increased feelings of depression / hopelessness
+47,Depression , Luvox , Fluvoxamine , Drowsiness / dizziness; increased risk for overdose; increased feelings of depression / hopelessness
+48,Depression , Nardil , Phenelzine (MAOI) , Serious heart-related side effects / dangerously high blood pressure when mixed with tyramine (found in beer / red wine)
+49,Depression , Norpramin , Desipramine , Serious heart-related side effects / dangerously high blood pressure when mixed with tyramine (found in beer / red wine)
+50,Depression , Parnate , Tranylcypromine (MAOI) , Serious heart-related side effects / dangerously high blood pressure when mixed with tyramine (found in beer / red wine); avoid tyramine and alcohol combination
+51,Depression , Paxil , Paroxetine , Serious heart-related side effects / dangerously high blood pressure when mixed with tyramine (found in beer / red wine)
+52,Depression , Pristiq , Desvenlafaxine , Serious heart-related side effects / dangerously high blood pressure when mixed with tyramine (found in beer / red wine)
+53,Depression , Prozac , Fluoxetine , Serious heart-related side effects / dangerously high blood pressure when mixed with tyramine (found in beer / red wine)
+54,Depression , Remeron , Mirtazapine , Impaired motor control
+55,Depression , Risperdal , Risperidone , Impaired motor control
+56,Depression , Seroquel , Quetiapine , Impaired motor control
+57,Depression , Serzone , Nefazodone , Impaired motor control
+58,Depression , Symbyax , Fluoxetine / Olanzapine , Impaired motor control
+59,Depression , Wellbutrin , Bupropion , Increased effect of alcohol
+60,Depression , Zoloft , Sertraline , Increased effect of alcohol
+61,Depression , Zyprexa , Olanzapine , Increased effect of alcohol
+62,Depression , St. John’s Wort (Herbal) , none , Can interact with alcohol and other medications; increased drowsiness and side effects
+63,Diabetes , Diabinese , Chlorpropamide , Abnormally low blood sugar / flushing reaction (nausea / vomiting / headache / rapid heartbeat / sudden BP changes)
+64,Diabetes , Glucotrol , Glipizide , Abnormally low blood sugar / flushing reaction (nausea / vomiting / headache / rapid heartbeat / sudden BP changes)
+65,Diabetes , Glucophage , Metformin , Nausea and weakness symptoms may occur
+66,Diabetes , Glynase / DiaBeta / Micronase , Glyburide , Abnormally low blood sugar / flushing reaction (nausea / vomiting / headache / rapid heartbeat / sudden BP changes)
+67,Diabetes , Orinase , Tolbutamide , Abnormally low blood sugar / flushing reaction (nausea / vomiting / headache / rapid heartbeat / sudden BP changes)
+68,Diabetes , Tolinase , Tolazamide , Abnormally low blood sugar / flushing reaction (nausea / vomiting / headache / rapid heartbeat / sudden BP changes)
+69,Enlarged Prostate , Cardura , Doxazosin , Dizziness / light-headedness / fainting
+70,Enlarged Prostate , Flomax , Tamsulosin , Dizziness / light-headedness / fainting
+71,Enlarged Prostate , Hytrin , Terazosin , Dizziness / light-headedness / fainting
+72,Enlarged Prostate , Minipress , Prazosin , Dizziness / light-headedness / fainting
+73,Heartburn / Indigestion / Sour Stomach , Axid , Nizatidine , none
+74,Heartburn / Indigestion / Sour Stomach , Reglan , Metoclopramide , Rapid heartbeat; increased alcohol effect; sudden changes in blood pressure
+75,Heartburn / Indigestion / Sour Stomach , Tagamet , Cimetidine , none
+76,Heartburn / Indigestion / Sour Stomach , Zantac , Ranitidine , none
+77,High Blood Pressure , Accupril , Quinapril , Dizziness / fainting / drowsiness; possible heart problems (e.g. arrhythmia)
+78,High Blood Pressure , Calan , Verapamil , Dizziness / fainting / drowsiness; possible heart problems (e.g. arrhythmia)
+79,High Blood Pressure , Capozide , Hydrochlorothiazide , Dizziness / fainting / drowsiness; possible heart problems (e.g. arrhythmia)
+80,High Blood Pressure , Cardura , Doxazosin , Dizziness / fainting / drowsiness; possible heart problems (e.g. arrhythmia)
+81,High Blood Pressure , Catapres , Clonidine , Dizziness / fainting / drowsiness; possible heart problems (e.g. arrhythmia)
+82,High Blood Pressure , Cozaar , Losartan , Dizziness / fainting / drowsiness; possible heart problems (e.g. arrhythmia)
+83,High Blood Pressure , Hytrin , Terazosin , Dizziness / fainting / drowsiness; possible heart problems (e.g. arrhythmia)
+84,High Blood Pressure , Lopressor HCT , Hydrochlorothiazide , Dizziness / fainting / drowsiness; possible heart problems (e.g. arrhythmia)
+85,High Blood Pressure , Lotensin , Benzapril , Dizziness / fainting / drowsiness; possible heart problems (e.g. arrhythmia)
+86,High Blood Pressure , Minipress , Prazosin , Dizziness / fainting / drowsiness; possible heart problems (e.g. arrhythmia)
+87,High Blood Pressure , Norvasc , Amlodipine mesylate , Dizziness / fainting / drowsiness; possible heart problems (e.g. arrhythmia)
+88,High Blood Pressure , Prinivil / Zestril , Lisinopril , Dizziness / fainting / drowsiness; possible heart problems (e.g. arrhythmia)
+89,High Blood Pressure , Vaseretic , Enalapril , Dizziness / fainting / drowsiness; possible heart problems (e.g. arrhythmia)
+90,High Cholesterol , Advicor , Lovastatin + Niacin , Liver damage (all); increased flushing and itching (niacin)
+91,High Cholesterol , Altocor / Mevacor , Lovastatin , Liver damage
+92,High Cholesterol , Crestor , Rosuvastatin , Liver damage
+93,High Cholesterol , Lipitor , Atorvastatin , Liver damage
+94,High Cholesterol , Niaspan , Niacin , Flushing / itching
+95,High Cholesterol , Pravachol , Pravastatin , Liver damage
+96,High Cholesterol , Pravigard™ , Pravastatin + Aspirin , Liver damage; increased stomach bleeding
+97,High Cholesterol , Vytorin™ , Ezetimibe + Simvastatin , Liver damage
+98,High Cholesterol , Zocor , Simvastatin , Liver damage
+99,Infections , Acrodantin , Nitrofurantoin , Fast heartbeat; sudden BP changes
+100,Infections , Flagyl , Metronidazole , Stomach pain / vomiting / headache / flushing/redness of the face
+101,Infections , Grisactin , Griseofulvin , Stomach pain / vomiting / headache / flushing/redness of the face
+102,Infections , Nizoral , Ketoconazole , Upset stomach / vomiting / liver damage
+103,Infections , Nydrazid , Isoniazid , Liver damage / headache / flushing/redness of the face
+104,Infections , Seromycin , Cycloserine , Liver damage / headache / flushing/redness of the face
+105,Infections , Tindamax , Tinidazole , Liver damage / headache / flushing/redness of the face
+106,Infections , Zithromax , Azithromycin , none
+107,Mood Stabilizers , Depakene / Depakote , Valproic Acid , Drowsiness / dizziness / tremors; increased risk for side effects (restlessness / impaired motor control / loss of appetite / stomach upset / muscle/joint pain / depression / liver damage)
+108,Mood Stabilizers , Eskalith / Eskalith CR / Lithobid , Lithium , Drowsiness / dizziness; increased risk of seizures / overdose / slowed/difficulty breathing / impaired motor control / unusual behavior / memory problems
+109,Muscle Pain , Flexeril , Cyclobenzaprine , Drowsiness / dizziness; increased risk of seizures / overdose / slowed/difficulty breathing / impaired motor control / unusual behavior / memory problems
+110,Muscle Pain , Soma , Carisoprodol , Drowsiness / dizziness; increased risk of seizures / overdose / slowed/difficulty breathing / impaired motor control / unusual behavior / memory problems
+111,Motion Sickness , Antivert , Meclizine , Drowsiness / dizziness; increased risk for overdose
+112,Motion Sickness , Dramamine , Dimenhydrinate ,Drowsiness / dizziness; increased risk for overdose
+113,Motion Sickness , Phenergan , Promethazine , Drowsiness / dizziness; increased risk for overdose
+114,Pain / Fever / Inflammation , Advil / Motrin , Ibuprofen , Stomach upset / bleeding / ulcers
+115,Pain / Fever / Inflammation , Aleve , Naproxen , Stomach upset / bleeding / ulcers
+116,Pain / Fever / Inflammation , Excedrin , Aspirin + Acetaminophen , Liver damage (acetaminophen) / rapid heartbeat
+117,Pain / Fever / Inflammation , Tylenol , Acetaminophen , Liver damage / rapid heartbeat
+118,Seizures , Dilantin , Phenytoin , Drowsiness / dizziness / increased risk of seizures / unusual behavior / changes in mental health (e.g. suicidal thoughts)
+119,Seizures , Horizant / Neurontin , Gabapentin , Drowsiness / dizziness / increased risk of seizures / unusual behavior / changes in mental health (e.g. suicidal thoughts)
+120,Seizures , Keppra , Levetiracetam , Drowsiness / dizziness / increased risk of seizures / unusual behavior / changes in mental health (e.g. suicidal thoughts)
+121,Seizures , Klonopin , Clonazepam , Drowsiness / dizziness / increased risk of seizures / unusual behavior / changes in mental health (e.g. suicidal thoughts)
+122,Seizures , Lamictal , Lamotrigine , Drowsiness / dizziness / increased risk of seizures / unusual behavior / changes in mental health (e.g. suicidal thoughts)
+123,Seizures , Lyrica , Pregabalin , Drowsiness / dizziness / increased risk of seizures / unusual behavior / changes in mental health (e.g. suicidal thoughts)
+124,Seizures , Tegretol , Carbamazepine , Drowsiness / dizziness / increased risk of seizures / unusual behavior / changes in mental health (e.g. suicidal thoughts)
+125,Seizures , Topamax , Topiramate , Drowsiness / dizziness / increased risk of seizures / unusual behavior / changes in mental health; increased mental health risks (e.g. suicidal thoughts)
+126,Seizures , Trileptal , Oxcarbazepine , Drowsiness / dizziness / increased risk of seizures / unusual behavior / changes in mental health; increased mental health risks (e.g. suicidal thoughts)
+127,Severe Pain , Darvocet-N , Propoxyphene , Drowsiness / dizziness; increased risk for overdose; slowed or difficulty breathing; impaired motor control; unusual behavior; memory problems
+128,Severe Pain , Demerol , Meperidine , Drowsiness / dizziness; increased risk for overdose; slowed or difficulty breathing; impaired motor control; unusual behavior; memory problems
+129,Severe Pain , Fiorinal with codeine , Butalbital + Codeine , Drowsiness / dizziness; increased risk for overdose; slowed or difficulty breathing; impaired motor control; unusual behavior; memory problems
+130,Severe Pain , Percocet , Oxycodone , Drowsiness / dizziness; increased risk for overdose; slowed or difficulty breathing; impaired motor control; unusual behavior; memory problems
+131,Severe Pain , Vicodin , Hydrocodone , Drowsiness / dizziness; increased risk for overdose; slowed or difficulty breathing; impaired motor control; unusual behavior; memory problems
+132,Sleep Problems , Ambien , Zolpidem , Drowsiness / sleepiness / dizziness; slowed or difficulty breathing; impaired motor control; unusual behavior; memory problems
+133,Sleep Problems , Lunesta™ , Eszopiclone , Drowsiness / sleepiness / dizziness; slowed or difficulty breathing; impaired motor control; unusual behavior; memory problems
+134,Sleep Problems , Prosom™ , Estazolam , Drowsiness / sleepiness / dizziness; slowed or difficulty breathing; impaired motor control; unusual behavior; memory problems
+135,Sleep Problems , Restoril , Temazepam , Drowsiness / sleepiness / dizziness; slowed or difficulty breathing; impaired motor control; unusual behavior; memory problems
+136,Sleep Problems , Sominex , Diphenhydramine , Increased drowsiness
+137,Sleep Problems , Unisom , Doxylamine , Increased drowsiness
+138,Sleep Problems , Herbal preparations , Chamomile / Valerian / Lavender , Increased drowsiness
