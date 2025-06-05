@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import '../App.css';
 import NavBar from "../components/NavBar";
 import TagLine from "../components/TagLine";
-import { getBackendUrl } from "../utils/api";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -16,7 +15,7 @@ const LoginForm = () => {
     }
 
     try {
-      const res = await fetch(`${getBackendUrl()}/login`, {
+      const res = await fetch('/login', {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),

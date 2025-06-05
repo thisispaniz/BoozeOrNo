@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import '../App.css';
 import NavBar from "../components/NavBar";
 import TagLine from "../components/TagLine";
-import { getBackendUrl } from "../utils/api";
 
 const SignupForm = () => {
   const [showPasswordRules, setShowPasswordRules] = useState(false);
@@ -19,8 +18,15 @@ const SignupForm = () => {
   ];
 
   const handleSignup = async () => {
+    setMessage(""); // clear any previous message
+
+    if (!email || !password) {
+      setMessage("❌ Email and password are required.");
+      return;
+    }
+
     try {
-      const res = await fetch(`${getBackendUrl()}/register`, {
+      const res = await fetch('/register', {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -29,12 +35,20 @@ const SignupForm = () => {
       const data = await res.json();
 
       if (!res.ok) {
-        setMessage(`❌ ${data.detail || "Signup failed"}`);
-      } else {
-        setMessage("✅ Signup successful! Please check your email to confirm your account.");
+        console.error("Signup failed:", data);
+        if (Array.isArray(data.detail)) {
+          const messages = data.detail.map(d => d.msg).join(" | ");
+          setMessage("❌ " + messages);
+        } else {
+          setMessage("❌ " + (data.error || "Signup failed."));
+        }
+        return;
       }
+
+      setMessage("✅ Signup successful! Please check your email to confirm.");
     } catch (err) {
-      setMessage("❌ Server error during signup.");
+      console.error("Network or server error:", err);
+      setMessage("❌ Network error. Try again.");
     }
   };
 
