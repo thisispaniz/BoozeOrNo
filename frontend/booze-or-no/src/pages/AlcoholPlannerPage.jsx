@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import NavBar from '../components/NavBar';
 import '../App.css';
 import TagLine from '../components/TagLine';
+import NavBarLoggedIn from '../components/NavBar-Loggedin';
 
 const rFactors = {
     male: 0.73,
@@ -57,7 +58,7 @@ function AlcoholPlannerPage() {
 
     return (
         <>
-        <NavBar />
+        <NavBarLoggedIn />
         <div className="planner-container">
             <h1>Alcohol Metabolism Planner</h1>
             <form onSubmit={handleSubmit} className="planner-form">
