@@ -10,7 +10,7 @@ function FeaturesSection() {
                 <p className="p-black">&#10003; Enter medical conditions</p>
                 <p className="p-black">&#10003; Get personalized recommendations based on your alcohol metabolism</p>
             </div>
-            <button className="sign-me-up">SIGN ME UP</button>
+            <a href="/signup"><button className="sign-me-up">SIGN ME UP</button></a>
         </section>
     );
 }
