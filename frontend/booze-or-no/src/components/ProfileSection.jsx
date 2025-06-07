@@ -5,9 +5,7 @@ function ProfileSection() {
     return (
         <section className="profile-section">
             <div className="main-part">
-                
                 <img className="avatar" src="./avatar-1577909_1280.png" alt="" />
-            
                 <div className="column right">
                     <div className="row">
                         <div className="column">

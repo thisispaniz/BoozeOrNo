@@ -425,7 +425,11 @@ button {
 img .danger {
     width: 22px;
     height: 22px;
-    margin: 20px;
+}
+
+.danger {
+  margin-top: 0;
+  padding-top: 0;
 }
 
 .info {
@@ -451,7 +455,8 @@ img .danger {
   padding: 50px;
   width: 100%;
   margin-top: 30px;
-  margin-bottom: 30px;
+  margin-bottom: 0px;
+  border-radius: 4px;
 }
 
 .entire-section {
@@ -462,4 +467,16 @@ img .danger {
 
 .drinkplanner-logo {
   height: 92px;
+}
+
+.logo-container {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 50px;
+}
+
+.AlcoholCheckerInfo-container {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
 }
