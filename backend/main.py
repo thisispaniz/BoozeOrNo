@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Query, HTTPException
+from fastapi import FastAPI, Query, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from supabase import create_client, Client
 import os
@@ -6,11 +6,14 @@ from pydantic import BaseModel
 
 app = FastAPI()
 
+FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:3000") 
+# ensures that the right url is taken for redirect after reg
+
 @app.middleware("http")
 async def add_csp_header(request: Request, call_next):
     response: Response = await call_next(request)
     # Set your Content-Security-Policy header here
-    response.headers["Content-Security-Policy"] = "img-src 'self' https://github.dev;"
+    response.headers["Content-Security-Policy"] = "img-src 'self' https://.github.dev;"
     return response
 
 # CORS (adjust for production)
@@ -39,7 +42,9 @@ class UserCredentials(BaseModel):
 @app.post("/register")
 def register_user(user: UserCredentials):
     try:
-        result = supabase.auth.sign_up({"email": user.email, "password": user.password})
+        result = supabase.auth.sign_up(
+            {"email": user.email, "password": user.password}
+        )
         if result.user is None:
             raise HTTPException(status_code=400, detail="Registration failed")
         return {"message": "User registered", "id": result.user.id}
