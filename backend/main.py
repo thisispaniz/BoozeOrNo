@@ -6,6 +6,13 @@ from pydantic import BaseModel
 
 app = FastAPI()
 
+@app.middleware("http")
+async def add_csp_header(request: Request, call_next):
+    response: Response = await call_next(request)
+    # Set your Content-Security-Policy header here
+    response.headers["Content-Security-Policy"] = "img-src 'self' https://github.dev;"
+    return response
+
 # CORS (adjust for production)
 app.add_middleware(
     CORSMiddleware,
