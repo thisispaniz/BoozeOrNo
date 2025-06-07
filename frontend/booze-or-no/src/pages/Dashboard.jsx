@@ -1,6 +1,6 @@
 import React from "react";
 import '../App.css';
-import NavBarLoggedIn from "../components/NavBar-Loggedin";
+import NavBarLoggedIn from "../components/NavBar-LoggedIn";
 import TagLine from "../components/TagLine";
 import ProfileSection from "../components/ProfileSection";
 import DrinkPlannerInfo from "../components/DrinkPlannerInfo";
