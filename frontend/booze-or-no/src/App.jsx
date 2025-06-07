@@ -8,6 +8,7 @@ import SignupPage from './pages/SignupPage';
 import AlcoholPlannerPage from './pages/AlcoholPlannerPage';
 import LoginPage from './pages/LoginPage'
 import Dashboard from './pages/Dashboard'
+import EmailConfirmation from './pages/EmailConfirmation'
 
 function LandingPage() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/planner" element={<AlcoholPlannerPage />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/emailconfirmed" element={<EmailConfirmation/>} />
       </Routes>
     </Router>
   )
