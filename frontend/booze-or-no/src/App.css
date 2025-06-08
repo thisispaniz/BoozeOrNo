@@ -1,3 +1,4 @@
+
 body {
   margin: 0;
   padding-left: 150px;
@@ -479,4 +480,22 @@ img .danger {
   display: flex;
   flex-direction: row;
   gap: 30px;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 35px;
+  background-color: #000000;
+  font-size: 20px;
+  padding-bottom: 25px;
+  margin-left: -150PX;
+  margin-right: -150px;
+  padding-left: 150px;
+  padding-right: 150px;
+}
+
+.footer-rights {
+  font-size: 15px;
 }
