@@ -102,9 +102,9 @@ def search_medication(q: str = Query(..., description="Search term (medication, 
         response = supabase.table("alcmedi")\
             .select("*")\
             .or_(
-                f"medication_brand.ilike.%{q}%",
-                f"active_ingredient.ilike.%{q}%",
-                f"alcohol_interaction.ilike.%{q}%",
+                f"medication_brand.ilike.%{q}%,"
+                f"active_ingredient.ilike.%{q}%,"
+                f"alcohol_interaction.ilike.%{q}%,"
                 f"symptoms_disorders.ilike.%{q}%"
             )\
             .limit(20)\
