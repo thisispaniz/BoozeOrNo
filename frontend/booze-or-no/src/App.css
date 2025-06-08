@@ -1,3 +1,4 @@
+
 body {
   margin: 0;
   padding-left: 150px;
@@ -177,12 +178,35 @@ input {
   font-size: 38px;
 }
 
-.column img {
+
+.column p {
+  font-size: 28px;
+  color: #ffffff;
+  margin-top: 10px;
+  justify-content: left;
+  font-weight: 700;
+}
+
+.row2 {
+  display: flex;
+  width: 45%;
+  height: 300px;
+  align-items: center;
+}
+
+.column2 {
+  flex: 50%;
+  padding: 0;
+  margin: 0;
+  font-size: 38px;
+}
+
+.column2 img {
   width: 293px;
   height: 105px;
 }
 
-.column p {
+.column2 p {
   font-size: 28px;
   color: #ffffff;
   margin-top: 10px;
@@ -197,7 +221,7 @@ input {
 }
 
 h3 {
-  font-size: 38px;
+  font-size: 30px;
   color: #ffffff;
   text-align: left;
 }
@@ -368,4 +392,110 @@ button {
   position: relative;
 }
 
-password
+.avatar-navbar {
+  width: 44px;
+  height: 44px;
+  border-radius: 2px;
+  &:hover {
+    opacity: 80%;
+  }
+}
+
+.avatar {
+  border-radius: 2px;
+  height: 295px;
+  width: 295px;
+}
+
+.profile-section {
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: left;
+  text-align: left;
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 50px;
+  width: 100%;
+}
+
+.main-part {
+  display: flex;
+  gap: 50px;
+}
+
+img .danger {
+    width: 22px;
+    height: 22px;
+}
+
+.danger {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.info {
+  font-family: "Raleway", sans-serif;
+  font-size: 25px;
+  margin-left: 12px;
+  display: inline-block;
+}
+
+.orange {
+  font-size: 20px;
+  color: #FF9142;
+  margin-top: 60px;
+}
+
+.drinkplanner-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: left;
+  color: #ffffff;
+  background-color: #000000;
+  padding: 50px;
+  width: 100%;
+  margin-top: 30px;
+  margin-bottom: 0px;
+  border-radius: 4px;
+}
+
+.entire-section {
+  width: 100%;
+  font-size: 30px;
+  height: 56px;
+}
+
+.drinkplanner-logo {
+  height: 92px;
+}
+
+.logo-container {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 50px;
+}
+
+.AlcoholCheckerInfo-container {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 35px;
+  background-color: #000000;
+  font-size: 20px;
+  padding-bottom: 25px;
+  margin-left: -150PX;
+  margin-right: -150px;
+  padding-left: 150px;
+  padding-right: 150px;
+}
+
+.footer-rights {
+  font-size: 15px;
+}

@@ -1,16 +1,20 @@
-from fastapi import FastAPI, Query, HTTPException
+from fastapi import FastAPI, Query, HTTPException, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
-import os
 from supabase import create_client, Client
-import logging
+import os
+from pydantic import BaseModel
 
 app = FastAPI()
 
-# CORS configuration for production
+@app.middleware("http")
+async def add_csp_header(request: Request, call_next):
+    response: Response = await call_next(request)
+    # Set your Content-Security-Policy header here
+    response.headers["Content-Security-Policy"] = "img-src 'self' https://.github.dev;"
 origins = [
     "https://boozeorno-frontend.onrender.com", 
 ]
-
+# CORS configuration (allows frontend to access backend in Codespaces)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
@@ -20,39 +24,71 @@ app.add_middleware(
 )
 
 # Supabase client setup
-SUPABASE_URL = os.getenv("SUPABASE_URL")
-SUPABASE_KEY = os.getenv("SUPABASE_KEY")
+SUPABASE_URL = os.environ.get("SUPABASE_URL")
+SUPABASE_KEY = os.environ.get("SUPABASE_KEY")
 
 if not SUPABASE_URL or not SUPABASE_KEY:
-    raise RuntimeError("SUPABASE_URL or SUPABASE_KEY is not set in environment variables.")
+    raise ValueError("SUPABASE_URL and SUPABASE_KEY must be set as environment variables")
 
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
+
+class UserCredentials(BaseModel):
+    email: str
+    password: str
+    
+
+@app.post("/register")
+def register_user(user: UserCredentials, request: Request):
+    try:
+        # Safely get dynamic domain
+        host = request.headers.get("x-forwarded-host") or request.headers.get("X-Frontend-URL") or request.headers.get("host") or "localhost:3000"
+        scheme = request.headers.get("x-forwarded-proto", "http")
+        base_url = f"{scheme}://{host}"
+        redirect_url = f"{base_url}/emailconfirmed"
+
+        result = supabase.auth.sign_up(
+            {
+                "email": user.email,
+                "password": user.password,
+                "options": {
+                    "email_redirect_to": redirect_url
+                }
+            }
+        )
+        if result.user is None:
+            raise HTTPException(status_code=400, detail="Registration failed")
+        return {"message": "User registered", "id": result.user.id}
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+
+
+@app.post("/login")
+def login_user(user: UserCredentials):
+    try:
+        result = supabase.auth.sign_in_with_password({"email": user.email, "password": user.password})
+        if result.session is None:
+            raise HTTPException(status_code=401, detail="Login failed")
+        return {"access_token": result.session.access_token}
+    except Exception as e:
+        raise HTTPException(status_code=401, detail=str(e))
+
 
 @app.get("/search")
 def search_medication(q: str = Query(..., description="Medication name or active ingredient")):
     try:
-        response = (
-            supabase
-            .table("alcmedi")
-            .select("*")  # fetch all columns
-            .or_(f"medication_brand.ilike.%{q}%,active_ingredient.ilike.%{q}%")
-            .limit(10)
+        response = supabase.table("alcmedi")\
+            .select("alcohol_interaction")\
+            .or_(f"medication_brand.ilike.%{q}%,active_ingredient.ilike.%{q}%")\
+            .limit(10)\
             .execute()
-        )
-
-
-        logging.info(f"Supabase response: {response.model_dump_json(indent=2)}")
-
-        if not response.data:
-            raise HTTPException(status_code=404, detail="No matching entries found")
 
         return response.data
-
     except Exception as e:
-        logging.exception("Supabase query failed")
         raise HTTPException(status_code=500, detail=str(e))
 
-# For local dev only:
+
+    # Make sure uvicorn binds to 0.0.0.0, not localhost
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)

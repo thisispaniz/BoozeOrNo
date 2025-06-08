@@ -1,8 +1,8 @@
 // src/pages/AlcoholPlannerPage.jsx
 import React, { useState } from 'react';
-import NavBar from '../components/NavBar';
 import '../App.css';
-import TagLine from '../components/TagLine';
+import Footer from '../components/Footer';
+import NavBarLoggedIn from '../components/NavBar-LoggedIn';
 
 const rFactors = {
     male: 0.73,
@@ -57,7 +57,7 @@ function AlcoholPlannerPage() {
 
     return (
         <>
-        <NavBar />
+        <NavBarLoggedIn />
         <div className="planner-container">
             <h1>Alcohol Metabolism Planner</h1>
             <form onSubmit={handleSubmit} className="planner-form">
@@ -114,7 +114,7 @@ function AlcoholPlannerPage() {
         </div>
     )}
     </div>
-    <TagLine />
+    <Footer />
     </>
 );
 }

@@ -11,7 +11,7 @@ function NavBar() {
             <nav className="nav">
                 <a href="#about" className="nav-link">About</a>
                 <a href="/signup" className="nav-link">Signup</a>
-                <a href="/login" className="nav-link-yellow">Login</a>
+                <Link to="/login" className="nav-link-yellow">Login</Link>
             </nav>
         </header>
     )}
