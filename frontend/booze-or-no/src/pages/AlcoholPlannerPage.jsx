@@ -1,9 +1,8 @@
 // src/pages/AlcoholPlannerPage.jsx
 import React, { useState } from 'react';
-import NavBar from '../components/NavBar';
 import '../App.css';
-import TagLine from '../components/TagLine';
-import NavBarLoggedIn from '../components/NavBar-Loggedin';
+import Footer from '../components/Footer';
+import NavBarLoggedIn from '../components/NavBar-LoggedIn';
 
 const rFactors = {
     male: 0.73,
@@ -115,7 +114,7 @@ function AlcoholPlannerPage() {
         </div>
     )}
     </div>
-    <TagLine />
+    <Footer />
     </>
 );
 }
