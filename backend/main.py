@@ -76,7 +76,7 @@ def login_user(user: UserCredentials):
 def search_medication(q: str = Query(..., description="Medication name or active ingredient")):
     try:
         response = supabase.table("alcmedi")\
-            .select("alcohol_interaction")\
+            .select("*")\
             .or_(f"medication_brand.ilike.%{q}%,active_ingredient.ilike.%{q}%")\
             .limit(10)\
             .execute()
@@ -84,6 +84,7 @@ def search_medication(q: str = Query(..., description="Medication name or active
         return response.data
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
 
 
     # Make sure uvicorn binds to 0.0.0.0, not localhost
