@@ -7,16 +7,18 @@ import DrinkPlannerInfo from "../components/DrinkPlannerInfo";
 import AlcoholCheckerInfo from "../components/AlcoholCheckerInfo";
 
 const Dashboard = () => {
-    return (
-        <>
-            <NavBarLoggedIn />
-            <h1 className="title">Welcome, Max!</h1>
-            <ProfileSection />
-            <DrinkPlannerInfo />
-            <AlcoholCheckerInfo />
-            <Footer />
-        </>
-    )
-}
+  const email = localStorage.getItem("email") || "User";
+
+  return (
+    <>
+      <NavBarLoggedIn />
+      <h1 className="title">Welcome, {email}!</h1>
+      <ProfileSection />
+      <DrinkPlannerInfo />
+      <AlcoholCheckerInfo />
+      <Footer />
+    </>
+  );
+};
 
 export default Dashboard;

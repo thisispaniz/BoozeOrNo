@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // ✅ Import navigate
 import '../App.css';
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
@@ -8,31 +9,40 @@ const LoginForm = () => {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
+  const navigate = useNavigate(); // ✅ Initialize navigate
+
   const handleLogin = async () => {
-    if (!email || !password) {
-      setMessage("Please enter both email and password.");
-      return;
+  if (!email || !password) {
+    setMessage("Please enter both email and password.");
+    return;
+  }
+
+  try {
+    const res = await fetch('/login', {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new Error(data.detail || "Login failed");
     }
 
-    try {
-      const res = await fetch('/login', {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
+    if (data.access_token) {
+  localStorage.setItem("token", data.access_token);
+  localStorage.setItem("email", email);  // Save the email here
+}
 
-      const data = await res.json();
 
-      if (!res.ok) {
-        throw new Error(data.detail || "Login failed");
-      }
+    setMessage("✅ Login successful! You are now logged in.");
+    navigate("/dashboard"); // redirect after success
+  } catch (err) {
+    setMessage(`❌ ${err.message}`);
+  }
+};
 
-      setMessage("✅ Login successful! You are now logged in.");
-      // Future: redirect to dashboard
-    } catch (err) {
-      setMessage(`❌ ${err.message}`);
-    }
-  };
 
   return (
     <>

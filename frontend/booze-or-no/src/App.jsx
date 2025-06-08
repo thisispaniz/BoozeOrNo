@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import HeroSection from './components/HeroSection';
 import FeaturesSection from './components/FeaturesSection';
@@ -24,6 +24,16 @@ function LandingPage() {
   );
 }
 
+const ProtectedRoute = ({ children }) => {
+  const isLoggedIn = Boolean(localStorage.getItem("token")); // adjust based on your auth logic
+
+  if (!isLoggedIn) {
+    return <Navigate to="/login" replace />;
+  }
+
+  return children;
+};
+
 function App() {
   return (
     <Router>
@@ -32,8 +42,15 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/planner" element={<AlcoholPlannerPage />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/emailconfirmed" element={<EmailConfirmation/>} />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/emailconfirmed" element={<EmailConfirmation />} />
       </Routes>
     </Router>
   )

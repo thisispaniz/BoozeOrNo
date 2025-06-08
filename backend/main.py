@@ -6,8 +6,6 @@ from pydantic import BaseModel
 
 app = FastAPI()
 
-FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:3000") 
-# ensures that the right url is taken for redirect after reg
 
 @app.middleware("http")
 async def add_csp_header(request: Request, call_next):
@@ -40,10 +38,24 @@ class UserCredentials(BaseModel):
     
 
 @app.post("/register")
-def register_user(user: UserCredentials):
+def register_user(user: UserCredentials, request: Request):
     try:
+        # Get dynamic domain from request headers
+        host = request.headers.get("x-forwarded-host", request.headers.get("host", "localhost:3000"))
+        scheme = request.headers.get("x-forwarded-proto", "http")
+        base_url = f"{scheme}://{host}"
+        
+        # Construct confirmation page link
+        redirect_url = f"{base_url}/emailconfirmed"
+
         result = supabase.auth.sign_up(
-            {"email": user.email, "password": user.password}
+            {
+                "email": user.email,
+                "password": user.password,
+                "options": {
+                    "email_redirect_to": redirect_url
+                }
+            }
         )
         if result.user is None:
             raise HTTPException(status_code=400, detail="Registration failed")
