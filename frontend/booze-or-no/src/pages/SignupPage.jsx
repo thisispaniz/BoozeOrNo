@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import '../App.css';
-import NavBar from "../components/NavBar";
-import TagLine from "../components/TagLine";
+import Footer from "../components/Footer";
 
 const SignupForm = () => {
   const [showPasswordRules, setShowPasswordRules] = useState(false);
@@ -54,7 +53,7 @@ const SignupForm = () => {
           </p>
         </div>
       </div>
-      <TagLine />
+      <Footer />
     </>
   );
 };

@@ -1,6 +1,6 @@
 import '../App.css';
 import NavBar from "../components/NavBar";
-import TagLine from '../components/TagLine';
+import Footer from '../components/Footer';
 
 const EmailConfirmation = () => {
 
@@ -9,7 +9,7 @@ const EmailConfirmation = () => {
             <NavBar />
             <h1>Thank you for confirming your email!</h1>
             <button className="register-btn">LOGIN</button>
-            <TagLine />
+            <Footer />
         </>
     );
 };

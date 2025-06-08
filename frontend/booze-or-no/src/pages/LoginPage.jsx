@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import '../App.css';
 import NavBar from "../components/NavBar";
-import TagLine from "../components/TagLine";
+import Footer from "../components/Footer";
 
 const SignupForm = () => {
 
@@ -20,7 +20,7 @@ const SignupForm = () => {
           <button className="register-btn">LOGIN</button>
         </div>
       </div>
-      <TagLine />
+      <Footer />
     </>
   );
 };

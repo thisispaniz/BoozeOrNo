@@ -1,7 +1,7 @@
 import React from "react";
 import '../App.css';
 import NavBarLoggedIn from "../components/NavBar-Loggedin";
-import TagLine from "../components/TagLine";
+import Footer from "../components/Footer";
 import ProfileSection from "../components/ProfileSection";
 import DrinkPlannerInfo from "../components/DrinkPlannerInfo";
 import AlcoholCheckerInfo from "../components/AlcoholCheckerInfo";
@@ -14,7 +14,7 @@ const Dashboard = () => {
             <ProfileSection />
             <DrinkPlannerInfo />
             <AlcoholCheckerInfo />
-            <TagLine />
+            <Footer />
         </>
     )
 }

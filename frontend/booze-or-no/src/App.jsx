@@ -6,9 +6,10 @@ import DisclaimerSection from './components/DisclaimerSection';
 import TagLine from './components/TagLine';
 import SignupPage from './pages/SignupPage';
 import AlcoholPlannerPage from './pages/AlcoholPlannerPage';
-import LoginPage from './pages/LoginPage'
-import Dashboard from './pages/Dashboard'
-import EmailConfirmation from './pages/EmailConfirmation'
+import LoginPage from './pages/LoginPage';
+import Dashboard from './pages/Dashboard';
+import EmailConfirmation from './pages/EmailConfirmation';
+import Footer from './components/Footer';
 
 function LandingPage() {
   return (
@@ -18,6 +19,7 @@ function LandingPage() {
     <FeaturesSection />
     <TagLine />
     <DisclaimerSection />
+    <Footer />
    </>
   );
 }
