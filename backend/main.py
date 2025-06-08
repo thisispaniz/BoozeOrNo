@@ -73,17 +73,23 @@ def login_user(user: UserCredentials):
 
 
 @app.get("/search")
-def search_medication(q: str = Query(..., description="Medication name or active ingredient")):
+def search_medication(q: str = Query(..., description="Search term (medication, ingredient, interaction, etc.)")):
     try:
         response = supabase.table("alcmedi")\
             .select("*")\
-            .or_(f"medication_brand.ilike.%{q}%,active_ingredient.ilike.%{q}%")\
-            .limit(10)\
+            .or_(
+                f"medication_brand.ilike.%{q}%,"
+                f"active_ingredient.ilike.%{q}%,"
+                f"alcohol_interaction.ilike.%{q}%,"
+                f"symptoms_disorders.ilike.%{q}%,"
+            )\
+            .limit(20)\
             .execute()
 
         return response.data
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
 
 
 
