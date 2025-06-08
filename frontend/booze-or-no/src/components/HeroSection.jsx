@@ -97,7 +97,7 @@ function HeroSection() {
               right: 0,
               maxHeight: "150px",
               overflowY: "auto",
-              backgroundColor: "white",
+              backgroundColor: "black",
               border: "1px solid #ccc",
               borderRadius: "4px",
               zIndex: 1000,
