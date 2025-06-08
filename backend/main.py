@@ -71,6 +71,30 @@ def login_user(user: UserCredentials):
     except Exception as e:
         raise HTTPException(status_code=401, detail=str(e))
 
+@app.get("/autocomplete")
+def autocomplete(q: str = Query(..., description="Partial search term")):
+    try:
+        response = supabase.table("alcmedi")\
+            .select("symptoms_disorders, medication_brand, active_ingredient, alcohol_interaction")\
+            .or_(
+                f"symptoms_disorders.ilike.%{q}%,"
+                f"medication_brand.ilike.%{q}%,"
+                f"active_ingredient.ilike.%{q}%,"
+                f"alcohol_interaction.ilike.%{q}%"
+            )\
+            .limit(10)\
+            .execute()
+
+        suggestions = set()
+        for row in response.data:
+            for key in ["symptoms_disorders", "medication_brand", "active_ingredient", "alcohol_interaction"]:
+                if row.get(key):
+                    suggestions.add(row[key])
+
+        return list(suggestions)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
 
 @app.get("/search")
 def search_medication(q: str = Query(..., description="Search term (medication, ingredient, interaction, etc.)")):
