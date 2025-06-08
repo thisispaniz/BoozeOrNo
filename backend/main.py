@@ -40,11 +40,8 @@ class UserCredentials(BaseModel):
 @app.post("/register")
 def register_user(user: UserCredentials, request: Request):
     try:
-        # Safely get dynamic domain
-        host = request.headers.get("x-forwarded-host") or request.headers.get("X-Frontend-URL") or request.headers.get("host") or "localhost:3000"
-        scheme = request.headers.get("x-forwarded-proto", "http")
-        base_url = f"{scheme}://{host}"
-        redirect_url = f"{base_url}/emailconfirmed"
+        # Always use frontend URL for redirect
+        redirect_url = "https://boozeorno-frontend.onrender.com/emailconfirmed"
 
         result = supabase.auth.sign_up(
             {
