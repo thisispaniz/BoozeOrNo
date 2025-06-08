@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import '../App.css';
 import Footer from "../components/Footer";
+import NavBar from "../components/NavBar";
 
 const SignupForm = () => {
   const [showPasswordRules, setShowPasswordRules] = useState(false);
