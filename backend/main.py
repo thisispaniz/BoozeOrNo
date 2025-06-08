@@ -41,7 +41,7 @@ class UserCredentials(BaseModel):
 def register_user(user: UserCredentials, request: Request):
     try:
         # Get dynamic domain from request headers
-        host = request.headers.get("x-forwarded-host", request.headers.get("host", "localhost:3000"))
+        host = request.headers.get("x-forwarded-host", request.headers.get("host"))
         scheme = request.headers.get("x-forwarded-proto", "http")
         base_url = f"{scheme}://{host}"
         
