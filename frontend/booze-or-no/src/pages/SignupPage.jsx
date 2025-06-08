@@ -30,6 +30,7 @@ const SignupForm = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
+        "X-Frontend-URL": window.location.origin
       });
 
       const data = await res.json();

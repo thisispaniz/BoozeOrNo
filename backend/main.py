@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Query, HTTPException, Request
+from fastapi import FastAPI, Query, HTTPException, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
 from supabase import create_client, Client
 import os
@@ -40,12 +40,10 @@ class UserCredentials(BaseModel):
 @app.post("/register")
 def register_user(user: UserCredentials, request: Request):
     try:
-        # Get dynamic domain from request headers
-        host = request.headers.get("x-forwarded-host", request.headers.get("host"))
+        # Safely get dynamic domain
+        host = request.headers.get("x-forwarded-host") or request.headers.get("X-Frontend-URL") or request.headers.get("host") or "localhost:3000"
         scheme = request.headers.get("x-forwarded-proto", "http")
         base_url = f"{scheme}://{host}"
-        
-        # Construct confirmation page link
         redirect_url = f"{base_url}/emailconfirmed"
 
         result = supabase.auth.sign_up(
@@ -62,6 +60,7 @@ def register_user(user: UserCredentials, request: Request):
         return {"message": "User registered", "id": result.user.id}
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
+
 
 
 @app.post("/login")
