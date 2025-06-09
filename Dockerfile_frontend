@@ -5,6 +5,8 @@ FROM node:18
 COPY frontend /workspaces/BoozeOrNo/frontend
 WORKDIR /workspaces/BoozeOrNo/frontend/booze-or-no
 
+RUN npm install @supabase/supabase-js
+
 RUN npm install
 
 CMD ["npm", "run", "dev"]
