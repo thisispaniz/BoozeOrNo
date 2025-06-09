@@ -1,6 +1,7 @@
 import '../App.css';
 import NavBar from "../components/NavBar";
 import Footer from '../components/Footer';
+import { Link } from "react-router-dom";
 
 const EmailConfirmation = () => {
 
@@ -9,7 +10,7 @@ const EmailConfirmation = () => {
             <NavBar />
             <main className='center-content'>
                 <h1>Thank you for confirming your email!</h1>
-                <a href="/login" className="login-link">Login to your account</a>
+                <Link to="/login" className="login-link">Login to your account</Link>
             </main>
             <Footer />
         </div>
