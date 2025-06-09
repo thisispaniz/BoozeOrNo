@@ -13,14 +13,14 @@ import Footer from './components/Footer';
 
 function LandingPage() {
   return (
-   <>
-    <NavBar />
-    <HeroSection />
-    <FeaturesSection />
-    <TagLine />
-    <DisclaimerSection />
-    <Footer />
-   </>
+    <div className='page-container'>
+      <NavBar />
+      <HeroSection />
+      <FeaturesSection />
+      <TagLine />
+      <DisclaimerSection />
+      <Footer />
+    </div>
   );
 }
 
@@ -30,7 +30,6 @@ const ProtectedRoute = ({ children }) => {
   if (!isLoggedIn) {
     return <Navigate to="/login" replace />;
   }
-
   return children;
 };
 
