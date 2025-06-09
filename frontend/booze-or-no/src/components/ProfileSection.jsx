@@ -26,7 +26,7 @@ function ProfileSection() {
                         <h3>Sex: <span className="info">Male</span></h3>
                         <h3>Weight: <span><img className="danger" src="./Vector.svg" alt="" /></span></h3>
                         <h3>Location: <span className="info">Pfarrkirchen, Bayern</span></h3>
-                         <button className="edit-button" onClick={handleEditClick}>Edit Profile</button>
+                        <button className="edit-button" onClick={handleEditClick}>Edit Profile</button>
                     </div>
                 </div>
             </div>
