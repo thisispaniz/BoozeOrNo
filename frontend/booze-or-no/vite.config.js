@@ -6,14 +6,24 @@ export default defineConfig({
   server: {
     host: '0.0.0.0',
     port: 3000,
-    https: false,  // explicitly disable https if it is enabled
-    strictPort: true, // ensures Vite fails if port 3000 is not available
+    https: false,
+    strictPort: true,
     proxy: {
-      '/search': {
-        target: 'http://backend:8000',
-        changeOrigin: true,
-        secure: false,
-      }
-    }
+  '/register': {
+    target: 'http://backend:8000',
+    changeOrigin: true,
+    secure: false,
+  },
+  '/login': {
+    target: 'http://backend:8000',
+    changeOrigin: true,
+    secure: false,
+  },
+  '/search': {
+    target: 'http://backend:8000',
+    changeOrigin: true,
+    secure: false,
+  }
+}
   }
 })

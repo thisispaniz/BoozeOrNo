@@ -6,6 +6,8 @@ import NavBar from "../components/NavBar";
 const SignupForm = () => {
   const [showPasswordRules, setShowPasswordRules] = useState(false);
   const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
 
   const passwordRequirements = [
     { label: "At least 8 characters", test: (pw) => pw.length >= 8 },
@@ -15,21 +17,60 @@ const SignupForm = () => {
     { label: "One special character", test: (pw) => /[!@#$%^&*]/.test(pw) },
   ];
 
+  const handleSignup = async () => {
+    setMessage(""); // clear any previous message
+
+    if (!email || !password) {
+      setMessage("❌ Email and password are required.");
+      return;
+    }
+
+    try {
+      const res = await fetch('/register', {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+        "X-Frontend-URL": window.location.origin
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        console.error("Signup failed:", data);
+        if (Array.isArray(data.detail)) {
+          const messages = data.detail.map(d => d.msg).join(" | ");
+          setMessage("❌ " + messages);
+        } else {
+          setMessage("❌ " + (data.error || "Signup failed."));
+        }
+        return;
+      }
+
+      setMessage("✅ Signup successful! Please check your email to confirm.");
+    } catch (err) {
+      console.error("Network or server error:", err);
+      setMessage("❌ Network error. Try again.");
+    }
+  };
+
   return (
     <>
       <NavBar />
       <div className="container">
         <h1 className="title">CREATE AN ACCOUNT</h1>
         <div className="form">
-          <div className="name-fields">
-            <input className="signup-input" type="text" placeholder="First name" />
-            <input className="signup-input" type="text" placeholder="Last name" />
-          </div>
-          <input className="signup-input" type="email" placeholder="email" />
+          <input
+            className="signup-input"
+            type="email"
+            placeholder="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
           <input
             className="signup-input"
             type="password"
             placeholder="password"
+            value={password}
             onFocus={() => setShowPasswordRules(true)}
             onBlur={() => setShowPasswordRules(false)}
             onChange={(e) => setPassword(e.target.value)}
@@ -48,7 +89,10 @@ const SignupForm = () => {
               </ul>
             </div>
           )}
-          <button className="register-btn">REGISTER</button>
+          <button className="register-btn" onClick={handleSignup}>
+            REGISTER
+          </button>
+          {message && <p className="feedback-message">{message}</p>}
           <p className="login-link">
             Have an account already? <span>LOGIN</span>
           </p>
