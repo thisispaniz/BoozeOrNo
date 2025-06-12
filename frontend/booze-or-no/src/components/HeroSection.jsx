@@ -13,7 +13,9 @@ function HeroSection() {
       return;
     }
     setError(null);
-    setResult(null);
+    setBrandName(null);
+    setActiveIngredient(null);
+    setInteraction(null);
 
     try {
       const response = await fetch(`/search?q=${encodeURIComponent(query)}`);
