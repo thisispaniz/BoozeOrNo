@@ -1,0 +1,15 @@
+FROM python:3.11
+# Install SQLite
+# RUN apk --no-cache add sqlite
+# Copy database file into the container	
+COPY db /workspaces/BoozeOrNo/db
+# point to the workdir
+WORKDIR /workspaces/BoozeOrNo/db
+# Expose the port if needed
+# EXPOSE 1433
+# Command to run when the container starts
+CMD ["ls"]
+
+
+
+

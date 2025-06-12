@@ -1,0 +1,39 @@
+# version: "3.8"
+services:
+  backend:
+    build:
+      context: ./../
+      dockerfile: Dockerfile_backend
+    container_name: backend
+    ports:
+      - "8000:8000"
+    environment:
+      SUPABASE_URL: https://wojajoaokvqmtqsmubal.supabase.co
+      SUPABASE_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndvamFqb2Fva3ZxbXRxc211YmFsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg4NDgxMDgsImV4cCI6MjA2NDQyNDEwOH0.sKn5tfKD7WVLNTDkCogCNk1oD2KgTK06sk5Sdm_GmNo
+    volumes:
+      - ./backend:/backend
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+    # command: sleep infinity  # Keep the container running
+
+  frontend:
+    build:
+      context: ./../  # Build from the frontend folder in the root directory
+      dockerfile: Dockerfile_frontend  # Ensure the correct Dockerfile is used
+    container_name: frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/frontend  # Mount the frontend folder into the container
+    # stdin_open: true
+    # tty: true
+   # command: sleep infinity  # Keep the container running
+
+#  db:
+ #   build:
+  #    context: ./../  # Build from the db folder in the root directory
+   #   dockerfile: Dockerfile_db  # Ensure the correct Dockerfile is used
+   # container_name: sqlite-db
+   # ports:
+   #   - "5000:5000"
+   # volumes:
+   #   - ./db:/db  # Mount the db folder into the container

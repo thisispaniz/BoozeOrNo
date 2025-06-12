@@ -1,16 +1,10 @@
 {
-    "name": "FastAPI Development",
-    "build": {
-        "dockerfile": "../dockerfile",
-        "context": ".."
-    },
-    "forwardPorts": [8000],
+    "name": "BoozeOrNo",
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "backend",
+    "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+    "forwardPorts": [3000, 8000],
     "settings": {
-        "terminal.integrated.shell.linux": "/bin/bash"
-    },
-    
-    "extensions": [
-        "ms-python.python", "qwtel.sqlite-viewer"
-    ],
-    "postStartCommand": "cd OneButtonWebpage/app && python3 -m uvicorn main:app --reload"
+        "terminal.integrated.defaultProfile.linux": "bash"
+    }
 }
