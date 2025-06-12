@@ -46,7 +46,9 @@ function HeroSection() {
         <button className="search-button" onClick={handleSearch}>BOOZE OR NO</button>
       </div>
       {error && <p style={{ color: "red" }}>{error}</p>}
-      {result && <p>Alcohol interaction info: {interaction}</p>}
+      {brandName && <p>Medicine brand name: {brandName}</p>}
+      {activeIngredient && <p>Active ingredient: {activeIngredient}</p>}
+      {interaction && <p>Alcohol interaction info: {interaction}</p>}
     </section>
   );
 }
