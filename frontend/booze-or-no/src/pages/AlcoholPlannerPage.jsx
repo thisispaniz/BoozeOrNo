@@ -56,66 +56,66 @@ function AlcoholPlannerPage() {
     }
 
     return (
-        <>
-        <NavBarLoggedIn />
-        <div className="planner-container">
-            <h1>Alcohol Metabolism Planner</h1>
-            <form onSubmit={handleSubmit} className="planner-form">
-                <label>
-                    Sex:
-                    <select value={sex} onChange={(e) => setSex(e.target.value)}>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                    </select>
-                </label>
+        <div className='page-container'>
+            <NavBarLoggedIn />
+            <div className="planner-container">
+                <h1>Alcohol Metabolism Planner</h1>
+                <form onSubmit={handleSubmit} className="planner-form">
+                    <label>
+                        Sex:
+                        <select value={sex} onChange={(e) => setSex(e.target.value)}>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </label>
 
-                <label>
-                    Weight (kg):
-                    <input className='calcinput' type="number" value={weight} onChange={(e) => setWeight(e.target.value)} />
-                </label>
+                    <label>
+                        Weight (kg):
+                        <input className='calcinput' type="number" value={weight} onChange={(e) => setWeight(e.target.value)} />
+                    </label>
 
-                <label>
-                    The alcohol needs to be out of your system by:
-                    <input className='calcinput' type="datetime-local" value={targetTime} onChange={(e) => setTargetTime(e.target.value)} />
-                </label>
+                    <label>
+                        The alcohol needs to be out of your system by:
+                        <input className='calcinput' type="datetime-local" value={targetTime} onChange={(e) => setTargetTime(e.target.value)} />
+                    </label>
 
-                <button type="submit">Calculate</button>
-            </form>
+                    <button type="submit">Calculate</button>
+                </form>
 
-    {results && (
-        <div className="results">
-            <h3>You can drink:</h3>
-            <ul>
-            {results.drinkPlan.map(drink => (
-                <li key={drink.name}>{drink.count} × {drink.name}</li>
-            ))}
-            </ul>
+        {results && (
+            <div className="results">
+                <h3>You can drink:</h3>
+                <ul>
+                {results.drinkPlan.map(drink => (
+                    <li key={drink.name}>{drink.count} × {drink.name}</li>
+                ))}
+                </ul>
 
-            <h3>BAC Over Time</h3>
-            <div className="graph-container">
-                <svg width="100%" height="200">
-                    <path
-                        d = {results.timePoints.map((point, index) => {
-                            const x = (index / (results.timePoints.length - 1)) * 600;
-                            const y = 200 - parseFloat(point.bac) * 200;
-                            return `${index === 0 ? 'M' : 'L'} ${x},${y}`;
-                        }).join(' ')}
-                        fill = "none"
-                        stroke='#FFC300'
-                        strokeWidth="2"
-                    />
-                </svg>
-                <div className="x-labels">
-                    {results.timePoints.map((point, i) => (
-                        <span key={i}>{i % 2 === 0 ? point.time : ''}</span>
-                    ))}
+                <h3>BAC Over Time</h3>
+                <div className="graph-container">
+                    <svg width="100%" height="200">
+                        <path
+                            d = {results.timePoints.map((point, index) => {
+                                const x = (index / (results.timePoints.length - 1)) * 600;
+                                const y = 200 - parseFloat(point.bac) * 200;
+                                return `${index === 0 ? 'M' : 'L'} ${x},${y}`;
+                            }).join(' ')}
+                            fill = "none"
+                            stroke='#FFC300'
+                            strokeWidth="2"
+                        />
+                    </svg>
+                    <div className="x-labels">
+                        {results.timePoints.map((point, i) => (
+                            <span key={i}>{i % 2 === 0 ? point.time : ''}</span>
+                        ))}
+                    </div>
                 </div>
             </div>
+        )}
         </div>
-    )}
+        <Footer />
     </div>
-    <Footer />
-    </>
 );
 }
 
