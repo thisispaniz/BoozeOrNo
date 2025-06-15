@@ -19,6 +19,24 @@ export default defineConfig({
       target: 'https://boozeorno-backend.onrender.com',
       changeOrigin: true,
       secure: true,
+      },
+      proxy: {
+      '/profile': {
+      target: 'https://boozeorno-backend.onrender.com',
+      changeOrigin: true,
+      secure: true,
+      },
+        proxy: {
+      '/login': {
+      target: 'https://boozeorno-backend.onrender.com',
+      changeOrigin: true,
+      secure: true,
+      },
+      proxy: {
+      '/register': {
+      target: 'https://boozeorno-backend.onrender.com',
+      changeOrigin: true,
+      secure: true,
       }
     }
   }
