@@ -105,8 +105,9 @@ def get_profile(user=Depends(get_current_user)):
     print("Response data:", getattr(response, 'data', None))
 
     # Check if response is okay
-    if response is None or response.status_code != 200:
-        raise HTTPException(status_code=500, detail="Database query failed")
+   # if response:
+    #    if response.status_code != 200:
+     #       raise HTTPException(status_code=500, detail="Database query failed")
 
     data = getattr(response, "data", None)
 
@@ -126,8 +127,8 @@ def get_profile(user=Depends(get_current_user)):
 
         print("Insert response:", insert_response)
 
-        if insert_response.status_code != 201:
-            raise HTTPException(status_code=500, detail="Failed to create placeholder profile")
+        #if insert_response.status_code != 200:
+        #    raise HTTPException(status_code=500, detail="Failed to create placeholder profile")
 
         return placeholder
 
