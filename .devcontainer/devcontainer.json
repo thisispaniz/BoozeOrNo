@@ -4,7 +4,6 @@
     "service": "backend",
     "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
     "forwardPorts": [3000, 8000],
-    "envFile": ".devcontainer/devcontainer.env",
     "settings": {
         "terminal.integrated.defaultProfile.linux": "bash"
     }
