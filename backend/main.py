@@ -92,22 +92,10 @@ def login_user(user: UserCredentials):
     except Exception as e:
         raise HTTPException(status_code=401, detail=str(e))
 
-
-from fastapi import Depends, HTTPException
-
 @app.get("/profile")
 def get_profile(user=Depends(get_current_user)):
     uid = user.id
     response = supabase.table("userdata").select("*").eq("user_id", uid).maybe_single().execute()
-
-    # Debug logs
-    print("Supabase response:", response)
-    print("Response data:", getattr(response, 'data', None))
-
-    # Check if response is okay
-   # if response:
-    #    if response.status_code != 200:
-     #       raise HTTPException(status_code=500, detail="Database query failed")
 
     data = getattr(response, "data", None)
 
@@ -124,13 +112,7 @@ def get_profile(user=Depends(get_current_user)):
             "meds": None,
         }
         insert_response = supabase.table("userdata").insert(placeholder).execute()
-
-        print("Insert response:", insert_response)
-
-        #if insert_response.status_code != 200:
-        #    raise HTTPException(status_code=500, detail="Failed to create placeholder profile")
-
-        return placeholder
+        return insert_response.data[0]  # return the actual inserted row
 
     # Return existing profile
     return data
@@ -161,7 +143,7 @@ def update_profile(profile: ProfileData, user=Depends(get_current_user)):
 
     except Exception as e:
         print("Unexpected error in /profile PUT:", e)
-        raise HTTPException(status_code=500, detail="Internal server error")
+        #raise HTTPException(status_code=500, detail="Internal server error")
 
 
 

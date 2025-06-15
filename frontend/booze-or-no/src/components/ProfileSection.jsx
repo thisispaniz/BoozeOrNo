@@ -53,41 +53,59 @@ function ProfileSection() {
   };
 
   const handleSave = async () => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      alert("You must be logged in.");
-      return;
-    }
+  const token = localStorage.getItem("token");
+  if (!token) {
+    alert("You must be logged in.");
+    return;
+  }
 
+  try {
+    const res = await fetch("/profile", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(tempData),
+    });
+
+    const text = await res.text();
+    let data = null;
     try {
-      const res = await fetch("/profile", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(tempData),
-      });
-
-      const text = await res.text();
-      let data = null;
-      try {
-        data = JSON.parse(text);
-      } catch {
-        console.error("Response not JSON:", text);
-      }
-
-      if (!res.ok) {
-        throw new Error(data?.detail || "Failed to save profile.");
-      }
-
-      setProfileData(data);
-      setIsEditing(false);
-      console.log("Saved to DB:", data);
-    } catch (err) {
-      console.error("Save error:", err.message);
+      data = JSON.parse(text);
+    } catch {
+      console.error("Response not JSON:", text);
     }
-  };
+
+    if (!res.ok) {
+      throw new Error(data?.detail || "Failed to save profile.");
+    }
+
+    // ✅ Immediately re-fetch profile to get latest state from DB
+    const freshRes = await fetch("/profile", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    const freshText = await freshRes.text();
+    let freshData = null;
+    try {
+      freshData = JSON.parse(freshText);
+    } catch {
+      console.error("Fresh response not JSON:", freshText);
+    }
+
+    if (freshRes.ok && freshData) {
+      setProfileData(freshData);
+      setTempData(freshData);
+    }
+
+    setIsEditing(false);
+    console.log("Saved to DB:", freshData || data);
+  } catch (err) {
+    console.error("Save error:", err.message);
+  }
+};
+
 
   const handleCancel = () => {
     setTempData(profileData);
