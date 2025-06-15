@@ -112,7 +112,8 @@ def get_profile(user=Depends(get_current_user)):
             "meds": None,
         }
         insert_response = supabase.table("userdata").insert(placeholder).execute()
-        return insert_response.data[0]  # return the actual inserted row
+        response = supabase.table("userdata").select("*").eq("user_id", uid).maybe_single().execute()
+        data = getattr(response, "data", None)
 
     # Return existing profile
     return data

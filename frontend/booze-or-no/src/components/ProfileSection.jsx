@@ -9,43 +9,44 @@ function ProfileSection() {
   const [fetchError, setFetchError] = useState(null);
 
   useEffect(() => {
-    const fetchProfile = async () => {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        setFetchError("No token found, please log in.");
-        setLoading(false);
-        return;
-      }
+  const token = localStorage.getItem("token");
+  if (!token) {
+    setFetchError("No token found, please log in.");
+    setLoading(false);
+    return;
+  }
 
+  const fetchProfile = async () => {
+    try {
+      const res = await fetch("/profile", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      const text = await res.text();
+      let data = null;
       try {
-        const res = await fetch("/profile", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-
-        const text = await res.text();
-        let data = null;
-        try {
-          data = JSON.parse(text);
-        } catch {
-          console.error("Response not JSON:", text);
-        }
-
-        if (res.ok && data) {
-          setProfileData(data);
-          setTempData(data);
-          setFetchError(null);
-        } else {
-          setFetchError(data?.detail || "Failed to load profile");
-        }
-      } catch (err) {
-        setFetchError("Error fetching profile: " + err.message);
-      } finally {
-        setLoading(false);
+        data = JSON.parse(text);
+      } catch {
+        console.error("Response not JSON:", text);
       }
-    };
 
-    fetchProfile();
-  }, []);
+      if (res.ok && data) {
+        setProfileData(data);
+        setTempData(data);
+        setFetchError(null);
+      } else {
+        setFetchError(data?.detail || "Failed to load profile");
+      }
+    } catch (err) {
+      setFetchError("Error fetching profile: " + err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchProfile();
+}, [localStorage.getItem("token")]);  // 👈 Will re-run when token is set
+
 
   const handleEdit = () => {
     setTempData(profileData);
