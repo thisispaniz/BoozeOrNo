@@ -38,7 +38,24 @@ supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 class UserCredentials(BaseModel):
     email: str
     password: str
-    
+
+class ProfileData(BaseModel):
+    email: Optional[str] = None
+    name: Optional[str] = None
+    age: Optional[int] = None
+    sex: Optional[str] = None
+    location: Optional[str] = None
+    weight: Optional[float] = None
+    meds: Optional[str] = None
+
+def get_current_user(authorization: str = Header(None)):
+    if not authorization or not authorization.startswith("Bearer "):
+        raise HTTPException(status_code=401, detail="Unauthorized")
+    token = authorization[7:]
+    user = supabase.auth.get_user(token)
+    if user.user is None:
+        raise HTTPException(status_code=401, detail="Invalid token")
+    return user.user
 
 @app.post("/register")
 def register_user(user: UserCredentials, request: Request):
