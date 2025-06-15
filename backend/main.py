@@ -4,6 +4,7 @@ from supabase import create_client, Client
 import os
 from pydantic import BaseModel
 from typing import Optional
+import time
 
 app = FastAPI()
 
@@ -112,6 +113,7 @@ def get_profile(user=Depends(get_current_user)):
             "meds": None,
         }
         insert_response = supabase.table("userdata").insert(placeholder).execute()
+        time.sleep(1)
         response = supabase.table("userdata").select("*").eq("user_id", uid).maybe_single().execute()
         data = getattr(response, "data", None)
 
