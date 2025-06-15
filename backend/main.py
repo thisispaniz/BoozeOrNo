@@ -1,8 +1,10 @@
-from fastapi import FastAPI, Query, HTTPException, Request, Response
+from fastapi import FastAPI, Query, HTTPException, Request, Response, Depends, Header
 from fastapi.middleware.cors import CORSMiddleware
 from supabase import create_client, Client
 import os
 from pydantic import BaseModel
+from typing import Optional
+import time
 
 app = FastAPI()
 
