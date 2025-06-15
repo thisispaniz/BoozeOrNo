@@ -153,21 +153,22 @@ def update_profile(profile: ProfileData, user=Depends(get_current_user)):
 
         response = supabase.table("userdata").upsert(update_data, on_conflict="user_id").execute()
 
-        if response.error:
-            print("Supabase upsert error:", response.error)
-            raise HTTPException(status_code=400, detail=response.error.message)
+        if response.status_code >= 400:
+            print("Supabase upsert error:", response.model_dump())
+            raise HTTPException(status_code=response.status_code, detail="Failed to update profile")
 
         refreshed = supabase.table("userdata").select("*").eq("user_id", uid).single().execute()
 
-        if refreshed.error or refreshed.data is None:
-            print("Supabase refresh error:", refreshed.error)
+        if refreshed.status_code >= 400 or not refreshed.data:
+            print("Supabase refresh error:", refreshed.model_dump())
             raise HTTPException(status_code=500, detail="Failed to retrieve updated profile")
 
-        return refreshed.data  # return the profile dict directly, not wrapped
+        return refreshed.data
 
     except Exception as e:
         print("Unexpected error in /profile PUT:", e)
-        #raise HTTPException(status_code=500, detail="Internal server error")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
 
 @app.get("/search")
 def search_medication(q: str = Query(..., description="Search term (medication, ingredient, interaction, etc.)")):
