@@ -95,6 +95,60 @@ def autocomplete(q: str = Query(..., description="Partial search term")):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+@app.get("/profile")
+def get_profile(user=Depends(get_current_user)):
+    uid = user.id
+    response = supabase.table("userdata").select("*").eq("user_id", uid).maybe_single().execute()
+
+    data = getattr(response, "data", None)
+
+    # If no profile found, insert placeholder
+    if not data:
+        placeholder = {
+            "user_id": uid,
+            "email": user.email,
+            "name": "Please fill in your name",
+            "age": None,
+            "sex": None,
+            "location": "Please fill in your location",
+            "weight": None,
+            "meds": None,
+        }
+        insert_response = supabase.table("userdata").insert(placeholder).execute()
+        time.sleep(1)
+        response = supabase.table("userdata").select("*").eq("user_id", uid).maybe_single().execute()
+        data = getattr(response, "data", None)
+
+    # Return existing profile
+    return data
+    
+@app.put("/profile")
+def update_profile(profile: ProfileData, user=Depends(get_current_user)):
+    uid = user.id
+    try:
+        update_data = {k: v for k, v in profile.dict().items() if v is not None}
+        if not update_data:
+            raise HTTPException(status_code=400, detail="No data provided for update")
+
+        update_data["user_id"] = uid
+
+        response = supabase.table("userdata").upsert(update_data, on_conflict="user_id").execute()
+
+        if response.error:
+            print("Supabase upsert error:", response.error)
+            raise HTTPException(status_code=400, detail=response.error.message)
+
+        refreshed = supabase.table("userdata").select("*").eq("user_id", uid).single().execute()
+
+        if refreshed.error or refreshed.data is None:
+            print("Supabase refresh error:", refreshed.error)
+            raise HTTPException(status_code=500, detail="Failed to retrieve updated profile")
+
+        return refreshed.data  # return the profile dict directly, not wrapped
+
+    except Exception as e:
+        print("Unexpected error in /profile PUT:", e)
+        #raise HTTPException(status_code=500, detail="Internal server error")
 
 @app.get("/search")
 def search_medication(q: str = Query(..., description="Search term (medication, ingredient, interaction, etc.)")):
