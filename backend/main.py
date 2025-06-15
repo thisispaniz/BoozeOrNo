@@ -153,21 +153,26 @@ def update_profile(profile: ProfileData, user=Depends(get_current_user)):
 
         response = supabase.table("userdata").upsert(update_data, on_conflict="user_id").execute()
 
-        if response.status_code >= 400:
-            print("Supabase upsert error:", response.model_dump())
-            raise HTTPException(status_code=response.status_code, detail="Failed to update profile")
+        # ✅ Safely handle error attribute
+        if hasattr(response, "error") and response.error:
+            print("Supabase upsert error:", response.error)
+            raise HTTPException(status_code=400, detail=str(response.error))
 
         refreshed = supabase.table("userdata").select("*").eq("user_id", uid).single().execute()
 
-        if refreshed.status_code >= 400 or not refreshed.data:
-            print("Supabase refresh error:", refreshed.model_dump())
+        if hasattr(refreshed, "error") and refreshed.error:
+            print("Supabase refresh error:", refreshed.error)
             raise HTTPException(status_code=500, detail="Failed to retrieve updated profile")
+
+        if not refreshed.data:
+            raise HTTPException(status_code=500, detail="No profile data returned")
 
         return refreshed.data
 
     except Exception as e:
         print("Unexpected error in /profile PUT:", e)
         raise HTTPException(status_code=500, detail="Internal server error")
+
 
 
 @app.get("/search")
