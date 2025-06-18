@@ -53,7 +53,7 @@ function HeroSection() {
       {interaction && <p>Alcohol interaction info: {interaction}</p>}
 
       {/* Hardcoded searh result for demonstration purposes */}
-      {/* <div className="medicine-search-results my-5 p-4">
+      <div className="medicine-search-results my-5 p-4">
         <div className=" d-flex flex-column gap-3">
           <div className="medicine-title-info d-flex flex-column gap-0 p-3 bg-main-dark">
             <h2>Darvocet-N</h2>
@@ -72,7 +72,7 @@ function HeroSection() {
             </ul>
           </div>
         </div>
-       </div> */}
+       </div>
       {/* End of hardcoded search result */}
 
     </section>
