@@ -8,7 +8,6 @@ import TagLine from './components/TagLine';
 import AlcoholPlannerPage from './pages/AlcoholPlannerPage';
 import Dashboard from './pages/Dashboard';
 import EmailConfirmation from './pages/EmailConfirmation';
-import Footer from './components/Footer';
 import InteractionChecker from './pages/InteractionChecker';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
