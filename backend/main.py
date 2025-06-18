@@ -5,14 +5,13 @@ import os
 from pydantic import BaseModel
 from typing import Optional
 import time
+import requests
 
 app = FastAPI()
-
 
 @app.middleware("http")
 async def add_csp_header(request: Request, call_next):
     response: Response = await call_next(request)
-    # Set your Content-Security-Policy header here
     response.headers["Content-Security-Policy"] = "img-src 'self' https://*.github.dev;"
     return response
 
@@ -55,12 +54,10 @@ def get_current_user(authorization: str = Header(None)):
     if user.user is None:
         raise HTTPException(status_code=401, detail="Invalid token")
     return user.user
-    
 
 @app.post("/register")
 def register_user(user: UserCredentials, request: Request):
     try:
-        # Safely get dynamic domain
         host = request.headers.get("x-forwarded-host") or request.headers.get("X-Frontend-URL") or request.headers.get("host") or "localhost:3000"
         scheme = request.headers.get("x-forwarded-proto", "http")
         base_url = f"{scheme}://{host}"
@@ -81,8 +78,6 @@ def register_user(user: UserCredentials, request: Request):
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
 
-
-
 @app.post("/login")
 def login_user(user: UserCredentials):
     try:
@@ -97,10 +92,8 @@ def login_user(user: UserCredentials):
 def get_profile(user=Depends(get_current_user)):
     uid = user.id
     response = supabase.table("userdata").select("*").eq("user_id", uid).maybe_single().execute()
-
     data = getattr(response, "data", None)
 
-    # If no profile found, insert placeholder
     if not data:
         placeholder = {
             "user_id": uid,
@@ -112,14 +105,13 @@ def get_profile(user=Depends(get_current_user)):
             "weight": None,
             "meds": None,
         }
-        insert_response = supabase.table("userdata").insert(placeholder).execute()
+        supabase.table("userdata").insert(placeholder).execute()
         time.sleep(1)
         response = supabase.table("userdata").select("*").eq("user_id", uid).maybe_single().execute()
         data = getattr(response, "data", None)
 
-    # Return existing profile
     return data
-    
+
 @app.put("/profile")
 def update_profile(profile: ProfileData, user=Depends(get_current_user)):
     uid = user.id
@@ -131,23 +123,69 @@ def update_profile(profile: ProfileData, user=Depends(get_current_user)):
         update_data["user_id"] = uid
 
         response = supabase.table("userdata").upsert(update_data, on_conflict="user_id").execute()
-
         if response.error:
             print("Supabase upsert error:", response.error)
             raise HTTPException(status_code=400, detail=response.error.message)
 
         refreshed = supabase.table("userdata").select("*").eq("user_id", uid).single().execute()
-
         if refreshed.error or refreshed.data is None:
             print("Supabase refresh error:", refreshed.error)
             raise HTTPException(status_code=500, detail="Failed to retrieve updated profile")
 
-        return refreshed.data  # return the profile dict directly, not wrapped
+        return refreshed.data
 
     except Exception as e:
         print("Unexpected error in /profile PUT:", e)
-        #raise HTTPException(status_code=500, detail="Internal server error")
 
+# next: placeholder for AI powered summary of the alcohol interaction
+
+'''@app.get("/search")
+def search_medication(q: str = Query(..., description="Medication name or active ingredient")):
+    try:
+        response = supabase.table("alcmedi")\
+            .select("*")\
+            .or_(f"medication_brand.ilike.%{q}%,active_ingredient.ilike.%{q}%")\
+            .limit(10)\
+            .execute()
+
+        data = response.data
+        if not data:
+            return {"summary": f"No results found for '{q}'."}
+
+        item = data[0]
+        drug_name = item.get("medication_brand") or item.get("active_ingredient") or q
+        interaction_info = item.get("alcohol_interaction", "").strip()
+        usage_info = item.get("symptoms_disorders", "").strip()
+
+        if not interaction_info:
+            summary = f"There are no known harmful interactions between alcohol and {drug_name}."
+        else:
+            hf_token = os.getenv("HUGGINGFACE_API_TOKEN")
+            if not hf_token:
+                raise HTTPException(status_code=500, detail="Missing Hugging Face API token")
+
+            hf_payload = {
+                "inputs": f"Summarize this alcohol interaction info for the medication '{drug_name}' in a simple, friendly way:\n\n{interaction_info}"
+            }
+            hf_headers = {
+                "Authorization": f"Bearer {hf_token}"
+            }
+            hf_response = requests.post(
+                "https://api-inference.huggingface.co/models/facebook/bart-large-cnn",
+                headers=hf_headers,
+                json=hf_payload
+            )
+            hf_json = hf_response.json()
+            summary = hf_json[0]["summary_text"] if isinstance(hf_json, list) and "summary_text" in hf_json[0] else f"Info: {interaction_info}"
+
+        return {
+            "medication": drug_name,
+            "alcohol_summary": summary,
+            "common_usage": usage_info or "No common usage information found."
+        }
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))'''
 
 
 @app.get("/search")
@@ -164,7 +202,7 @@ def search_medication(q: str = Query(..., description="Medication name or active
         raise HTTPException(status_code=500, detail=str(e))
 
 
-    # Make sure uvicorn binds to 0.0.0.0, not localhost
+
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
