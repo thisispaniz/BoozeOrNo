@@ -10,6 +10,7 @@ import LoginPage from './pages/LoginPage';
 import Dashboard from './pages/Dashboard';
 import EmailConfirmation from './pages/EmailConfirmation';
 import Footer from './components/Footer';
+import InteractionChecker from './pages/InteractionChecker';
 
 function LandingPage() {
   return (
@@ -50,6 +51,7 @@ function App() {
           }
         />
         <Route path="/emailconfirmed" element={<EmailConfirmation />} />
+        <Route path="/medicationxalcohol" element={<InteractionChecker />} />
       </Routes>
     </Router>
   )

@@ -249,6 +249,14 @@ h3 {
   color: #ffffff;
 }
 
+.checker-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem;
+  margin-top: 50px;
+  color: #ffffff;
+}
+
 .planner-form {
   display: flex;
   flex-direction: column;
@@ -536,4 +544,8 @@ img .danger {
   justify-content: center;
   text-align: center;
   padding: 20px;
+}
+
+.search-bar-checker {
+  margin-top: 50px;
 }
