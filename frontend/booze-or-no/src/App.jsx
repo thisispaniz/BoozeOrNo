@@ -8,21 +8,22 @@ import TagLine from './components/TagLine';
 import AlcoholPlannerPage from './pages/AlcoholPlannerPage';
 import Dashboard from './pages/Dashboard';
 import EmailConfirmation from './pages/EmailConfirmation';
+import InteractionChecker from './pages/InteractionChecker';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 
+
+
 function LandingPage() {
   return (
-   <>
-    <NavBar />
-    <div className="d-flex flex-column">
+    <div className='page-container'>
+      <NavBar />
       <HeroSection />
       <FeaturesSection />
       <TagLine />
       <DisclaimerSection />
+      <Footer />
     </div>
-    <Footer />
-   </>
   );
 }
 
@@ -32,7 +33,6 @@ const ProtectedRoute = ({ children }) => {
   if (!isLoggedIn) {
     return <Navigate to="/login" replace />;
   }
-
   return children;
 };
 
@@ -53,6 +53,7 @@ function App() {
           }
         />
         <Route path="/emailconfirmed" element={<EmailConfirmation />} />
+        <Route path="/medicationxalcohol" element={<InteractionChecker />} />
       </Routes>
     </Router>
   )

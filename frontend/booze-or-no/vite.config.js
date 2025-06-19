@@ -23,6 +23,11 @@ export default defineConfig({
     target: 'http://backend:8000',
     changeOrigin: true,
     secure: false,
+  },
+  '/profile': {
+    target: 'http://backend:8000',
+    changeOrigin: true,
+    secure: false,
   }
 }
   }
