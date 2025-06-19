@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom"; // ✅ Import navigate
 import '../App.css';
-import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
+import NavBar from "../components/NavBar";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -50,7 +50,7 @@ const LoginForm = () => {
     <>
       <NavBar />
       <div className="container">
-        <h1 className="title">LOGIN TO YOUR ACCOUNT</h1>
+        <h1 className="mb-4">LOGIN TO YOUR ACCOUNT</h1>
         <div className="form">
           <input
             className="signup-input"

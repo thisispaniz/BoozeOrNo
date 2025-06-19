@@ -1,5 +1,4 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";  // import useNavigate
+import { useNavigate } from "react-router-dom"; // import useNavigate
 import "../App.css";
 
 function NavBarLoggedIn() {
@@ -16,7 +15,7 @@ function NavBarLoggedIn() {
         <div className="logo">
             <a href="/" ><img src="/Booze or No.svg" alt="BoozeOrNo" /></a>
         </div>
-        <nav className="nav">
+        <nav className="d-flex gap-5 align-items-center">
             {/* Use a button or anchor with onClick handler */}
             <a href="#" className="nav-link" onClick={handleLogout}>Logout</a>
             <a href="/dashboard">

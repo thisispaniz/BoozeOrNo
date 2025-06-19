@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import '../App.css';
 import Footer from "../components/Footer";
 import NavBar from "../components/NavBar";
@@ -57,7 +57,7 @@ const SignupForm = () => {
     <>
       <NavBar />
       <div className="container">
-        <h1 className="title">CREATE AN ACCOUNT</h1>
+        <h1 className="mb-4">CREATE AN ACCOUNT</h1>
         <div className="form">
           <input
             className="signup-input"

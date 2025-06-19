@@ -1,6 +1,5 @@
-import React from "react";
-import "../App.css";
 import { Link } from "react-router-dom";
+import "../App.css";
 
 function NavBar() {
     return (
@@ -8,7 +7,7 @@ function NavBar() {
             <div className="logo">
                 <a href="/" ><img src="/Booze or No.svg" alt="BoozeOrNo" /></a>
             </div>
-            <nav className="nav">
+            <nav className="d-flex gap-5 align-items-center">
                 <a href="#about" className="nav-link">About</a>
                 <a href="/signup" className="nav-link">Signup</a>
                 <Link to="/login" className="nav-link-yellow">Login</Link>

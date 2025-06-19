@@ -1,9 +1,8 @@
-import React from "react";
 import "../App.css";
 
 function DisclaimerSection() {
     return (
-        <div className="disclaimer-section">
+        <div className="d-flex flex-column align-items-center justify-content-center text-start w-100 pt-3">
             <div className="disclaimer">
                 <h3>DISCLAIMER</h3>
                 <p>

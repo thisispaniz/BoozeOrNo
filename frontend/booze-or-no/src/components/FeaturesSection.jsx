@@ -2,8 +2,8 @@ import "../App.css";
 
 function FeaturesSection() {
     return (
-        <section className="features-section py-5">
-            <div className="feature-texts">
+        <section className="d-flex flex-column align-items-center justify-content-center text-start w-100 features-section py-5">
+            <div className="w-45">
                 <h2 className="h1-black">CREATE AN ACCOUNT TO ACCESS FULL FEATURES</h2>
                 <p className="p-black">&#10003; Enter as many long-term or short-term medications</p>
                 <p className="p-black">&#10003; Enter medical conditions</p>
