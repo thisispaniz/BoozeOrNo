@@ -1,16 +1,18 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import NavBar from './components/NavBar';
-import HeroSection from './components/HeroSection';
-import FeaturesSection from './components/FeaturesSection';
+import { Navigate, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import DisclaimerSection from './components/DisclaimerSection';
+import FeaturesSection from './components/FeaturesSection';
+import Footer from './components/Footer';
+import HeroSection from './components/HeroSection';
+import NavBar from './components/NavBar';
 import TagLine from './components/TagLine';
-import SignupPage from './pages/SignupPage';
 import AlcoholPlannerPage from './pages/AlcoholPlannerPage';
-import LoginPage from './pages/LoginPage';
 import Dashboard from './pages/Dashboard';
 import EmailConfirmation from './pages/EmailConfirmation';
-import Footer from './components/Footer';
 import InteractionChecker from './pages/InteractionChecker';
+import LoginPage from './pages/LoginPage';
+import SignupPage from './pages/SignupPage';
+
+
 
 function LandingPage() {
   return (
