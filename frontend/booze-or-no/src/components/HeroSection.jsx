@@ -6,6 +6,7 @@ function HeroSection() {
   const [brandName, setBrandName] = useState(null);
   const [activeIngredient, setActiveIngredient] = useState(null);
   const [error, setError] = useState(null);
+  const [displayedText, setDisplayText] = useState(null);
 
   async function handleSearch() {
     if (!query.trim()) {
@@ -16,6 +17,7 @@ function HeroSection() {
     setBrandName(null);
     setActiveIngredient(null);
     setInteraction(null);
+    setDisplayText(null);
 
     try {
       const response = await fetch(`/search?q=${encodeURIComponent(query)}`);
@@ -25,6 +27,7 @@ function HeroSection() {
       setBrandName(data.length > 0 ? data[0].medication_brand : "No results found.");
       setActiveIngredient(data.length > 0 ? data[0].active_ingredient : "---");
       setInteraction(data.length > 0 ? data[0].alcohol_interaction : "---");
+      setDisplayText(data.length > 0 ? data[0].displayed_text : "---");
     } catch (e) {
       setError("Failed to fetch data. Make sure the backend is running.");
       console.error(e);
@@ -48,11 +51,10 @@ function HeroSection() {
         <button className="search-button" onClick={handleSearch}>BOOZE OR NO</button>
       </div>
       {error && <p style={{ color: "red" }}>{error}</p>}
-      {brandName && <p>Medicine brand name: {brandName}</p>}
-      {activeIngredient && <p>Active ingredient: {activeIngredient}</p>}
-      {interaction && <p>Alcohol interaction info: {interaction}</p>}
+      {displayedText && <p> {displayedText} </p>}
+{/*
 
-      {/* Hardcoded searh result for demonstration purposes */}
+     Hardcoded searh result for demonstration purposes 
       <div className="medicine-search-results my-5 p-4">
         <div className=" d-flex flex-column gap-3">
           <div className="medicine-title-info d-flex flex-column gap-0 p-3 bg-main-dark">
@@ -73,7 +75,7 @@ function HeroSection() {
           </div>
         </div>
        </div>
-      {/* End of hardcoded search result */}
+       End of hardcoded search result */} 
 
     </section>
   );
