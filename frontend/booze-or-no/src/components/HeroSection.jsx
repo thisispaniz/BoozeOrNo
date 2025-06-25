@@ -21,9 +21,8 @@ function HeroSection() {
         if (!res.ok) throw new Error("Failed to fetch suggestions");
         const data = await res.json();
 
-        // Show only brand or active ingredient, not full displayed_text
-        const filtered = data.map((item) => item.medication_brand || item.active_ingredient);
-        setSuggestions([...new Set(filtered)]); // remove duplicates
+        // Use data directly — it's an array of strings (brand or ingredient)
+        setSuggestions(data);
         setShowSuggestions(true);
       } catch (err) {
         console.error(err);
@@ -36,8 +35,8 @@ function HeroSection() {
   }, [query]);
 
   // Handle search
-  async function handleSearch() {
-    if (!query.trim()) {
+  async function handleSearch(searchTerm = query) {
+    if (!searchTerm.trim()) {
       setError("Please enter a medication name or ingredient.");
       setDisplayText(null);
       return;
@@ -48,7 +47,7 @@ function HeroSection() {
     setShowSuggestions(false);
 
     try {
-      const response = await fetch(`/search?q=${encodeURIComponent(query)}`);
+      const response = await fetch(`https://boozeorno-backend.onrender.com/search?q=${encodeURIComponent(searchTerm)}`);
       if (!response.ok) throw new Error("Network response was not ok");
 
       const data = await response.json();
@@ -67,6 +66,7 @@ function HeroSection() {
     setQuery(text);
     setShowSuggestions(false);
     inputRef.current.focus();
+    handleSearch(text); // Immediately trigger search on suggestion click
   };
 
   return (
@@ -88,7 +88,7 @@ function HeroSection() {
           onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
           autoComplete="off"
         />
-        <button className="search-button" onClick={handleSearch}>BOOZE OR NO</button>
+        <button className="search-button" onClick={() => handleSearch()}>BOOZE OR NO</button>
 
         {showSuggestions && suggestions.length > 0 && (
           <ul
@@ -109,22 +109,22 @@ function HeroSection() {
             }}
           >
             {suggestions.map((text, idx) => (
-  <li
-    key={idx}
-    style={{
-      padding: "12px 16px",
-      cursor: "pointer",
-      fontSize: "16px",
-      lineHeight: "1.4",
-      backgroundColor: "black",
-      color: "white",
-      borderBottom: "1px solid #444"
-    }}
-    onClick={() => handleSuggestionClick(text)}
-    onMouseDown={(e) => e.preventDefault()} // prevent blur on click
-  >
-    {text}
-  </li>
+              <li
+                key={idx}
+                style={{
+                  padding: "12px 16px",
+                  cursor: "pointer",
+                  fontSize: "16px",
+                  lineHeight: "1.4",
+                  backgroundColor: "black",
+                  color: "white",
+                  borderBottom: "1px solid #444"
+                }}
+                onClick={() => handleSuggestionClick(text)}
+                onMouseDown={(e) => e.preventDefault()} // prevent blur on click
+              >
+                {text}
+              </li>
             ))}
           </ul>
         )}
