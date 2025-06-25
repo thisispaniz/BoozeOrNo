@@ -11,6 +11,7 @@ import EmailConfirmation from './pages/EmailConfirmation';
 import InteractionChecker from './pages/InteractionChecker';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
+import AboutUs from './pages/AboutUs';
 
 
 
@@ -52,6 +53,7 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/emailconfirmed" element={<EmailConfirmation />} />
         <Route path="/medicationxalcohol" element={<InteractionChecker />} />
       </Routes>

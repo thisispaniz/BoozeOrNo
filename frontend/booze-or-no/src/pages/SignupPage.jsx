@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import '../App.css';
 import Footer from "../components/Footer";
 import NavBar from "../components/NavBar";
+import { Link } from "react-router-dom";
 
 const SignupForm = () => {
   const [showPasswordRules, setShowPasswordRules] = useState(false);
@@ -93,8 +94,8 @@ const SignupForm = () => {
             REGISTER
           </button>
           {message && <p className="feedback-message">{message}</p>}
-          <p className="login-link">
-            Have an account already? <span>LOGIN</span>
+          <p>
+            Have an account already? <Link to="/login" className="login-signup">Login</Link>
           </p>
         </div>
       </div>
