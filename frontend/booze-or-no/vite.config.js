@@ -32,7 +32,7 @@ export default defineConfig({
     '/autocomplete': {
     target: 'http://backend:8000',
     changeOrigin: true,
-    secure: true,
+    secure: false,
 }
   }
 })
