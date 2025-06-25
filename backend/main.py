@@ -179,7 +179,7 @@ def update_profile(profile: ProfileData, user=Depends(get_current_user)):
 def search_medication(q: str = Query(..., description="Medication name or active ingredient")):
     try:
         response = supabase.table("alcmedi")\
-            .select("displayed_text")\
+            .select("*")\
             .or_(f"medication_brand.ilike.%{q}%,active_ingredient.ilike.%{q}%")\
             .limit(10)\
             .execute()
