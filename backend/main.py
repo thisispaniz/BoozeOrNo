@@ -103,14 +103,18 @@ def autocomplete(q: str = Query(..., description="Partial search term")):
             .execute()
 
         suggestions = set()
+
         for row in response.data:
-            for key in ["medication_brand", "active_ingredient"]:
-                if row.get(key):
-                    suggestions.add(row[key])
+            if row.get("medication_brand"):
+                suggestions.add(row["medication_brand"])
+            if row.get("active_ingredient"):
+                suggestions.add(row["active_ingredient"])
 
         return list(suggestions)
+
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
 
 @app.get("/profile")
 def get_profile(user=Depends(get_current_user)):
