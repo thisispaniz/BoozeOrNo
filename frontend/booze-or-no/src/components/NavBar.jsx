@@ -9,7 +9,7 @@ function NavBar() {
                 <a href="/" ><img src="/Booze or No.svg" alt="BoozeOrNo" /></a>
             </div>
             <nav className="nav">
-                <a href="#about" className="nav-link">About</a>
+                <a href="/aboutus" className="nav-link">About</a>
                 <a href="/signup" className="nav-link">Signup</a>
                 <Link to="/login" className="nav-link-yellow">Login</Link>
             </nav>
