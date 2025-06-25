@@ -11,7 +11,7 @@ This is still work-in-progress.
 
 In order to make it work with your own codespaces, just create codespace on main. 
 After the containers are finished spinning up, there must be two ports forwarded: 3000 and 8000.
-Click on the link for port 3000 and the website shows in a new tab/window, according to your browser settings.
+Click on the link for port 3000 and the website shows in a new tab/window, according to your browser settings
 
 ------------
 

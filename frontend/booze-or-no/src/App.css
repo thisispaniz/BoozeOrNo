@@ -72,7 +72,6 @@ body {
   flex-direction: column;
   align-items: left;
   justify-content: center;
-  height: 450px;
   text-align: left;
   color: #ffffff;
   margin-bottom: 80px;
@@ -141,7 +140,6 @@ input {
   text-align: left;
   color: #0A0A0A;
   background-color: #FFC300;
-  height: 380px;
   width: 100%;
 }
 
@@ -159,12 +157,10 @@ input {
 }
 
 .sign-me-up {
-  width: 45%;
   height: 45px;
   font-size: 20px;
   background-color: #FFC300;
-  border-style: solid;
-  border-color: #0A0A0A;
+  border: solid 1px #0A0A0A;
   margin-top: 25px;
   &:hover {
     background-color: #cc9d01;
@@ -243,6 +239,14 @@ h3 {
 
 .planner-container {
   max-width: 600px;
+  margin: 0 auto;
+  padding: 1rem;
+  margin-top: 50px;
+  color: #ffffff;
+}
+
+.checker-container {
+  max-width: 800px;
   margin: 0 auto;
   padding: 1rem;
   margin-top: 50px;
@@ -516,7 +520,6 @@ img .danger {
 .footer-rights {
   font-size: 15px;
 }
-
 .login-link {
   text-decoration: none;
   color: #FFC300;
@@ -536,4 +539,75 @@ img .danger {
   justify-content: center;
   text-align: center;
   padding: 20px;
+}
+
+.search-bar-checker {
+  margin-top: 50px;
+
+.medicine-search-results {
+  background-color: #161616;
+}
+
+.bg-main-dark {
+  background-color: #0A0A0A;
+}
+
+ul {
+    font-family: "Raleway", sans-serif;
+}
+
+.safe {
+  color: #42FF65;
+}
+
+.low-risk {
+  color: #cdff42;
+}
+
+.moderate-risk {
+  color: #ffbf36;
+}
+
+.elevated-risk {
+  color: #ff9b0f;
+}
+
+.high-risk {
+  color: #ff7614;
+}
+
+.very-high-risk {
+  color: #ff3300;
+}
+
+.extremely-dangerous {
+  color: #c90000;
+}
+
+.border-safe {
+  border:solid 5px #42FF65;
+}
+
+.border-low-risk {
+  border:solid 5px #cdff42;
+}
+
+.border-moderate-risk {
+  border:solid 5px #ffbf36;
+}
+
+.border-elevated-risk {
+  border:solid 5px #ff9b0f;
+}
+
+.border-high-risk {
+  border:solid 5px #ff7614;
+}
+
+.border-very-high-risk {
+  border:solid 5px #ff3300;
+}
+
+.border-extremely-dangerous {
+  border:solid 5px #c90000;
 }
