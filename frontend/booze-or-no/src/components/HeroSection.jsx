@@ -109,14 +109,22 @@ function HeroSection() {
             }}
           >
             {suggestions.map((text, idx) => (
-              <li
-                key={idx}
-                style={{ padding: "8px", cursor: "pointer" }}
-                onClick={() => handleSuggestionClick(text)}
-                onMouseDown={e => e.preventDefault()}
-              >
-                {text}
-              </li>
+  <li
+    key={idx}
+    style={{
+      padding: "12px 16px",
+      cursor: "pointer",
+      fontSize: "16px",
+      lineHeight: "1.4",
+      backgroundColor: "black",
+      color: "white",
+      borderBottom: "1px solid #444"
+    }}
+    onClick={() => handleSuggestionClick(text)}
+    onMouseDown={(e) => e.preventDefault()} // prevent blur on click
+  >
+    {text}
+  </li>
             ))}
           </ul>
         )}
