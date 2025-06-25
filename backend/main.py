@@ -176,17 +176,12 @@ def update_profile(profile: ProfileData, user=Depends(get_current_user)):
 
 
 @app.get("/search")
-def search_medication(q: str = Query(..., description="Search term (medication, ingredient, interaction, etc.)")):
+def search_medication(q: str = Query(..., description="Medication name or active ingredient")):
     try:
         response = supabase.table("alcmedi")\
-            .select("*")\
-            .or_(
-                f"medication_brand.ilike.%{q}%,"
-                f"active_ingredient.ilike.%{q}%,"
-                f"alcohol_interaction.ilike.%{q}%,"
-                f"symptoms_disorders.ilike.%{q}%"
-            )\
-            .limit(20)\
+            .select("displayed_text")\
+            .or_(f"medication_brand.ilike.%{q}%,active_ingredient.ilike.%{q}%")\
+            .limit(10)\
             .execute()
 
         return response.data
