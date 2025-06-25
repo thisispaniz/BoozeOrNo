@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // ✅ Import navigate
 import { supabase } from "../supabaseClient";
 import '../App.css';
-import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 
 const LoginForm = () => {
@@ -48,7 +47,6 @@ const LoginForm = () => {
 
   return (
     <>
-      <NavBar />
       <div className="container">
         <h1 className="title">LOGIN TO YOUR ACCOUNT</h1>
         <div className="form">
