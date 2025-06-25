@@ -94,19 +94,17 @@ def login_user(user: UserCredentials):
 def autocomplete(q: str = Query(..., description="Partial search term")):
     try:
         response = supabase.table("alcmedi")\
-            .select("symptoms_disorders, medication_brand, active_ingredient, alcohol_interaction")\
+            .select("medication_brand, active_ingredient")\
             .or_(
-                f"symptoms_disorders.ilike.%{q}%,"
                 f"medication_brand.ilike.%{q}%,"
-                f"active_ingredient.ilike.%{q}%,"
-                f"alcohol_interaction.ilike.%{q}%"
+                f"active_ingredient.ilike.%{q}%"
             )\
             .limit(10)\
             .execute()
 
         suggestions = set()
         for row in response.data:
-            for key in ["symptoms_disorders", "medication_brand", "active_ingredient", "alcohol_interaction"]:
+            for key in ["medication_brand", "active_ingredient"]:
                 if row.get(key):
                     suggestions.add(row[key])
 
