@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { supabase } from "../supabaseClient";
 import '../App.css';
 import Footer from "../components/Footer";
-import NavBar from "../components/NavBar";
 
 const SignupForm = () => {
   const [showPasswordRules, setShowPasswordRules] = useState(false);
@@ -56,7 +55,6 @@ const SignupForm = () => {
 
   return (
     <>
-      <NavBar />
       <div className="container">
         <h1 className="title">CREATE AN ACCOUNT</h1>
         <div className="form">
