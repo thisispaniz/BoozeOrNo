@@ -18,7 +18,7 @@ function NavBarLoggedIn() {
         </div>
         <nav className="nav">
             {/* Use a button or anchor with onClick handler */}
-            <a href="#" className="nav-link" onClick={handleLogout}>Logout</a>
+            <a href="/" className="nav-link" onClick={handleLogout}>Logout</a>
             <a href="/dashboard">
             <img className="avatar-navbar" src="/avatar-1577909_1280.png" alt="User avatar" />
             </a>

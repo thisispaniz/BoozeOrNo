@@ -543,6 +543,7 @@ img .danger {
 
 .search-bar-checker {
   margin-top: 50px;
+}
 
 .medicine-search-results {
   background-color: #161616;
@@ -610,4 +611,16 @@ ul {
 
 .border-extremely-dangerous {
   border:solid 5px #c90000;
+}
+
+.login-signup{
+  color: #FFC300;
+}
+
+h2{
+  color: white;
+}
+
+li {
+  color: #ccc;
 }
