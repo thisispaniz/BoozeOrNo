@@ -17,7 +17,7 @@ function HeroSection() {
 
     const fetchSuggestions = async () => {
       try {
-        const res = await fetch(`https://boozeorno-backend.onrender.com/autocomplete?q=${encodeURIComponent(query)}`);
+        const res = await fetch(`/autocomplete?q=${encodeURIComponent(query)}`);
         if (!res.ok) throw new Error("Failed to fetch suggestions");
         const data = await res.json();
 
@@ -47,7 +47,7 @@ function HeroSection() {
     setShowSuggestions(false);
 
     try {
-      const response = await fetch(`https://boozeorno-backend.onrender.com/search?q=${encodeURIComponent(searchTerm)}`);
+      const response = await fetch(`/search?q=${encodeURIComponent(searchTerm)}`);
       if (!response.ok) throw new Error("Network response was not ok");
 
       const data = await response.json();
