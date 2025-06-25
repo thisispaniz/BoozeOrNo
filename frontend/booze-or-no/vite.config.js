@@ -34,6 +34,10 @@ export default defineConfig({
         changeOrigin: true,
         secure: true,
       },
+        '/autocomplete': {
+        target: 'https://boozeorno-backend.onrender.com',
+        changeOrigin: true,
+        secure: true,
     }
   }
 });
