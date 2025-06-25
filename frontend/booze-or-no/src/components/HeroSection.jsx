@@ -2,14 +2,13 @@ import React, { useState, useEffect, useRef } from "react";
 
 function HeroSection() {
   const [query, setQuery] = useState("");
-  const [results, setResults] = useState(null);
+  const [displayedText, setDisplayText] = useState(null);
   const [error, setError] = useState(null);
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
-
   const inputRef = useRef(null);
 
-  // Fetch autocomplete suggestions when query changes
+  // Fetch autocomplete suggestions
   useEffect(() => {
     if (query.trim().length === 0) {
       setSuggestions([]);
@@ -21,7 +20,10 @@ function HeroSection() {
         const res = await fetch(`https://boozeorno-backend.onrender.com/autocomplete?q=${encodeURIComponent(query)}`);
         if (!res.ok) throw new Error("Failed to fetch suggestions");
         const data = await res.json();
-        setSuggestions(data);
+
+        // Show only brand or active ingredient, not full displayed_text
+        const filtered = data.map((item) => item.medication_brand || item.active_ingredient);
+        setSuggestions([...new Set(filtered)]); // remove duplicates
         setShowSuggestions(true);
       } catch (err) {
         console.error(err);
@@ -33,14 +35,16 @@ function HeroSection() {
     fetchSuggestions();
   }, [query]);
 
+  // Handle search
   async function handleSearch() {
     if (!query.trim()) {
       setError("Please enter a medication name or ingredient.");
-      setResults(null);
+      setDisplayText(null);
       return;
     }
+
     setError(null);
-    setResults(null);
+    setDisplayText(null);
     setShowSuggestions(false);
 
     try {
@@ -48,22 +52,19 @@ function HeroSection() {
       if (!response.ok) throw new Error("Network response was not ok");
 
       const data = await response.json();
-
       if (data.length === 0) {
         setError("No results found.");
-        setResults(null);
       } else {
-        setResults(data[0]);
+        setDisplayText(data[0].displayed_text);
       }
     } catch (e) {
-      setError("Failed to fetch data. Make sure the backend is running.");
       console.error(e);
+      setError("Failed to fetch data. Make sure the backend is running.");
     }
   }
 
-  // When user clicks a suggestion, fill input and hide suggestions
-  const handleSuggestionClick = (suggestion) => {
-    setQuery(suggestion);
+  const handleSuggestionClick = (text) => {
+    setQuery(text);
     setShowSuggestions(false);
     inputRef.current.focus();
   };
@@ -75,6 +76,7 @@ function HeroSection() {
       <h1>-HAVE A MEDICAL CONDITION?</h1>
       <p>See how safe it is to drink tonight.</p>
       <h2>TRY IT NOW</h2>
+
       <div className="search-bar" style={{ position: "relative" }}>
         <input
           ref={inputRef}
@@ -83,7 +85,7 @@ function HeroSection() {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onFocus={() => query.trim() && setShowSuggestions(true)}
-          onBlur={() => setTimeout(() => setShowSuggestions(false), 200)} // delay to allow click
+          onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
           autoComplete="off"
         />
         <button className="search-button" onClick={handleSearch}>BOOZE OR NO</button>
@@ -106,14 +108,14 @@ function HeroSection() {
               padding: 0,
             }}
           >
-            {suggestions.map((suggestion, idx) => (
+            {suggestions.map((text, idx) => (
               <li
                 key={idx}
                 style={{ padding: "8px", cursor: "pointer" }}
-                onClick={() => handleSuggestionClick(suggestion)}
-                onMouseDown={e => e.preventDefault()} // prevent blur on click
+                onClick={() => handleSuggestionClick(text)}
+                onMouseDown={e => e.preventDefault()}
               >
-                {suggestion}
+                {text}
               </li>
             ))}
           </ul>
@@ -121,25 +123,7 @@ function HeroSection() {
       </div>
 
       {error && <p style={{ color: "red" }}>{error}</p>}
-
-      {results && (
-        <div className="results">
-          <p>
-            This medication has the active ingredient <strong>{results.active_ingredient}</strong>.{" "}
-            There are generic brands available: <strong>{results.medication_brand}</strong>.{" "}
-            It is usually used for/against <strong>{results.symptoms_disorders}</strong>.
-          </p>
-          {results.alcohol_interaction.toLowerCase() === "none" ? (
-            <p>
-              There is no known significant interaction of this medication with alcohol, but nevertheless, proceed with caution.
-            </p>
-          ) : (
-            <p>
-              Be aware: the following interactions are known to happen with alcohol: <strong>{results.alcohol_interaction}</strong>.
-            </p>
-          )}
-        </div>
-      )}
+      {displayedText && <p style={{ whiteSpace: "pre-line" }}>{displayedText}</p>}
     </section>
   );
 }
