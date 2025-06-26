@@ -28,6 +28,7 @@ function LandingPage() {
   );
 }
 
+
 const ProtectedRoute = ({ children }) => {
   const isLoggedIn = Boolean(localStorage.getItem("token"));
   if (!isLoggedIn) {
