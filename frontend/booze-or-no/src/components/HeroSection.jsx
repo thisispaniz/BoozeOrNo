@@ -172,7 +172,6 @@ function HeroSection() {
       </div>
 
       {error && <p style={{ color: "red" }}>{error}</p>}
-      {displayedText && <p style={{ whiteSpace: "pre-line" }}>{displayedText}</p>}
       {hasSearched && (
       <div className="medicine-search-results my-5 p-4">
         <div className=" d-flex flex-column gap-3">
