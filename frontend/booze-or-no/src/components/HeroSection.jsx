@@ -3,11 +3,37 @@ import React, { useState, useEffect, useRef } from "react";
 function HeroSection() {
   const [query, setQuery] = useState("");
   const [displayedText, setDisplayText] = useState(null);
+  const [riskLevel, setRiskLevel] = useState(null);
   const [error, setError] = useState(null);
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const inputRef = useRef(null);
 
+  function getRiskClass(riskLevel) {
+    if (!riskLevel) {
+      console.log('empty')
+      return '';}
+
+      switch(riskLevel.toLowerCase()) {
+        case 'safe':
+          return 'safe';
+        case 'low-risk':
+          return 'low-risk';
+        case 'moderate risk':
+          return 'moderate-risk';
+        case 'elevated risk':
+          return 'elevated-risk';
+        case 'high risk':
+          return 'high-risk';
+        case 'very high risk':
+          return 'very-high-risk';
+        case 'extremely dangerous':
+          return 'extremely-dangerous';
+        default:
+          return 'unknown-risk'; 
+      }
+    
+  }
   // Fetch autocomplete suggestions
   useEffect(() => {
     if (query.trim().length === 0) {
@@ -132,6 +158,21 @@ function HeroSection() {
 
       {error && <p style={{ color: "red" }}>{error}</p>}
       {displayedText && <p style={{ whiteSpace: "pre-line" }}>{displayedText}</p>}
+      <div className="medicine-search-results my-5 p-4">
+        <div className=" d-flex flex-column gap-3">
+          <div className="medicine-title-info d-flex flex-column gap-0 p-3 bg-main-dark">
+            <h2>Darvocet-N</h2>
+            <p className="m-0">Active Ingredient: <span className="active-ingredient-name fw-bold">Propoxyphene</span></p>
+          </div>
+          <div className="alcohol-interaction p-3 bg-main-dark border-${getRiskClass(riskLevel) py-4">
+            <p className="m-0">Interaction with alcohol: <span className="interaction-risk text-uppercase fw-bold ${getRiskClass(riskLevel)">{riskLevel}</span></p>
+          </div>
+          <div className="side-effects p-3 bg-main-dark">
+            <p>Alcohol interaction side-effects include:</p>
+            {displayedText && <p style={{ whiteSpace: "pre-line" }}>{displayedText}</p>}
+          </div>
+        </div>
+      </div>
     </section>
   );
 }
