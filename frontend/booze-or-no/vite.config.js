@@ -28,7 +28,13 @@ export default defineConfig({
     target: 'http://backend:8000',
     changeOrigin: true,
     secure: false,
-  }
+  },
+  '/autocomplete': {
+  target: 'http://backend:8000',
+  changeOrigin: true,
+  secure: false,
 }
   }
-})
+    }
+      }
+        )

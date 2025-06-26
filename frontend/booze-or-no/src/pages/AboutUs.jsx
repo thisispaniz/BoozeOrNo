@@ -1,11 +1,8 @@
-import NavBar from "../components/NavBar";
-import NavBarLoggedIn from "../components/NavBar-LoggedIn";
 import Footer from "../components/Footer";
 
 const AboutUs = () =>  {
     return (
         <div className="page-container">
-            <NavBar />
             <h1>ABOUT</h1>
             <p>Welcome to Booze or No, a tool to help you drink more safely if you're taking medications or managing health conditions.
 We get it: figuring out how alcohol mixes with your meds or health issues isn’t always easy. That’s why we built this platform. Just enter what you’re taking or dealing with, and we’ll give you a rough idea of how much alcohol might be okay for you. And what that looks like in real drinks.</p>

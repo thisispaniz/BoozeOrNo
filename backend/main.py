@@ -192,12 +192,38 @@ def search_medication(q: str = Query(..., description="Medication name or active
 def search_medication(q: str = Query(..., description="Medication name or active ingredient")):
     try:
         response = supabase.table("alcmedi")\
-            .select("*")\
+            .select("displayed_text")\
             .or_(f"medication_brand.ilike.%{q}%,active_ingredient.ilike.%{q}%")\
             .limit(10)\
             .execute()
 
         return response.data
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/autocomplete")
+def autocomplete(q: str = Query(..., description="Partial search term")):
+    try:
+        response = supabase.table("alcmedi")\
+            .select("medication_brand, active_ingredient")\
+            .or_(
+                f"medication_brand.ilike.%{q}%,"
+                f"active_ingredient.ilike.%{q}%"
+            )\
+            .limit(10)\
+            .execute()
+
+        suggestions = set()
+
+        for row in response.data:
+            if row.get("medication_brand"):
+                suggestions.add(row["medication_brand"])
+            if row.get("active_ingredient"):
+                suggestions.add(row["active_ingredient"])
+
+        return list(suggestions)
+
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
