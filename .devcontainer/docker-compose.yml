@@ -7,9 +7,9 @@ services:
     container_name: backend
     ports:
       - "8000:8000"
-    environment:
-      SUPABASE_URL: https://wojajoaokvqmtqsmubal.supabase.co
-      SUPABASE_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndvamFqb2Fva3ZxbXRxc211YmFsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg4NDgxMDgsImV4cCI6MjA2NDQyNDEwOH0.sKn5tfKD7WVLNTDkCogCNk1oD2KgTK06sk5Sdm_GmNo
+   # environment:
+    #  SUPABASE_URL: https://wojajoaokvqmtqsmubal.supabase.co
+     # SUPABASE_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndvamFqb2Fva3ZxbXRxc211YmFsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg4NDgxMDgsImV4cCI6MjA2NDQyNDEwOH0.sKn5tfKD7WVLNTDkCogCNk1oD2KgTK06sk5Sdm_GmNo
     volumes:
       - ./backend:/backend
     command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
