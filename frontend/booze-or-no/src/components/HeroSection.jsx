@@ -147,6 +147,7 @@ function HeroSection() {
               listStyle: "none",
               margin: 0,
               padding: 0,
+              width: "447px",
             }}
           >
             {suggestions.map((text, idx) => (
