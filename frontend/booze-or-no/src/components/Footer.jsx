@@ -10,7 +10,7 @@ function Footer() {
                 <p className='footer-rights'>©Booze or No - All rights reserved</p>
             </div>
             <nav className="nav">
-                <a href="/about" className="nav-link">About us</a>
+                <a href="/aboutus" className="nav-link">About us</a>
                 <a href="/contact" className="nav-link">contact us</a>
                 <a href="/privacypolicy" className="nav-link">privacy policy</a>
                 <a href="/termsofuse" className="nav-link">terms of use</a>

@@ -15,6 +15,7 @@ import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import AboutUs from './pages/AboutUs';
 import Conditions from './pages/Conditions';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 
 function LandingPage() {
   return (
@@ -70,6 +71,7 @@ function App() {
         <Route path="/emailconfirmed" element={<EmailConfirmation />} />
         <Route path="/medicationxalcohol" element={<InteractionChecker />} />
         <Route path='/conditionxalcohol' element={<Conditions />} />
+        <Route path='/privacypolicy' element={<PrivacyPolicy />} />
       </Routes>
     </Router>
   );
