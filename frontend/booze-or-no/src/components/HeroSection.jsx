@@ -159,7 +159,8 @@ function HeroSection() {
                   lineHeight: "1.4",
                   backgroundColor: "black",
                   color: "white",
-                  borderBottom: "1px solid #444"
+                  borderBottom: "1px solid #444",
+                  width: "447px",
                 }}
                 onClick={() => handleSuggestionClick(text)}
                 onMouseDown={(e) => e.preventDefault()} // prevent blur on click
