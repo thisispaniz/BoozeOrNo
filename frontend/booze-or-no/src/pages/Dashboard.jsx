@@ -1,6 +1,5 @@
 import React from "react";
 import '../App.css';
-import NavBarLoggedIn from "../components/NavBar-LoggedIn";
 import Footer from "../components/Footer";
 import ProfileSection from "../components/ProfileSection";
 import DrinkPlannerInfo from "../components/DrinkPlannerInfo";
@@ -11,7 +10,6 @@ const Dashboard = () => {
 
     return (
         <div className='page-container'>
-            <NavBarLoggedIn />
             <h1 className="title">Welcome, {email}!</h1>
             <ProfileSection />
             <DrinkPlannerInfo />

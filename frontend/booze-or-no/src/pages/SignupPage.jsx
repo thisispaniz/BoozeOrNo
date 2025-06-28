@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import '../App.css';
 import Footer from "../components/Footer";
-import NavBar from "../components/NavBar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-const SignupForm = () => {
+const SignupForm = ({ onLogin }) => {
   const [showPasswordRules, setShowPasswordRules] = useState(false);
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+
+  const navigate = useNavigate();
 
   const passwordRequirements = [
     { label: "At least 8 characters", test: (pw) => pw.length >= 8 },
@@ -19,7 +20,7 @@ const SignupForm = () => {
   ];
 
   const handleSignup = async () => {
-    setMessage(""); // clear any previous message
+    setMessage("");
 
     if (!email || !password) {
       setMessage("❌ Email and password are required.");
@@ -29,9 +30,10 @@ const SignupForm = () => {
     try {
       const res = await fetch('/register', {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({ email, password }),
-        "X-Frontend-URL": window.location.origin
       });
 
       const data = await res.json();
@@ -47,7 +49,17 @@ const SignupForm = () => {
         return;
       }
 
-      setMessage("✅ Signup successful! Please check your email to confirm.");
+      // ✅ If signup also logs in the user and returns token:
+      if (data.access_token) {
+        localStorage.setItem("token", data.access_token);
+        localStorage.setItem("email", email);
+        if (onLogin) onLogin(); // Notify App to switch navbar
+        setMessage("✅ Signup successful!");
+        navigate("/dashboard"); // Optional: navigate immediately
+      } else {
+        setMessage("✅ Signup successful! Please check your email to confirm.");
+      }
+
     } catch (err) {
       console.error("Network or server error:", err);
       setMessage("❌ Network error. Try again.");
@@ -56,7 +68,6 @@ const SignupForm = () => {
 
   return (
     <>
-      <NavBar />
       <div className="container">
         <h1 className="title">CREATE AN ACCOUNT</h1>
         <div className="form">
@@ -95,7 +106,8 @@ const SignupForm = () => {
           </button>
           {message && <p className="feedback-message">{message}</p>}
           <p>
-            Have an account already? <Link to="/login" className="login-signup">Login</Link>
+            Have an account already?{" "}
+            <Link to="/login" className="login-signup">Login</Link>
           </p>
         </div>
       </div>
