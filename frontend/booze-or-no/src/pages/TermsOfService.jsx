@@ -46,7 +46,6 @@ const TermsOfService = () =>  {
         <p>If you have any questions about these Terms, please contact us at:</p>
         <ul>
             <li><strong>Email:</strong> boozeorno@email.com</li>
-            <li><strong>Address:</strong> [your company address, if applicable]</li>
         </ul>
 
         <p><em>By using BoozeOrNo, you acknowledge that you have read, understood, and agreed to these Terms of Service.</em></p>

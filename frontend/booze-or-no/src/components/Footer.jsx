@@ -13,7 +13,7 @@ function Footer() {
                 <a href="/aboutus" className="nav-link">About us</a>
                 <a href="/contact" className="nav-link">contact us</a>
                 <a href="/privacypolicy" className="nav-link">privacy policy</a>
-                <a href="/termsofuse" className="nav-link">terms of use</a>
+                <a href="/termsofservice" className="nav-link">terms of use</a>
             </nav>
         </div>
     )}
