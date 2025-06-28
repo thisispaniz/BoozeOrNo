@@ -9,7 +9,7 @@ function AlcoholCheckerInfo () {
                     <img className="drinkplanner-logo" src="./Frame 51.svg" alt="" />
                 </div>
                 <p className="info">Alcohol can be extra dangerous if you have certain medical conditions. Make sure you’re not at risk before drinking. </p>
-                <a href="/planner"><button className="entire-section">Conditions x alcohol checker</button></a>
+                <a href="/conditionxalcohol"><button className="entire-section">Conditions x alcohol checker</button></a>
             </section>
         <section className="drinkplanner-section">
             <div className="logo-container">

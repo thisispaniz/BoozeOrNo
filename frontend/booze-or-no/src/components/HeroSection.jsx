@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 
 function HeroSection() {
   const [query, setQuery] = useState("");
-  const [displayedText, setDisplayText] = useState(null);
   const [riskLevel, setRiskLevel] = useState(null);
   const [medicationBrand, setMedicationBrand] = useState(null);
   const [activeIngredient, setActiveIngredient] = useState(null);
@@ -33,9 +32,8 @@ function HeroSection() {
         case 'extremely dangerous':
           return 'extremely-dangerous';
         default:
-          return 'unknown-risk'; 
+          return 'unknown-risk';
       }
-    
   }
   // Fetch autocomplete suggestions
   useEffect(() => {
