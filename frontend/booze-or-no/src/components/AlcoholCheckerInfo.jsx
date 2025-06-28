@@ -16,7 +16,7 @@ function AlcoholCheckerInfo () {
                 <img className="drinkplanner-logo" src="./Frame 50.svg" alt="" />
             </div>
             <p className="info">Check if it’s dangerous to drink with medications you’re taking or planning to take.</p>
-            <a href="/planner"><button className="entire-section">medication x alcohol checker</button></a>
+            <a href="/medicationxalcohol"><button className="entire-section">medication x alcohol checker</button></a>
         </section>
         </div>
     );
