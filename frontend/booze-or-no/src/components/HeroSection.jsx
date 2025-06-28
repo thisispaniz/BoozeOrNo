@@ -184,9 +184,6 @@ function HeroSection() {
           <div className={`alcohol-interaction p-3 bg-main-dark border-${getRiskClass(riskLevel)} py-4`}>
             <p className="m-0">Interaction with alcohol: <span className={`interaction-risk text-uppercase fw-bold ${getRiskClass(riskLevel)}`}>{riskLevel}</span></p>
           </div>
-          <div className="side-effects p-3 bg-main-dark">
-            {displayedText && <p style={{ whiteSpace: "pre-line" }}>{displayedText}</p>}
-          </div>
         </div>
       </div>
       )}
