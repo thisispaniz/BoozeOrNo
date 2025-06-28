@@ -20,7 +20,7 @@ function HeroSection() {
       switch(riskLevel.toLowerCase()) {
         case 'safe':
           return 'safe';
-        case 'low-risk':
+        case 'low risk':
           return 'low-risk';
         case 'moderate risk':
           return 'moderate-risk';
