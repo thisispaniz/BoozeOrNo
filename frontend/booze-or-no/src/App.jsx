@@ -14,6 +14,10 @@ import InteractionChecker from './pages/InteractionChecker';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import AboutUs from './pages/AboutUs';
+import Conditions from './pages/Conditions';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/TermsOfService';
+
 function LandingPage() {
   return (
     <>
@@ -25,6 +29,7 @@ function LandingPage() {
     </>
   );
 }
+
 const ProtectedRoute = ({ children }) => {
   const isLoggedIn = Boolean(localStorage.getItem("token"));
   if (!isLoggedIn) {
@@ -32,8 +37,10 @@ const ProtectedRoute = ({ children }) => {
   }
   return children;
 };
+
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(Boolean(localStorage.getItem("token")));
+
   // Sync login state if token changes in another tab
   useEffect(() => {
     const handleStorage = () => {
@@ -42,10 +49,12 @@ function App() {
     window.addEventListener("storage", handleStorage);
     return () => window.removeEventListener("storage", handleStorage);
   }, []);
+
   return (
     <Router>
       {/* Switch NavBar based on login state */}
       {isLoggedIn ? ( <NavBarLoggedIn onLogout={() => setIsLoggedIn(false)} /> ) : ( <NavBar /> )}
+
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage onLogin={() => setIsLoggedIn(true)} />} />
@@ -62,8 +71,12 @@ function App() {
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/emailconfirmed" element={<EmailConfirmation />} />
         <Route path="/medicationxalcohol" element={<InteractionChecker />} />
+        <Route path='/conditionxalcohol' element={<Conditions />} />
+        <Route path='/privacypolicy' element={<PrivacyPolicy />} />
+        <Route path='/termsofservice' element={<TermsOfService />} />
       </Routes>
     </Router>
   );
 }
+
 export default App;
