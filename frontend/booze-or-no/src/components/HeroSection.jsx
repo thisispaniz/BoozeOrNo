@@ -2,12 +2,40 @@ import React, { useState, useEffect, useRef } from "react";
 
 function HeroSection() {
   const [query, setQuery] = useState("");
+  const [riskLevel, setRiskLevel] = useState(null);
+  const [medicationBrand, setMedicationBrand] = useState(null);
+  const [activeIngredient, setActiveIngredient] = useState(null);
+  const [hasSearched, setHasSearched] = useState(false);
   const [displayedText, setDisplayText] = useState(null);
   const [error, setError] = useState(null);
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const inputRef = useRef(null);
 
+  function getRiskClass(riskLevel) {
+    if (!riskLevel) {
+      console.log('empty')
+      return '';}
+
+      switch(riskLevel.toLowerCase()) {
+        case 'safe':
+          return 'safe';
+        case 'low risk':
+          return 'low-risk';
+        case 'moderate risk':
+          return 'moderate-risk';
+        case 'elevated risk':
+          return 'elevated-risk';
+        case 'high risk':
+          return 'high-risk';
+        case 'very high risk':
+          return 'very-high-risk';
+        case 'extremely dangerous':
+          return 'extremely-dangerous';
+        default:
+          return 'unknown-risk';
+      }
+  }
   // Fetch autocomplete suggestions
   useEffect(() => {
     if (query.trim().length === 0) {
@@ -39,13 +67,22 @@ function HeroSection() {
     if (!searchTerm.trim()) {
       setError("Please enter a medication name or ingredient.");
       setDisplayText(null);
+      setMedicationBrand(null);
+      setActiveIngredient(null);
+      setRiskLevel(null);
+      hasSearched(false);
       return;
     }
 
     setError(null);
     setDisplayText(null);
+    setMedicationBrand(null);
+    setActiveIngredient(null);
+    setRiskLevel(null);
+    setHasSearched(true);
     setShowSuggestions(false);
 
+    
     try {
       const response = await fetch(`/search?q=${encodeURIComponent(searchTerm)}`);
       if (!response.ok) throw new Error("Network response was not ok");
@@ -55,6 +92,9 @@ function HeroSection() {
         setError("No results found.");
       } else {
         setDisplayText(data[0].displayed_text);
+        setActiveIngredient(data[0].active_ingredient);
+        setRiskLevel(data[0].risk_level);
+        setMedicationBrand(data[0].medication_brand);
       }
     } catch (e) {
       console.error(e);
@@ -106,6 +146,7 @@ function HeroSection() {
               listStyle: "none",
               margin: 0,
               padding: 0,
+              width: "447px",
             }}
           >
             {suggestions.map((text, idx) => (
@@ -118,7 +159,8 @@ function HeroSection() {
                   lineHeight: "1.4",
                   backgroundColor: "black",
                   color: "white",
-                  borderBottom: "1px solid #444"
+                  borderBottom: "1px solid #444",
+                  width: "447px",
                 }}
                 onClick={() => handleSuggestionClick(text)}
                 onMouseDown={(e) => e.preventDefault()} // prevent blur on click
@@ -131,7 +173,19 @@ function HeroSection() {
       </div>
 
       {error && <p style={{ color: "red" }}>{error}</p>}
-      {displayedText && <p style={{ whiteSpace: "pre-line" }}>{displayedText}</p>}
+      {hasSearched && (
+      <div className="medicine-search-results my-5 p-4">
+        <div className=" d-flex flex-column gap-3">
+          <div className="medicine-title-info d-flex flex-column gap-0 p-3 bg-main-dark">
+            <h2>{medicationBrand}</h2>
+            <p className="m-0">Active Ingredient: <span className="active-ingredient-name fw-bold">{activeIngredient}</span></p>
+          </div>
+          <div className={`alcohol-interaction p-3 bg-main-dark border-${getRiskClass(riskLevel)} py-4`}>
+            <p className="m-0">Interaction with alcohol: <span className={`interaction-risk text-uppercase fw-bold ${getRiskClass(riskLevel)}`}>{riskLevel}</span></p>
+          </div>
+        </div>
+      </div>
+      )}
     </section>
   );
 }
