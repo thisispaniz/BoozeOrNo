@@ -6,7 +6,7 @@ function HeroSection() {
   const [medicationBrand, setMedicationBrand] = useState(null);
   const [activeIngredient, setActiveIngredient] = useState(null);
   const [hasSearched, setHasSearched] = useState(false);
-  const [displayedText, setDisplayText] = useState(null);
+  {/*const [displayedText, setDisplayText] = useState(null);*/}
   const [error, setError] = useState(null);
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
