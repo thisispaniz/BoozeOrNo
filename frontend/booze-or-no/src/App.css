@@ -625,3 +625,17 @@ h2{
 li {
   color: #ccc;
 }
+
+.list-h2 {
+  color: #FFC300;
+  margin-left: -30px;
+  margin-top: 10px;
+}
+
+ol li {
+  font-size: 20px;
+}
+
+ol {
+  margin-bottom: 100px;
+}
