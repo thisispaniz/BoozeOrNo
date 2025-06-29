@@ -65,7 +65,7 @@ function HeroSection() {
   async function handleSearch(searchTerm = query) {
     if (!searchTerm.trim()) {
       setError("Please enter a medication name or ingredient.");
-      setDisplayText(null);
+      {/*setDisplayText(null);*/}
       setMedicationBrand(null);
       setActiveIngredient(null);
       setRiskLevel(null);
@@ -74,7 +74,7 @@ function HeroSection() {
     }
 
     setError(null);
-    setDisplayText(null);
+    {/*setDisplayText(null);*/}
     setMedicationBrand(null);
     setActiveIngredient(null);
     setRiskLevel(null);
@@ -90,7 +90,7 @@ function HeroSection() {
       if (data.length === 0) {
         setError("No results found.");
       } else {
-        setDisplayText(data[0].displayed_text);
+        {/*setDisplayText(data[0].displayed_text);*/}
         setActiveIngredient(data[0].active_ingredient);
         setRiskLevel(data[0].risk_level);
         setMedicationBrand(data[0].medication_brand);
