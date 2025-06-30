@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Identicon from "./Identicon";
 import "../App.css";
 
 function ProfileSection() {
@@ -135,7 +136,7 @@ function ProfileSection() {
   return (
     <section className="profile-section">
       <div className="main-part">
-        <img className="avatar" src="./avatar-1577909_1280.png" alt="Avatar" />
+        <Identicon />
         <div className="column right">
           <div className="row">
             <div className="column">
