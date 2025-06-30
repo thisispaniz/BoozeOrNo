@@ -17,6 +17,7 @@ import AboutUs from './pages/AboutUs';
 import Conditions from './pages/Conditions';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
+import ContactUs from './pages/ContactUs';
 
 function LandingPage() {
   return (
@@ -74,6 +75,7 @@ function App() {
         <Route path='/conditionxalcohol' element={<Conditions />} />
         <Route path='/privacypolicy' element={<PrivacyPolicy />} />
         <Route path='/termsofservice' element={<TermsOfService />} />
+        <Route path='/contactus' element={<ContactUs />} />
       </Routes>
     </Router>
   );
