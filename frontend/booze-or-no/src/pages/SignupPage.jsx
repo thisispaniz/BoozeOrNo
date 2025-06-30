@@ -101,6 +101,7 @@ const SignupForm = ({ onLogin }) => {
               </ul>
             </div>
           )}
+          <p>By clicking on register, you are accepting BoozeOrNo's <a className="login-signup" href="/termsofservice">Terms of Service</a>.</p>
           <button className="register-btn" onClick={handleSignup}>
             REGISTER
           </button>

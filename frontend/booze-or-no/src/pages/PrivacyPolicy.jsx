@@ -41,7 +41,7 @@ const PrivacyPolicy = () =>  {
             We take reasonable measures to protect your personal information but cannot guarantee absolute security.</p>
             <p><h5>5. Your Rights</h5>
 
-            Depending on your location, you may have rights under privacy laws, including the right to access, correct, or delete your data. Please contact us at boozeorno@email.com to exercise these rights.</p>
+            Depending on your location, you may have rights under privacy laws, including the right to access, correct, or delete your data. Please contact us at info@boozeorno.com to exercise these rights.</p>
             <p><h5>6. Changes to This Policy</h5>
 
             We may update this Privacy Policy occasionally. Changes will be posted on this page with an updated effective date.</p>
@@ -49,8 +49,7 @@ const PrivacyPolicy = () =>  {
 
             If you have any questions about this Privacy Policy, please contact us at:
 
-            BoozeOrNo
-            boozeorno@email.com</p>
+            info@boozeorno.com</p>
             <Footer />
         </div>
     );
