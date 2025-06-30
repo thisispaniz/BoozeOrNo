@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 
 function HeroSection() {
   const [query, setQuery] = useState("");
-  const [displayedText, setDisplayText] = useState(null);
   const [riskLevel, setRiskLevel] = useState(null);
   const [medicationBrand, setMedicationBrand] = useState(null);
   const [activeIngredient, setActiveIngredient] = useState(null);
@@ -33,9 +32,8 @@ function HeroSection() {
         case 'extremely dangerous':
           return 'extremely-dangerous';
         default:
-          return 'unknown-risk'; 
+          return 'unknown-risk';
       }
-    
   }
   // Fetch autocomplete suggestions
   useEffect(() => {
@@ -67,7 +65,7 @@ function HeroSection() {
   async function handleSearch(searchTerm = query) {
     if (!searchTerm.trim()) {
       setError("Please enter a medication name or ingredient.");
-      setDisplayText(null);
+      {/*setDisplayText(null);*/}
       setMedicationBrand(null);
       setActiveIngredient(null);
       setRiskLevel(null);
@@ -76,7 +74,7 @@ function HeroSection() {
     }
 
     setError(null);
-    setDisplayText(null);
+    {/*setDisplayText(null);*/}
     setMedicationBrand(null);
     setActiveIngredient(null);
     setRiskLevel(null);
@@ -92,7 +90,7 @@ function HeroSection() {
       if (data.length === 0) {
         setError("No results found.");
       } else {
-        setDisplayText(data[0].displayed_text);
+        {/*setDisplayText(data[0].displayed_text);*/}
         setActiveIngredient(data[0].active_ingredient);
         setRiskLevel(data[0].risk_level);
         setMedicationBrand(data[0].medication_brand);
@@ -183,9 +181,6 @@ function HeroSection() {
           </div>
           <div className={`alcohol-interaction p-3 bg-main-dark border-${getRiskClass(riskLevel)} py-4`}>
             <p className="m-0">Interaction with alcohol: <span className={`interaction-risk text-uppercase fw-bold ${getRiskClass(riskLevel)}`}>{riskLevel}</span></p>
-          </div>
-          <div className="side-effects p-3 bg-main-dark">
-            {displayedText && <p style={{ whiteSpace: "pre-line" }}>{displayedText}</p>}
           </div>
         </div>
       </div>
