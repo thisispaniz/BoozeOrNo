@@ -134,6 +134,7 @@ function ProfileSection() {
 
   return (
     <section className="profile-section">
+      <div className="d-flex justify-content-between">
       <div className="main-part">
         <img className="avatar" src="./avatar-1577909_1280.png" alt="Avatar" />
         <div className="column right">
@@ -231,6 +232,7 @@ function ProfileSection() {
             Edit Profile
           </button>
         )}
+      </div>
       </div>
 
       <div className="danger">
