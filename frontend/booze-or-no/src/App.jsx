@@ -17,7 +17,7 @@ import AboutUs from './pages/AboutUs';
 import Conditions from './pages/Conditions';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
-import ContactUs from './pages/Contactus'
+import ContactUs from './pages/ContactUs'
 
 function LandingPage() {
   return (
