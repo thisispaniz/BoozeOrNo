@@ -1,5 +1,5 @@
 // src/pages/AlcoholPlannerPage.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../App.css';
 import Footer from '../components/Footer';
 
@@ -20,6 +20,41 @@ function AlcoholPlannerPage() {
     const [weight, setWeight] = useState('');
     const [targetTime, setTargetTime] = useState('');
     const [results, setResults] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchProfile = async () => {
+            try {
+                const response = await fetch('/api/profile', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        // Add authorization header if you're using JWT tokens
+                        'Authorization': `Bearer ${localStorage.getItem('token')}` // Adjust based on your auth implementation
+                    }
+                });
+
+                if (response.ok) {
+                    const profileData = await response.json();
+                    // Set default values if they exist in profile
+                    if (profileData.sex) {
+                        setSex(profileData.sex);
+                    }
+                    if (profileData.weight) {
+                        setWeight(profileData.weight.toString());
+                    }
+                } else {
+                    console.log('Profile not found or error fetching profile');
+                }
+            } catch (error) {
+                console.error('Error fetching profile:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchProfile();
+    }, []);
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -52,6 +87,18 @@ function AlcoholPlannerPage() {
     }
 
     setResults({ drinkPlan, timePoints });
+    }
+
+    if (loading) {
+        return (
+            <div className='page-container'>
+                <div className="planner-container">
+                    <h1>Alcohol Metabolism Planner</h1>
+                    <p>Loading profile data...</p>
+                </div>
+                <Footer />
+            </div>
+        );
     }
 
     return (
