@@ -1,5 +1,5 @@
 // src/pages/AlcoholPlannerPage.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../App.css';
 import Footer from '../components/Footer';
 
@@ -20,6 +20,64 @@ function AlcoholPlannerPage() {
     const [weight, setWeight] = useState('');
     const [targetTime, setTargetTime] = useState('');
     const [results, setResults] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+
+        useEffect(() => {
+        const fetchProfile = async () => {
+            try {
+                const response = await fetch('/profile', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        // Add authorization header if you're using JWT tokens
+                        'Authorization': `Bearer ${localStorage.getItem('token')}` // Adjust based on your auth implementation
+                    }
+                });
+
+                console.log('Response status:', response.status);
+                console.log('Response headers:', response.headers);
+
+                if (response.ok) {
+                    // Check if response is actually JSON
+                    const contentType = response.headers.get('content-type');
+                    if (contentType && contentType.includes('application/json')) {
+                        const profileData = await response.json();
+                        console.log('Profile data:', profileData);
+                        console.log('Sex value from profile:', profileData.sex);
+                        // Set default values if they exist in profile
+                        if (profileData.sex) {
+                            // Handle different possible sex values
+                            const sexValue = profileData.sex.toLowerCase();
+                            if (sexValue === 'female' || sexValue === 'f' || sexValue === 'woman') {
+                                setSex('female');
+                            } else if (sexValue === 'male' || sexValue === 'm' || sexValue === 'man') {
+                                setSex('male');
+                            } else {
+                                // If it's an unexpected value, log it but don't set it
+                                console.log('Unexpected sex value:', profileData.sex);
+                            }
+                        }
+                        if (profileData.weight) {
+                            setWeight(profileData.weight.toString());
+                        }
+                    } else {
+                        const textResponse = await response.text();
+                        console.log('Non-JSON response:', textResponse);
+                    }
+                } else {
+                    const errorText = await response.text();
+                    console.log('Error response:', response.status, errorText);
+                }
+            } catch (error) {
+                console.error('Error fetching profile:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchProfile();
+    }, []);
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -54,66 +112,89 @@ function AlcoholPlannerPage() {
     setResults({ drinkPlan, timePoints });
     }
 
-    return (
-        <>
-        <div className="planner-container">
-            <h1>Alcohol Metabolism Planner</h1>
-            <form onSubmit={handleSubmit} className="planner-form">
-                <label>
-                    Sex:
-                    <select value={sex} onChange={(e) => setSex(e.target.value)}>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                    </select>
-                </label>
-
-                <label>
-                    Weight (kg):
-                    <input className='calcinput' type="number" value={weight} onChange={(e) => setWeight(e.target.value)} />
-                </label>
-
-                <label>
-                    The alcohol needs to be out of your system by:
-                    <input className='calcinput' type="datetime-local" value={targetTime} onChange={(e) => setTargetTime(e.target.value)} />
-                </label>
-
-                <button type="submit">Calculate</button>
-            </form>
-
-    {results && (
-        <div className="results">
-            <h3>You can drink:</h3>
-            <ul>
-            {results.drinkPlan.map(drink => (
-                <li key={drink.name}>{drink.count} × {drink.name}</li>
-            ))}
-            </ul>
-
-            <h3>BAC Over Time</h3>
-            <div className="graph-container">
-                <svg width="100%" height="200">
-                    <path
-                        d = {results.timePoints.map((point, index) => {
-                            const x = (index / (results.timePoints.length - 1)) * 600;
-                            const y = 200 - parseFloat(point.bac) * 200;
-                            return `${index === 0 ? 'M' : 'L'} ${x},${y}`;
-                        }).join(' ')}
-                        fill = "none"
-                        stroke='#FFC300'
-                        strokeWidth="2"
-                    />
-                </svg>
-                <div className="x-labels">
-                    {results.timePoints.map((point, i) => (
-                        <span key={i}>{i % 2 === 0 ? point.time : ''}</span>
-                    ))}
+    if (loading) {
+        return (
+            <div className='page-container'>
+                <div className="planner-container">
+                    <h1>Alcohol Metabolism Planner</h1>
+                    <p>Loading profile data...</p>
                 </div>
+                <Footer />
             </div>
+        );
+    }
+    
+    return (
+        <div className='page-container'>
+            <div className="planner-container">
+                <h1>Alcohol Metabolism Planner</h1>
+                <form onSubmit={handleSubmit} className="planner-form">
+                    <label>
+                        Sex:
+                        <select value={sex} onChange={(e) => setSex(e.target.value)}>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </label>
+
+                    <label>
+                        Weight (kg):
+                        <input 
+                            className='calcinput' 
+                            type="number" 
+                            value={weight} 
+                            onChange={(e) => setWeight(e.target.value)}
+                            placeholder="Enter your weight"
+                        />
+                    </label>
+
+                    <label>
+                        The alcohol needs to be out of your system by:
+                        <input 
+                            className='calcinput' 
+                            type="datetime-local" 
+                            value={targetTime} 
+                            onChange={(e) => setTargetTime(e.target.value)} 
+                        />
+                    </label>
+
+                    <button type="submit">Calculate</button>
+                </form>
+
+                {results && (
+                    <div className="results">
+                        <h3>You can drink:</h3>
+                        <ul>
+                        {results.drinkPlan.map(drink => (
+                            <li key={drink.name}>{drink.count} × {drink.name}</li>
+                        ))}
+                        </ul>
+
+                        <h3>BAC Over Time</h3>
+                        <div className="graph-container">
+                            <svg width="100%" height="200">
+                                <path
+                                    d = {results.timePoints.map((point, index) => {
+                                        const x = (index / (results.timePoints.length - 1)) * 600;
+                                        const y = 200 - parseFloat(point.bac) * 200;
+                                        return `${index === 0 ? 'M' : 'L'} ${x},${y}`;
+                                    }).join(' ')}
+                                    fill = "none"
+                                    stroke='#FFC300'
+                                    strokeWidth="2"
+                                />
+                            </svg>
+                            <div className="x-labels">
+                                {results.timePoints.map((point, i) => (
+                                    <span key={i}>{i % 2 === 0 ? point.time : ''}</span>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                )}
+            </div>
+            <Footer />
         </div>
-    )}
-    </div>
-    <Footer />
-    </>
 );
 }
 
