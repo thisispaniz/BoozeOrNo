@@ -45,7 +45,6 @@ function AlcoholPlannerPage() {
                         const profileData = await response.json();
                         console.log('Profile data:', profileData);
                         console.log('Sex value from profile:', profileData.sex);
-                        
                         // Set default values if they exist in profile
                         if (profileData.sex) {
                             // Handle different possible sex values
