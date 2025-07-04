@@ -49,7 +49,6 @@ const PrivacyPolicy = () =>  {
 
             If you have any questions about this Privacy Policy, please contact us at:
 
-            BoozeOrNo
             boozeorno@email.com</p>
             <Footer />
         </div>
