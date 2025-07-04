@@ -47,6 +47,14 @@ function ProfileSection() {
   fetchProfile();
 }, [localStorage.getItem("token")]);  // 👈 Will re-run when token is set
 
+const isFieldEmpty = (field) => {
+  return !profileData[field] || profileData[field] === "";
+};
+
+const hasEmptyFields = () => {
+  if (!profileData) return false;
+  return isFieldEmpty("name") || isFieldEmpty("age") || isFieldEmpty("sex") || isFieldEmpty("weight") || isFieldEmpty("location");
+};
 
   const handleEdit = () => {
     setTempData(profileData);
@@ -148,7 +156,13 @@ function ProfileSection() {
                   className="edit-input name-input"
                 />
               ) : (
-                <h2>{profileData.name}</h2>
+                <h2>
+                  {isFieldEmpty("name") ? (
+                    <img className="danger" src="./Vector.svg" alt="Missing name" />
+                  ) : (
+                    profileData.name
+                  )}
+                </h2>
               )}
             </div>
             <h3>
@@ -161,7 +175,13 @@ function ProfileSection() {
                   className="edit-input age-input"
                 />
               ) : (
-                <span className="info">{profileData.age}</span>
+                <span className="info">
+                  {isFieldEmpty("age") ? (
+                    <img className="danger" src="./Vector.svg" alt="Missing age" />
+                  ) : (
+                    profileData.age
+                  )}
+                </span>
               )}
             </h3>
             <h3>
@@ -177,7 +197,13 @@ function ProfileSection() {
                   <option value="Other">Other</option>
                 </select>
               ) : (
-                <span className="info">{profileData.sex}</span>
+                <span className="info">
+                  {isFieldEmpty("sex") ? (
+                    <img className="danger" src="./Vector.svg" alt="Missing sex" />
+                  ) : (
+                    profileData.sex
+                  )}
+                </span>
               )}
             </h3>
             <h3>
@@ -210,7 +236,13 @@ function ProfileSection() {
                   className="edit-input location-input"
                 />
               ) : (
-                <span className="info">{profileData.location}</span>
+                <span className="info">
+                  {isFieldEmpty("location") ? (
+                    <img className="danger" src="./Vector.svg" alt="Missing location" />
+                  ) : (
+                    profileData.location
+                  )}
+                </span>
               )}
             </h3>
           </div>
@@ -235,14 +267,16 @@ function ProfileSection() {
       </div>
       </div>
 
-      <div className="danger">
-        <h3>
-          <span className="info orange">
-            <img className="danger" src="./Vector.svg" alt="Warning" /> Completing your
-            profile allows us to estimate your alcohol metabolism.
-          </span>
-        </h3>
-      </div>
+      {hasEmptyFields() && (
+        <div className="danger">
+          <h3>
+            <span className="info orange">
+              <img className="danger" src="./Vector.svg" alt="Warning" /> Completing your
+              profile allows us to estimate your alcohol metabolism.
+            </span>
+          </h3>
+        </div>
+      )}
     </section>
   );
 }
