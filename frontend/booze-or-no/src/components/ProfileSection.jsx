@@ -249,18 +249,18 @@ const hasEmptyFields = () => {
         </div>
       </div>
 
-      <div className="profile-actions">
+      <div className="profile-actions d-flex flex-column gap-1">
         {isEditing ? (
           <>
-            <button onClick={handleSave} className="save-btn">
+            <button onClick={handleSave} className="save-btn" style={{width: "100px"}}>
               Save
             </button>
-            <button onClick={handleCancel} className="cancel-btn">
+            <button onClick={handleCancel} className="cancel-btn" style={{width: "100px"}}>
               Cancel
             </button>
           </>
         ) : (
-          <button onClick={handleEdit} className="edit-btn">
+          <button onClick={handleEdit} className="edit-btn" style={{width: "100px"}}>
             Edit Profile
           </button>
         )}
