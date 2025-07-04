@@ -7,6 +7,21 @@ body {
   font-family: "Bebas Neue", sans-serif;
 }
 
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.page-container > *:not(.footer) {
+  flex-shrink: 0;
+}
+
+.content-wrap {
+  flex: 1;
+}
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -57,7 +72,6 @@ body {
   flex-direction: column;
   align-items: left;
   justify-content: center;
-  height: 450px;
   text-align: left;
   color: #ffffff;
   margin-bottom: 80px;
@@ -126,7 +140,6 @@ input {
   text-align: left;
   color: #0A0A0A;
   background-color: #FFC300;
-  height: 380px;
   width: 100%;
 }
 
@@ -136,6 +149,7 @@ input {
 .h1-black {
   padding-left: 10px;
   margin-bottom: 35px;
+  color: #0A0A0A;
 }
 .p-black {
   color: #0A0A0A;
@@ -144,12 +158,10 @@ input {
 }
 
 .sign-me-up {
-  width: 45%;
   height: 45px;
   font-size: 20px;
   background-color: #FFC300;
-  border-style: solid;
-  border-color: #0A0A0A;
+  border: solid 1px #0A0A0A;
   margin-top: 25px;
   &:hover {
     background-color: #cc9d01;
@@ -228,6 +240,14 @@ h3 {
 
 .planner-container {
   max-width: 600px;
+  margin: 0 auto;
+  padding: 1rem;
+  margin-top: 50px;
+  color: #ffffff;
+}
+
+.checker-container {
+  max-width: 800px;
   margin: 0 auto;
   padding: 1rem;
   margin-top: 50px;
@@ -494,8 +514,138 @@ img .danger {
   margin-right: -150px;
   padding-left: 150px;
   padding-right: 150px;
+  margin-top: auto;
+  flex-wrap: wrap;
 }
 
 .footer-rights {
   font-size: 15px;
+}
+.login-link {
+  text-decoration: none;
+  color: #FFC300;
+  font-weight: 500;
+  font-size: 40px;
+  transition: color 0.3s ease;
+  &:hover {
+    color: rgba(255, 195, 0, 0.5);
+  }
+}
+
+.center-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+}
+
+.search-bar-checker {
+  margin-top: 50px;
+}
+
+.medicine-search-results {
+  background-color: #161616;
+}
+
+.bg-main-dark {
+  background-color: #0A0A0A;
+}
+
+ul {
+    font-family: "Raleway", sans-serif;
+}
+
+.safe {
+  color: #42FF65;
+}
+
+.low-risk {
+  color: #cdff42;
+}
+
+.moderate-risk {
+  color: #ffbf36;
+}
+
+.elevated-risk {
+  color: #ff9b0f;
+}
+
+.high-risk {
+  color: #ff7614;
+}
+
+.very-high-risk {
+  color: #ff3300;
+}
+
+.extremely-dangerous {
+  color: #c90000;
+}
+
+.border-safe {
+  border:solid 5px #42FF65;
+}
+
+.border-low-risk {
+  border:solid 5px #cdff42;
+}
+
+.border-moderate-risk {
+  border:solid 5px #ffbf36;
+}
+
+.border-elevated-risk {
+  border:solid 5px #ff9b0f;
+}
+
+.border-high-risk {
+  border:solid 5px #ff7614;
+}
+
+.border-very-high-risk {
+  border:solid 5px #ff3300;
+}
+
+.border-extremely-dangerous {
+  border:solid 5px #c90000;
+}
+
+.login-signup{
+  color: #FFC300;
+}
+
+h2{
+  color: white;
+}
+
+li {
+  color: #ccc;
+}
+
+.list-h2 {
+  color: #FFC300;
+  margin-left: -30px;
+  margin-top: 10px;
+}
+
+ol li {
+  font-size: 20px;
+}
+
+ol {
+  margin-bottom: 100px;
+}
+
+.cancel-btn {
+  background-color: rgba(255, 255, 255, 0);
+  border: solid 1px #555;
+  color: #888;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
 }
