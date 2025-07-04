@@ -255,7 +255,7 @@ function ProfileSection() {
             <button onClick={handleSave} className="save-btn" style={{width: "100px"}}>
               Save
             </button>
-            <button onClick={handleCancel} className="cancel-btn" style={{width="100px"}}>
+            <button onClick={handleCancel} className="cancel-btn" style={{width: "100px"}}>
               Cancel
             </button>
           </>
