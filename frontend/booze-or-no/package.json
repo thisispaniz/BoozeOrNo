@@ -10,9 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@dicebear/collection": "^9.2.3",
+    "@dicebear/core": "^9.2.3",
+    "@supabase/supabase-js": "^2.50.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "@supabase/supabase-js": "^2.50.0"
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.22.0",
