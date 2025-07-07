@@ -66,9 +66,15 @@ const SignupForm = ({ onLogin }) => {
     }
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      handleSignup(e);
+    }
+  };
+
   return (
     <>
-      <div className="container">
+      <div className="container" onKeyDown={handleKeyDown}>
         <h1 className="title">CREATE AN ACCOUNT</h1>
         <div className="form">
           <input

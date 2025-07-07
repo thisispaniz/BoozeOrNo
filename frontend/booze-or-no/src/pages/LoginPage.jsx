@@ -42,9 +42,15 @@ const LoginForm = ({ onLogin }) => {  // ✅ Accept the onLogin prop
     }
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      handleLogin(e);
+    }
+  };
+
   return (
     <>
-      <div className="container">
+      <div className="container" onKeyDown={handleKeyDown}>
         <h1 className="title">LOGIN TO YOUR ACCOUNT</h1>
         <div className="form">
           <input
@@ -61,7 +67,7 @@ const LoginForm = ({ onLogin }) => {  // ✅ Accept the onLogin prop
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button className="register-btn" onClick={handleLogin}>LOGIN</button>
+          <button className="register-btn" onClick={handleLogin} >LOGIN</button>
           {message && <p className="feedback-msg">{message}</p>}
         </div>
       </div>
