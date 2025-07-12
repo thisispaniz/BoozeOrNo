@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";  // import useNavigate
 import "../App.css";
+import MyIdenticon from './MyIdenticon';
 
 function NavBarLoggedIn() {
   const navigate = useNavigate();
