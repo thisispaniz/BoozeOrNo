@@ -6,9 +6,13 @@ function NavBarLoggedIn() {
   const navigate = useNavigate();
 
   const handleLogout = (e) => {
-    e.preventDefault();           // prevent default anchor behavior
-    localStorage.removeItem("token"); // clear token from localStorage
-    navigate("/");                // redirect to landing page
+      e.preventDefault();           // prevent default anchor behavior
+      localStorage.removeItem("token"); // clear token from localStorage
+      navigate("/"); 
+      setTimeout(() => {
+          window.location.reload();          // refresh the page
+      }, 0);
+        
   };
 
   return (
@@ -20,7 +24,8 @@ function NavBarLoggedIn() {
         {/* Use a button or anchor with onClick handler */}
         <a href="#" className="nav-link" onClick={handleLogout}>Logout</a>
         <a href="/dashboard">
-          <img className="avatar-navbar" src="/avatar-1577909_1280.png" alt="User avatar" />
+            {/* <img className="avatar-navbar" src="/avatar-1577909_1280.png" alt="User avatar" /> */}
+            <MyIdenticon seed={email} size={44} />
         </a>
       </nav>
     </header>
