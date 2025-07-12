@@ -5,6 +5,7 @@ import MyIdenticon from './MyIdenticon';
 
 function NavBarLoggedIn() {
   const navigate = useNavigate();
+  const email = localStorage.getItem("email") || "User";
 
   const handleLogout = (e) => {
       e.preventDefault();           // prevent default anchor behavior
