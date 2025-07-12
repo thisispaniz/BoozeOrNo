@@ -11,7 +11,7 @@ function Footer() {
             </div>
             <nav className="nav">
                 <a href="/aboutus" className="nav-link">About us</a>
-                <a href="/contact" className="nav-link">contact us</a>
+                <a href="/contactus" className="nav-link">contact us</a>
                 <a href="/privacypolicy" className="nav-link">privacy policy</a>
                 <a href="/termsofservice" className="nav-link">terms of use</a>
             </nav>
