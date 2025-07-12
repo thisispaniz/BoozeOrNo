@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import MyIdenticon from './MyIdenticon';
 import "../App.css";
 
 function ProfileSection() {
@@ -7,6 +8,7 @@ function ProfileSection() {
   const [tempData, setTempData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [fetchError, setFetchError] = useState(null);
+  const email = localStorage.getItem("email") || "User";
 
   useEffect(() => {
   const token = localStorage.getItem("token");
@@ -144,7 +146,8 @@ function ProfileSection() {
     <section className="profile-section">
       <div className="d-flex justify-content-between">
       <div className="main-part">
-        <img className="avatar" src="./avatar-1577909_1280.png" alt="Avatar" />
+        {/* <img className="avatar" src="./avatar-1577909_1280.png" alt="Avatar" /> */}
+        <MyIdenticon seed={email} size={295} />
         <div className="column right">
           <div className="row">
             <div className="column">
