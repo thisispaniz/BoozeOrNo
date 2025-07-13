@@ -165,9 +165,14 @@ function AlcoholPlannerPage() {
                     <div className="results">
                         <h3>You can drink:</h3>
                         <ul>
-                        {results.drinkPlan.map(drink => (
-                            <li key={drink.name}>{drink.count} × {drink.name}</li>
-                        ))}
+                            {results.drinkPlan.map((drink, index) => (
+                                <li key={drink.name}>
+                                    {drink.count} × {drink.name}
+                                    {index < results.drinkPlan.length - 1 && (
+                                        <span style={{ color: '#FCC300' }}> or </span>
+                                    )}
+                                </li>
+                            ))}
                         </ul>
 
                         <h3>BAC Over Time</h3>
