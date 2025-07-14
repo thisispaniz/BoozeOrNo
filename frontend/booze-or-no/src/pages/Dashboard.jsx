@@ -10,7 +10,7 @@ const Dashboard = () => {
 
     return (
         <div className='page-container'>
-            <h1 className="title">Welcome, {email}!</h1>
+            <h1 className="title">Welcome {email}!</h1>
             <ProfileSection />
             <DrinkPlannerInfo />
             <AlcoholCheckerInfo />

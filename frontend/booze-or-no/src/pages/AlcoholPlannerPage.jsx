@@ -9,7 +9,7 @@ const rFactors = {
 };
 
 const drinks = [
-    {name: 'Beer (300 ml @ 5%)', alcoholOz: 0.50721},
+    { name: 'Beer (300 ml @ 5%)', alcoholOz: 0.50721 },
     { name: 'Beer (500 ml @ 5%)', alcoholOz: 0.84535 },
     { name: 'Wine (One Glass - 150 ml @ 12%)', alcoholOz: 0.608652 },
     { name: 'Liquor (One Shot - 44 ml @ 40%)', alcoholOz: 0.595128 }
@@ -90,6 +90,11 @@ function AlcoholPlannerPage() {
             return;
         }
 
+        if (hours > 24) {
+            alert('Please select a time within the next 24 hours.');
+            return;
+        }
+
         const maxBAC = 0.08;
         const r = rFactors[sex];
         const weightNum = parseFloat(weight) * 2.2046;
@@ -139,10 +144,10 @@ function AlcoholPlannerPage() {
 
                     <label>
                         Weight (kg):
-                        <input 
-                            className='calcinput' 
-                            type="number" 
-                            value={weight} 
+                        <input
+                            className='calcinput'
+                            type="number"
+                            value={weight}
                             onChange={(e) => setWeight(e.target.value)}
                             placeholder="Enter your weight"
                         />
@@ -150,11 +155,11 @@ function AlcoholPlannerPage() {
 
                     <label>
                         The alcohol needs to be out of your system by:
-                        <input 
-                            className='calcinput' 
-                            type="datetime-local" 
-                            value={targetTime} 
-                            onChange={(e) => setTargetTime(e.target.value)} 
+                        <input
+                            className='calcinput'
+                            type="datetime-local"
+                            value={targetTime}
+                            onChange={(e) => setTargetTime(e.target.value)}
                         />
                     </label>
 
@@ -179,12 +184,12 @@ function AlcoholPlannerPage() {
                         <div className="graph-container">
                             <svg width="100%" height="200">
                                 <path
-                                    d = {results.timePoints.map((point, index) => {
+                                    d={results.timePoints.map((point, index) => {
                                         const x = (index / (results.timePoints.length - 1)) * 600;
                                         const y = 200 - parseFloat(point.bac) * 200;
                                         return `${index === 0 ? 'M' : 'L'} ${x},${y}`;
                                     }).join(' ')}
-                                    fill = "none"
+                                    fill="none"
                                     stroke='#FFC300'
                                     strokeWidth="2"
                                 />

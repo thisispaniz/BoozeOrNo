@@ -1,4 +1,3 @@
-
 body {
   margin: 0;
   padding-left: 150px;
@@ -14,7 +13,7 @@ body {
   min-height: 100vh;
 }
 
-.page-container > *:not(.footer) {
+.page-container>*:not(.footer) {
   flex-shrink: 0;
 }
 
@@ -45,6 +44,7 @@ body {
   color: #ffffff;
   font-weight: 500;
   transition: color 0.3s ease;
+
   &:hover {
     color: #FFC300;
   }
@@ -62,6 +62,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+
   &:hover {
     background-color: #cc9d01;
   }
@@ -109,10 +110,12 @@ input {
   border-width: 1px;
   margin-right: 12px;
   padding: 10px;
+
   &:focus {
     outline: none;
     border-color: #FFC300;
   }
+
   &::placeholder {
     font-style: italic;
   }
@@ -127,6 +130,7 @@ input {
   font-size: 20px;
   border-radius: 2px;
   border-width: 0px;
+
   &:hover {
     background-color: #cc9d01;
   }
@@ -146,11 +150,13 @@ input {
 .feature-texts {
   width: 45%;
 }
+
 .h1-black {
   padding-left: 10px;
   margin-bottom: 35px;
   color: #0A0A0A;
 }
+
 .p-black {
   color: #0A0A0A;
   margin: 10px;
@@ -163,6 +169,7 @@ input {
   background-color: #FFC300;
   border: solid 1px #0A0A0A;
   margin-top: 25px;
+
   &:hover {
     background-color: #cc9d01;
   }
@@ -181,6 +188,31 @@ input {
   width: 45%;
   height: 300px;
   align-items: center;
+}
+
+.row3 {
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+}
+
+.edit-input {
+  margin-left: 10px !important;
+}
+
+option,
+select {
+  font-family: "Raleway", sans-serif;
+  font-size: 15px;
+}
+
+select {
+  height: 44px;
+  background-color: #0A0A0A;
+  color: #B5B5B5;
+  border-radius: 2px;
+  border-width: 1px;
+  padding: 10px;
 }
 
 .column {
@@ -274,9 +306,11 @@ button {
   font-size: 20px;
   border-radius: 2px;
   border-width: 0px;
+
   &:hover {
     background-color: #cc9d01;
-}}
+  }
+}
 
 .results {
   margin-top: 2rem;
@@ -374,6 +408,7 @@ button {
   margin: 0;
   padding: 0;
   gap: 15px;
+
   input {
     margin: 0;
   }
@@ -416,6 +451,7 @@ button {
   width: 44px;
   height: 44px;
   border-radius: 2px;
+
   &:hover {
     opacity: 80%;
   }
@@ -444,8 +480,8 @@ button {
 }
 
 img .danger {
-    width: 22px;
-    height: 22px;
+  width: 22px;
+  height: 22px;
 }
 
 .danger {
@@ -522,12 +558,14 @@ img .danger {
 .footer-rights {
   font-size: 15px;
 }
+
 .login-link {
   text-decoration: none;
   color: #FFC300;
   font-weight: 500;
   font-size: 40px;
   transition: color 0.3s ease;
+
   &:hover {
     color: rgba(255, 195, 0, 0.5);
   }
@@ -556,7 +594,7 @@ img .danger {
 }
 
 ul {
-    font-family: "Raleway", sans-serif;
+  font-family: "Raleway", sans-serif;
 }
 
 .safe {
@@ -588,38 +626,38 @@ ul {
 }
 
 .border-safe {
-  border:solid 5px #42FF65;
+  border: solid 5px #42FF65;
 }
 
 .border-low-risk {
-  border:solid 5px #cdff42;
+  border: solid 5px #cdff42;
 }
 
 .border-moderate-risk {
-  border:solid 5px #ffbf36;
+  border: solid 5px #ffbf36;
 }
 
 .border-elevated-risk {
-  border:solid 5px #ff9b0f;
+  border: solid 5px #ff9b0f;
 }
 
 .border-high-risk {
-  border:solid 5px #ff7614;
+  border: solid 5px #ff7614;
 }
 
 .border-very-high-risk {
-  border:solid 5px #ff3300;
+  border: solid 5px #ff3300;
 }
 
 .border-extremely-dangerous {
-  border:solid 5px #c90000;
+  border: solid 5px #c90000;
 }
 
-.login-signup{
+.login-signup {
   color: #FFC300;
 }
 
-h2{
+h2 {
   color: white;
 }
 
